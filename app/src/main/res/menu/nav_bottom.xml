@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bt_giohang"
+        android:title="Giỏ hàng"
+        android:icon="@drawable/ic_giohang"/>
+    <item
+        android:id="@+id/bt_topsp"
+        android:title="Top SP"
+        android:icon="@drawable/ic_topsp"/>
+    <item
+        android:id="@+id/bt_nguoidung"
+        android:title="Tài Khoản"
+        android:icon="@drawable/ic_nguoidung"/>
+</menu>

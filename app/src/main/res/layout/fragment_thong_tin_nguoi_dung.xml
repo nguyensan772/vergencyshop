@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.ThongTinNguoiDungFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/dangnhap"
+        android:gravity="center">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="100sp"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+
+                />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giới tính:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày sinh:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ:"
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            >
+
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:id="@+id/tvTenKH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:id="@+id/tvGioiTinhKH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giới tính:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:id="@+id/tvNgaySinhKH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày sinh:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:id="@+id/tvSDTKH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại:"
+                />
+            <TextView
+                android:padding="10dp"
+                android:textColor="@color/dangnhap"
+                android:id="@+id/tvDiaChiKH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ:"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnSuaHoSo"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sửa hồ sơ"
+        android:backgroundTint="@color/login"
+        android:paddingHorizontal="50dp"
+        />
+</LinearLayout>

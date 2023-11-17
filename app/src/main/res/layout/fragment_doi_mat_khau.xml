@@ -27,34 +27,34 @@
 
     <EditText
         android:layout_marginTop="20dp"
-        android:id="@+id/edt_userDK"
+        android:id="@+id/edt_oldpassDMK"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/edit_text"
         android:layout_marginHorizontal="30dp"
-        android:hint="Tài khoản"
+        android:hint="Mật khẩu cũ"
         android:paddingLeft="20dp"
         />
 
     <EditText
-        android:id="@+id/edt_passDK"
+        android:id="@+id/edt_newpassDMK"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/edit_text"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
-        android:hint="Mật khẩu"
+        android:hint="Mật khẩu mới"
         android:paddingLeft="20dp"
         />
 
     <EditText
-        android:id="@+id/edt_checkpassDK"
+        android:id="@+id/edt_checknewpassDMK"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/edit_text"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
-        android:hint="Mật khẩu"
+        android:hint="Nhập lại mật khẩu"
         android:paddingLeft="20dp"
         />
 
@@ -78,10 +78,10 @@
 
         <Button
             android:layout_marginHorizontal="10dp"
-            android:id="@+id/btnsigninDK"
+            android:id="@+id/btnsaveDMK"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Đăng ký"
+            android:text="Lưu"
             android:backgroundTint="@color/login"
             android:textStyle="bold"
             />
