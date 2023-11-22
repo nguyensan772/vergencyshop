@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //ỳvuyjfujg
-
+// cn1
 
         drawerLayout = findViewById(R.id.layout_all);
         toolbar = findViewById(R.id.jl_toolbar);
