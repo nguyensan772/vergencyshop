@@ -54,7 +54,7 @@
         android:background="@drawable/edit_text"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
-        android:hint="Mật khẩu"
+        android:hint="Nhập lại mật khẩu"
         android:paddingLeft="20dp"
         />
 
