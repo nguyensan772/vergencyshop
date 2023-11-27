@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ThanhToanFragment"
+    tools:context=".ThanhToanSanPham"
     android:orientation="vertical"
-    android:weightSum="10">
-
+    >
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
             />
 
         <TextView
-
+            android:id="@+id/tvTenSDtThanhToan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phùng Đức Tâm | 0383065746"
@@ -122,18 +121,19 @@
                 android:layout_height="wrap_content"
                 android:text="Tổng thanh toán"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
 
                 />
 
 
             <TextView
+                android:id="@+id/tvTongThanhToanHoaDon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="310000 VNĐ"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/gia"
                 />
 
@@ -146,13 +146,13 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
-            android:text="Mua\nhàng"
+            android:text="Mua\n hàng"
             android:background="@color/btnMua"
             android:gravity="center"
             android:textStyle="bold"
             app:cornerRadius="0sp"
             android:textColor="@color/white"
-            android:textSize="25dp"
+            android:textSize="18dp"
             />
     </LinearLayout>
 

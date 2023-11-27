@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ChiTietSanPham"
+        android:paddingHorizontal="17sp"
+        >
+
+
+        <ImageView
+            android:id="@+id/imgChiTietSanPhamAct"
+            android:layout_marginHorizontal="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/logo"
+            />
+
+        <TextView
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:id="@+id/tvTenChiTietSanPham"
+            android:text="Simple sweater/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvGiaChiTietSanPham"
+                    android:text="99.000"
+                    android:textColor="@color/gia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    />
+
+                <RadioGroup
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Size :"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+                    <RadioButton
+                        android:id="@+id/rdSizeM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="M"
+                        />
+                    <RadioButton
+                        android:id="@+id/rdSizeL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="L"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rdSizeXL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="XL"
+                        />
+
+
+
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng "
+
+                        />
+
+                    <TextView
+                        android:id="@+id/btnTruSoLuong"
+                        android:background="@color/dangnhap"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvSoLuong"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:background="@color/cancel"
+                        />
+                    <TextView
+                        android:id="@+id/btnCongSoLuong"
+                        android:background="@color/dangnhap"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:text="+"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+                <Button
+                    android:id="@+id/btnThemVaoGioHangChiTietSanPham"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Thêm vào giỏ hàng"
+                    android:backgroundTint="@color/dangnhap"
+                    android:textSize="15sp"
+
+                    />
+
+                <Button
+                    android:id="@+id/btnThanhToanChiTietSanPham"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Thanh toán"
+                    android:backgroundTint="@color/dangnhap"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dangnhap"
+            android:text="MÔ TẢ SẢN PHẨM"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/tvThongTinChiTietSanPham"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Name: Simple sweater/gray"
+            />
+
+
+    </LinearLayout>
+</ScrollView>

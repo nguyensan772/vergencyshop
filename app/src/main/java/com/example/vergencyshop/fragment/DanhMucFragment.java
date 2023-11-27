@@ -1,12 +1,15 @@
 package com.example.vergencyshop.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.vergencyshop.DanhMuc;
 import com.example.vergencyshop.R;
 
 /**
@@ -55,11 +58,101 @@ public class DanhMucFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    View view ;
+    ImageView btnDanhMucShirt , btnDanhMucTShirt , btnDanhMucSweaters , btnDanhMucHoodies , btnDanhMucShort ,  btnDanhMucPants;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.frag_danhmuc, container, false);
+        anhXa();
+
+        btnDanhMucShirt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CODE",1);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btnDanhMucTShirt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CODE",2);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+        btnDanhMucSweaters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CODE",3);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+
+        btnDanhMucHoodies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CODE",4);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+
+        btnDanhMucShort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CODE",5);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+        btnDanhMucPants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CODE",6);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag_danhmuc, container, false);
+        return view;
+    }
+
+
+    private  void anhXa (){
+        btnDanhMucShirt = view.findViewById(R.id.btnDanhMucShirt);
+        btnDanhMucTShirt = view.findViewById(R.id.btnDanhMucTShirt);
+        btnDanhMucSweaters = view.findViewById(R.id.btnDanhMucSweaters);
+        btnDanhMucHoodies = view.findViewById(R.id.btnDanhMucHoodies);
+        btnDanhMucShort= view.findViewById(R.id.btnDanhMucShort);
+        btnDanhMucPants= view.findViewById(R.id.btnDanhMucPants);
+
+
+
     }
 }
