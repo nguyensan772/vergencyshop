@@ -1,5 +1,6 @@
 package com.example.vergencyshop.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -75,6 +76,7 @@ public class DoiMatKhauFragment extends Fragment {
     EditText edtOldPass , edtNewPass , edtCheckNewPass ;
     Button btnChange;
     View view;
+    ProgressDialog progressDialog;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("NguoiDung");
@@ -90,6 +92,7 @@ public class DoiMatKhauFragment extends Fragment {
         anhXa();
 
         btnChange.setOnClickListener(v -> {
+            progressDialog.show();
             String oldPass, newPass  ;
 
             if (    edtOldPass.getText().toString().isEmpty()||
@@ -103,19 +106,26 @@ public class DoiMatKhauFragment extends Fragment {
                 oldPass = edtOldPass.getText().toString();
                 newPass = edtNewPass.getText().toString();
 
+               auth.signInWithEmailAndPassword(user.getEmail(),oldPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                   @Override
+                   public void onComplete(@NonNull Task<AuthResult> task) {
+                       progressDialog.dismiss();
+                        if (task.isSuccessful()){
 
 
+                            user.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
 
-               if (!auth.signInWithEmailAndPassword(user.getEmail(),oldPass).isSuccessful()){
-                  
+                                        Toast.makeText(getContext(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
 
-
-               }else {
-                   Toast.makeText(getContext(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
-               }
-
-                
-
+                                    }
+                                }
+                            });
+                        }
+                   }
+               });
 
 
             }
@@ -129,6 +139,7 @@ public class DoiMatKhauFragment extends Fragment {
     }
 
     private  void  anhXa (){
+        progressDialog = new ProgressDialog(getContext());
         edtNewPass = view.findViewById(R.id.edt_newpassDMK);
         edtOldPass = view.findViewById(R.id.edt_oldpassDMK);
         edtCheckNewPass = view.findViewById(R.id.edt_checknewpassDMK);

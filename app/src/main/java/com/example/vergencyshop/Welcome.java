@@ -30,7 +30,7 @@ public class Welcome extends AppCompatActivity {
 
                 checkDangNhap();
 
-                startActivity(new Intent(Welcome.this,DangNhap.class));
+
             }
         },1000);
 
@@ -43,7 +43,8 @@ public class Welcome extends AppCompatActivity {
             Intent intent = new Intent(Welcome.this,MainActivity.class);
             startActivity(intent);
         }else {
-            return;
+            Intent intent = new Intent(Welcome.this,DangNhap.class);
+            startActivity(intent);
         }
 
         finish();

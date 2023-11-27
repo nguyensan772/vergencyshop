@@ -63,7 +63,7 @@ public class DangNhap extends AppCompatActivity {
 
                       if (task.isSuccessful()){
                           Toast.makeText(DangNhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                          startActivity(new Intent(DangNhap.this , MainActivity.class));
+                         startActivity(new Intent(DangNhap.this , MainActivity.class));
 
 
                       }else {

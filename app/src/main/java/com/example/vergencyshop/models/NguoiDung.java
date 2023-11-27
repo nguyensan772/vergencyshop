@@ -3,43 +3,34 @@ package com.example.vergencyshop.models;
 public class NguoiDung {
 
 
-    private String hoTen;
+    private String ten;
     private String gioiTinh;
     private String soDienThoai ;
     private String diaChi;
-    private String anh ;
+    private String ngaySinh ;
+    private String anh;
     private String taiKhoan ;
-    private String matKhau ;
 
 
-    public NguoiDung( String hoTen, String gioiTinh, String soDienThoai, String diaChi, String anh, String taiKhoan, String matKhau) {
-
-        this.hoTen = hoTen;
+    public NguoiDung(String ten, String gioiTinh, String soDienThoai, String diaChi, String ngaySinh, String anh, String taiKhoan) {
+        this.ten = ten;
         this.gioiTinh = gioiTinh;
         this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
         this.anh = anh;
         this.taiKhoan = taiKhoan;
-        this.matKhau = matKhau;
     }
 
     public NguoiDung() {
     }
 
-    public NguoiDung( String taiKhoan, String matKhau) {
-
-        this.taiKhoan = taiKhoan;
-        this.matKhau = matKhau;
+    public String getTen() {
+        return ten;
     }
 
-
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public String getGioiTinh() {
@@ -66,6 +57,14 @@ public class NguoiDung {
         this.diaChi = diaChi;
     }
 
+    public String getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
     public String getAnh() {
         return anh;
     }
@@ -80,13 +79,5 @@ public class NguoiDung {
 
     public void setTaiKhoan(String taiKhoan) {
         this.taiKhoan = taiKhoan;
-    }
-
-    public String getMatKhau() {
-        return matKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
     }
 }

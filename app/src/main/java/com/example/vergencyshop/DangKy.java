@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class DangKy extends AppCompatActivity {
     EditText edtUser , edtPass , edtCheckPass ;
     Button btnDangKi ;
     NguoiDung nguoiDung ;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,9 @@ public class DangKy extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ky);
         anhXa();
 
-        btnDangKi.setOnClickListener(v -> {
 
+        btnDangKi.setOnClickListener(v -> {
+            progressDialog.show();
             if (edtUser.getText().toString().isEmpty() ||
                     edtPass.getText().toString().isEmpty() ||
                     edtCheckPass.getText().toString().isEmpty()
@@ -54,7 +57,7 @@ public class DangKy extends AppCompatActivity {
                         addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
+                        progressDialog.dismiss();
                         if (task.isSuccessful()){
 
 
@@ -64,6 +67,14 @@ public class DangKy extends AppCompatActivity {
                             user = auth.getCurrentUser();
                             reference.child(user.getUid()).child("taiKhoan").setValue(email);
                             reference.child(user.getUid()).child("matKhau").setValue(password);
+                            //Thong tin
+                            reference.child(user.getUid()).child("ten").setValue(null);
+                            reference.child(user.getUid()).child("gioiTinh").setValue(null);
+                            reference.child(user.getUid()).child("ngaySinh").setValue(null);
+                            reference.child(user.getUid()).child("soDienThoai").setValue(null);
+                            reference.child(user.getUid()).child("diaChi").setValue(null);
+
+
 
 
 
@@ -89,6 +100,7 @@ public class DangKy extends AppCompatActivity {
 
 
     private  void  anhXa (){
+        progressDialog = new ProgressDialog(this);
         edtUser = findViewById(R.id.edt_userDK);
         edtPass = findViewById(R.id.edt_passDK);
         edtCheckPass = findViewById(R.id.edt_checkpassDK);
