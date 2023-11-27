@@ -5,25 +5,24 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ThongTinNguoiDungFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/dangnhap"
+        android:background="@drawable/backgourp_pro1"
         android:gravity="center">
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="100sp"
-            >
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
 
-                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgAVTedit"
+                android:src="@drawable/ngacnhien"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
 
-        </androidx.cardview.widget.CardView>
+            />
+
     </LinearLayout>
 
 
@@ -88,45 +87,63 @@
             android:gravity="end"
             >
 
-            <TextView
-                android:padding="10dp"
+            <EditText
+                android:padding="8dp"
                 android:textColor="@color/dangnhap"
-                android:id="@+id/tvTenKH"
+                android:id="@+id/edtTenKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên:"
+                android:hint="Trống"
                 />
-            <TextView
-                android:padding="10dp"
+            <RadioGroup
+
                 android:textColor="@color/dangnhap"
-                android:id="@+id/tvGioiTinhKH"
+                android:id="@+id/edtGioiTinhKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Giới tính:"
+                android:hint="Trống"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dangnhap"
+                    android:id="@+id/rdNam"
+                   android:text="Nam"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dangnhap"
+                    android:id="@+id/rdNu"
+                    android:text="Nữ"
+                    />
+
+            </RadioGroup>
+            <EditText
+                android:padding="8dp"
+                android:textColor="@color/dangnhap"
+                android:id="@+id/edtNgaySinhKH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Trống"
                 />
-            <TextView
-                android:padding="10dp"
+            <EditText
+                android:padding="8dp"
                 android:textColor="@color/dangnhap"
-                android:id="@+id/tvNgaySinhKH"
+                android:id="@+id/edtSDTKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày sinh:"
+                android:hint="Trống"
                 />
-            <TextView
-                android:padding="10dp"
+            <EditText
+                android:padding="8dp"
                 android:textColor="@color/dangnhap"
-                android:id="@+id/tvSDTKH"
+                android:id="@+id/edtDiaChiKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số điện thoại:"
-                />
-            <TextView
-                android:padding="10dp"
-                android:textColor="@color/dangnhap"
-                android:id="@+id/tvDiaChiKH"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Địa chỉ:"
+                android:hint="Trống"
                 />
 
 

@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.VergencyShop" parent="Base.Theme.VergencyShop" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        ...
+    </style>
 </resources>

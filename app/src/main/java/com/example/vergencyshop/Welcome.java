@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,10 +28,27 @@ public class Welcome extends AppCompatActivity {
             @Override
             public void run() {
 
+                checkDangNhap();
 
-                startActivity(new Intent(Welcome.this,DangNhap.class));
+
             }
         },1000);
 
     }
+
+    private void checkDangNhap() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null){
+            Intent intent = new Intent(Welcome.this,MainActivity.class);
+            startActivity(intent);
+        }else {
+            Intent intent = new Intent(Welcome.this,DangNhap.class);
+            startActivity(intent);
+        }
+
+        finish();
+    }
+
+
 }
