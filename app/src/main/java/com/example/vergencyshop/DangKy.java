@@ -59,11 +59,7 @@ public class DangKy extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()){
-
-
                             Toast.makeText(DangKy.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-
-
                             user = auth.getCurrentUser();
                             reference.child(user.getUid()).child("taiKhoan").setValue(email);
                             reference.child(user.getUid()).child("matKhau").setValue(password);
@@ -73,11 +69,6 @@ public class DangKy extends AppCompatActivity {
                             reference.child(user.getUid()).child("ngaySinh").setValue(null);
                             reference.child(user.getUid()).child("soDienThoai").setValue(null);
                             reference.child(user.getUid()).child("diaChi").setValue(null);
-
-
-
-
-
                             startActivity(new Intent(DangKy.this,MainActivity.class));
 
                             finish();

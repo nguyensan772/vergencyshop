@@ -22,9 +22,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.ArrayList;
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
 
 public class ThanhToanSanPham extends AppCompatActivity {
     TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon ,btnMuaHang;
@@ -34,7 +37,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     ArrayList<SanPham> list = new ArrayList<>();
-
+int phivanchuyen = 0;
     String  size ;
     String soLuong;
     ThanhToanAdapter thanhToanAdapter ;
@@ -49,6 +52,9 @@ public class ThanhToanSanPham extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanh_toan_san_pham);
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        Currency currency = Currency.getInstance(locale);
         anhXa();
         setThongTin();
 
@@ -58,22 +64,24 @@ public class ThanhToanSanPham extends AppCompatActivity {
         size = bundle.getString("sizethanhtoan");
 
         list.add(sanPham);
-        Toast.makeText(this, ""+size+soLuong, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+size+ soLuong, Toast.LENGTH_SHORT).show();
 
         rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this));
         thanhToanAdapter = new ThanhToanAdapter(list,this,soLuong,size);
+        tongTien = Integer.parseInt(soLuong) * Integer.parseInt(sanPham.getGiaSP());
+        if (tongTien >= 300000){
+            tongTien += 0;
 
-
-        tongTien =  Integer.parseInt(soLuong) * Integer.parseInt(sanPham.getGiaSP()) ;
-        if (tongTien < 200000){
-           tongTien = tongTien + 15000;
+            String formattedTongTien = currencyFormat.format(tongTien);
+            tvTongThanhToanHoaDon.setText(formattedTongTien);
+        } else
+        {
+            tongTien += 20000;
+            String formattedTongTien = currencyFormat.format(tongTien);
+            tvTongThanhToanHoaDon.setText(formattedTongTien);
         }
-
-        tvTongThanhToanHoaDon.setText(String.valueOf(String.valueOf(tongTien) + "VNĐ"));
-        rcSanPhamThanhToan.setAdapter(thanhToanAdapter);
-
+rcSanPhamThanhToan.setAdapter(thanhToanAdapter);
     }
-
     private  void anhXa(){
 
         tvTenSDtThanhToan = findViewById(R.id.tvTenSDtThanhToan);
@@ -84,12 +92,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
         rdBankingThanhToan = findViewById(R.id.rdBankingThanhToan);
         rdNhanHangThanhToan = findViewById(R.id.rdNhanHangThanhToan);
     }
-
     private void setThongTin (){
-
-
-
-
         reference.child("NguoiDung").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

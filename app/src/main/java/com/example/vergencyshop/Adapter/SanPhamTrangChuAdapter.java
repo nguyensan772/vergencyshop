@@ -21,15 +21,21 @@ import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.SanPham;
 
 import java.lang.reflect.Array;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 public class SanPhamTrangChuAdapter extends RecyclerView.Adapter<SanPhamTrangChuAdapter.HolderSanPhamTrangChuAdapter> {
 
 
 
     private final Context context;
-    private final ArrayList<SanPham> list;
-
+    private ArrayList<SanPham> list;
+    public void filterList(ArrayList<SanPham> filteredList) {
+        list = filteredList;
+        notifyDataSetChanged();
+    }
 
     public SanPhamTrangChuAdapter(Context context, ArrayList<SanPham> list) {
         this.context = context;
@@ -59,7 +65,13 @@ public class SanPhamTrangChuAdapter extends RecyclerView.Adapter<SanPhamTrangChu
                 .into(holder.imgSP);
 
         holder.tenSP.setText(list.get(position).getTenSP());
-        holder.giaSP.setText(list.get(position).getGiaSP()+" VNĐ");
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        Currency currency = Currency.getInstance(locale);
+
+        String formattedGiaSP = currencyFormat.format(Double.parseDouble(list.get(position).getGiaSP()));
+        holder.giaSP.setText(formattedGiaSP);
+
 
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override

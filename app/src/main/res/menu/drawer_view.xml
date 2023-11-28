@@ -43,6 +43,7 @@
 
         <item android:title="Khác">
             <menu>
+
                 <item
                     android:id="@+id/sub_Pass"
                     android:icon="@drawable/ic_matkhau"

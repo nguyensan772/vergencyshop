@@ -14,6 +14,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.vergencyshop.models.SanPham;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
+
 public class ChiTietSanPham extends AppCompatActivity {
     TextView tvTenSanPham,tvGiaSanPham,tvThongTinChiTietSanPham;
     ImageView imgChiTietSanPham;
@@ -33,6 +38,8 @@ public class ChiTietSanPham extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_san_pham);
+
+
         index = 1;
         anhXa();
         //Lấy dữ liệu từ trang chủ
@@ -56,6 +63,7 @@ public class ChiTietSanPham extends AppCompatActivity {
 
 
 
+
         btnThemGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +72,7 @@ public class ChiTietSanPham extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -98,8 +107,14 @@ public class ChiTietSanPham extends AppCompatActivity {
         Glide.with(this).load(sanPham.getAnhSP()).error(R.drawable.logo).placeholder(R.drawable.logo).into(imgChiTietSanPham);
 
         tvTenSanPham.setText(sanPham.getTenSP());
-        tvGiaSanPham .setText(sanPham.getGiaSP()+" VNĐ");
-        tvThongTinChiTietSanPham.setText(sanPham.getMotaSP());
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        Currency currency = Currency.getInstance(locale);
+
+        String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(sanPham.getGiaSP()));
+        tvGiaSanPham.setText(formattedGiaSanPham);
+        String motaSP = sanPham.getMotaSP().replace("\\n", "\n");
+        tvThongTinChiTietSanPham.setText(motaSP);
     }
 
     private  void hienSoLuong (){

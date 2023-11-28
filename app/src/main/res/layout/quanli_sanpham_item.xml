@@ -41,4 +41,11 @@
         android:text="49,000 VNĐ"
         android:textStyle="bold"
         android:textColor="@color/gia"/>
+    <ImageButton
+        android:id="@+id/img_edit_sanpham"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#70cbff"
+        android:src="@drawable/baseline_edit_note_24"/>
+
 </LinearLayout>

@@ -7,10 +7,13 @@
     <ImageView
         android:id="@+id/imgSanPhamThanhToan"
         android:src="@drawable/ngacnhien"
-        android:layout_width="150sp"
-        android:layout_height="150sp"/>
+        android:padding="8dp"
+        android:layout_width="140sp"
+        android:layout_height="140sp"/>
 
     <RelativeLayout
+
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -24,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Tên"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
         <TextView
             android:id="@+id/tvItemSizeSanPhamThanhToan"
@@ -33,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Tên"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
 
         <TextView
@@ -43,7 +46,7 @@
             android:layout_height="wrap_content"
             android:text="Tên"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/gia"
             />
 
@@ -54,7 +57,7 @@
 
             android:layout_height="wrap_content"
 
-            android:layout_below="@+id/tvItemSizeSanPhamThanhToan"
+            android:layout_below="@+id/tvItemGiaSanPhamThanhToan"
             android:layout_alignParentEnd="true"
 
             android:text="Tên"
@@ -63,18 +66,18 @@
 
         <TextView
             android:id="@+id/tvThanhToan"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
+           android:layout_below="@id/tvItemSoLuongSanPhamThanhToan"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tổng tiền: "
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             />
         <TextView
             android:id="@+id/tvItemTongTienSanPhamThanhToan"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@id/tvItemSoLuongSanPhamThanhToan"
             android:layout_toRightOf="@+id/tvThanhToan"
             android:textColor="@color/gia"
 
@@ -82,7 +85,7 @@
             android:layout_height="wrap_content"
             android:text="Tên"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
 
             />
 

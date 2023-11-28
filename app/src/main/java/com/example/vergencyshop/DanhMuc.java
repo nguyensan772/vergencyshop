@@ -59,7 +59,7 @@ public class DanhMuc extends AppCompatActivity {
 
         if (CODE_CHOSSE == 1 ){
 
-            reference.child("SanPham").orderByChild("danhmuc").equalTo("shirt").addValueEventListener(new ValueEventListener() {
+            reference.child("SanPham").orderByChild("danhmuc").equalTo("SHIRT").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
@@ -81,7 +81,7 @@ public class DanhMuc extends AppCompatActivity {
 
         }else if (CODE_CHOSSE == 2 ){
 
-            reference.child("SanPham").orderByChild("danhmuc").equalTo("tshirt").addValueEventListener(new ValueEventListener() {
+            reference.child("SanPham").orderByChild("danhmuc").equalTo("TSHIRT").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
@@ -103,7 +103,7 @@ public class DanhMuc extends AppCompatActivity {
 
         }else if (CODE_CHOSSE == 3 ){
 
-            reference.child("SanPham").orderByChild("danhmuc").equalTo("sweaters").addValueEventListener(new ValueEventListener() {
+            reference.child("SanPham").orderByChild("danhmuc").equalTo("SWEATER").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
@@ -125,7 +125,7 @@ public class DanhMuc extends AppCompatActivity {
 
         }else if (CODE_CHOSSE == 4 ){
 
-            reference.child("SanPham").orderByChild("danhmuc").equalTo("hoodies").addValueEventListener(new ValueEventListener() {
+            reference.child("SanPham").orderByChild("danhmuc").equalTo("HOODIES").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
@@ -147,7 +147,7 @@ public class DanhMuc extends AppCompatActivity {
 
         }else if (CODE_CHOSSE == 5 ){
 
-            reference.child("SanPham").orderByChild("danhmuc").equalTo("short").addValueEventListener(new ValueEventListener() {
+            reference.child("SanPham").orderByChild("danhmuc").equalTo("SHORT").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
@@ -169,7 +169,7 @@ public class DanhMuc extends AppCompatActivity {
 
         }else if (CODE_CHOSSE == 6 ){
 
-            reference.child("SanPham").orderByChild("danhmuc").equalTo("pants").addValueEventListener(new ValueEventListener() {
+            reference.child("SanPham").orderByChild("danhmuc").equalTo("PANTS").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){

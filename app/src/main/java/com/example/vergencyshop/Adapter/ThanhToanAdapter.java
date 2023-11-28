@@ -15,7 +15,10 @@ import com.example.vergencyshop.R;
 import com.example.vergencyshop.ThanhToanSanPham;
 import com.example.vergencyshop.models.SanPham;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.HolderThanhToan> {
 
@@ -49,12 +52,18 @@ public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.Hold
 
         holder.tvItemTenSanPhamThanhToan.setText(list.get(position).getTenSP());
 
-        holder.tvItemGiaSanPhamThanhToan.setText(list.get(position).getGiaSP());
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        Currency currency = Currency.getInstance(locale);
 
-         tongTien = Integer.parseInt(soLuong) * Integer.parseInt(list.get(position).getGiaSP());
-        holder.tvItemTongTienSanPhamThanhToan.setText(String.valueOf(tongTien));
+        String formattedGiaSP = currencyFormat.format(Double.parseDouble(list.get(position).getGiaSP()));
+        holder.tvItemGiaSanPhamThanhToan.setText(formattedGiaSP);
+
+        tongTien = Integer.parseInt(soLuong) * Integer.parseInt(list.get(position).getGiaSP());
+        String formattedTongTien = currencyFormat.format(tongTien);
+        holder.tvItemTongTienSanPhamThanhToan.setText(formattedTongTien);
         holder.tvItemSizeSanPhamThanhToan.setText(size);
-        holder.tvItemSoLuongSanPhamThanhToan.setText(soLuong);
+        holder.tvItemSoLuongSanPhamThanhToan.setText("x "+soLuong);
 
         Glide .with(context).load(list.get(position).getAnhSP()).into(holder.imgSanPhamThanhToan);
 
