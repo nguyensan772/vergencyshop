@@ -111,9 +111,6 @@ public class MainActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
-
-
-
                 }
                 if (item.getItemId() == R.id.nav_danhmuc){
                     progressDialog.dismiss();
@@ -174,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
                     toolbar.setTitle("Trang chủ");
                 }
                 if (item.getItemId() == R.id.bt_giohang){
-                    callFragment(new GioHangFragment());
+//                    callFragment(new GioHangFragment());
+                    startActivity(new Intent(MainActivity.this, GioHangActivity.class));
                     toolbar.setTitle("Giỏ hàng");
                 }
 
@@ -231,11 +229,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-
     }
-
-
-
 
 
 }

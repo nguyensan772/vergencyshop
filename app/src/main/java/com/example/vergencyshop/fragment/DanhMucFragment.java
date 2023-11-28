@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.vergencyshop.DanhMuc;
+import com.example.vergencyshop.DanhMucActivity;
 import com.example.vergencyshop.R;
 
 /**
@@ -69,7 +69,7 @@ public class DanhMucFragment extends Fragment {
         btnDanhMucShirt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Intent intent = new Intent(getContext(), DanhMucActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("CODE",1);
                 intent.putExtras(bundle);
@@ -80,7 +80,7 @@ public class DanhMucFragment extends Fragment {
         btnDanhMucTShirt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Intent intent = new Intent(getContext(), DanhMucActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("CODE",2);
                 intent.putExtras(bundle);
@@ -88,11 +88,10 @@ public class DanhMucFragment extends Fragment {
             }
         });
 
-
         btnDanhMucSweaters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Intent intent = new Intent(getContext(), DanhMucActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("CODE",3);
                 intent.putExtras(bundle);
@@ -105,7 +104,7 @@ public class DanhMucFragment extends Fragment {
         btnDanhMucHoodies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Intent intent = new Intent(getContext(), DanhMucActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("CODE",4);
                 intent.putExtras(bundle);
@@ -118,7 +117,7 @@ public class DanhMucFragment extends Fragment {
         btnDanhMucShort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Intent intent = new Intent(getContext(), DanhMucActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("CODE",5);
                 intent.putExtras(bundle);
@@ -130,7 +129,7 @@ public class DanhMucFragment extends Fragment {
         btnDanhMucPants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DanhMuc.class);
+                Intent intent = new Intent(getContext(), DanhMucActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("CODE",6);
                 intent.putExtras(bundle);

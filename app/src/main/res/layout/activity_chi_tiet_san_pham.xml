@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ChiTietSanPham"
+        tools:context=".ChiTietSanPhamActivity"
         android:paddingHorizontal="17sp"
         >
 
@@ -162,9 +162,7 @@
                     android:layout_height="match_parent"
                     android:text="Thêm vào giỏ hàng"
                     android:backgroundTint="@color/dangnhap"
-                    android:textSize="15sp"
-
-                    />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btnThanhToanChiTietSanPham"
@@ -172,8 +170,7 @@
                     android:layout_height="match_parent"
                     android:text="Thanh toán"
                     android:backgroundTint="@color/dangnhap"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
 

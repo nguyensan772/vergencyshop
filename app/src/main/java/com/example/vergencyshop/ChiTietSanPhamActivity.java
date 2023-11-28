@@ -1,5 +1,7 @@
 package com.example.vergencyshop;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,14 +14,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.vergencyshop.models.SanPham;
 
-import java.text.DecimalFormat;
+import com.example.vergencyshop.Adapter.GioHangAdapter;
+import com.example.vergencyshop.models.GioHang;
+import com.example.vergencyshop.models.SanPham;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.NumberFormat;
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
-public class ChiTietSanPham extends AppCompatActivity {
+public class ChiTietSanPhamActivity extends AppCompatActivity {
     TextView tvTenSanPham,tvGiaSanPham,tvThongTinChiTietSanPham;
     ImageView imgChiTietSanPham;
 
@@ -33,7 +47,15 @@ public class ChiTietSanPham extends AppCompatActivity {
     RadioButton rdSizeM , rdSizeL , rdSizeXL ;
     SanPham sanPham;
     int index;
-    String size ;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference cartRef = database.getReference("GioHang");
+
+    FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+    String size = null;
+    int position ;
+    GioHangAdapter gioHangAdapter;
+    List<GioHang> listGH;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +70,7 @@ public class ChiTietSanPham extends AppCompatActivity {
             return;
         }
         sanPham = (SanPham) bundle.get("SanPham");
+        position = bundle.getInt("viTriSanPham");
         //Set dữ liệu
         setChiTietSanPham();
         hienSoLuong();
@@ -55,21 +78,60 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chonSize();
-
+                chonSize(1);
             }
         });
 
+        btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chonSize(2);
+                themVaoGio();
+            }
+        });
+    }
+
+    private void themVaoGio(){
 
 
+        String anhSP =  sanPham.getAnhSP();
+        String tenSP = sanPham.getTenSP();
+        String sizeSP = size;
+        String soluongSP = String.valueOf(index);
+        String giaSP = sanPham.getGiaSP();
 
+        String tongtien = String.valueOf(Integer.parseInt(soluongSP)*Integer.parseInt(giaSP));
 
+        String idSP = sanPham.getIdSP();
+        String idND = user.getUid();
+        Toast.makeText(this, ""+giaSP, Toast.LENGTH_SHORT).show();
+        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,idSP,idND);
+        cartRef.push().setValue(newItem);
+
+//        DatabaseReference gioHangRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
+//
+//        String giaSP = sanPham.getGiaSP();
+//        String.valueOf(index);
+//        String size = sanPham.getSizeSP();
+//        String uid = user.getUid();
+//
+//        String gioHangKey = gioHangRef.push().getKey();
+//
+//        HashMap<String, Object> gioHangData = new HashMap<>();
+//        gioHangData.put("giaSP", giaSP);
+//        gioHangData.put("index", index);
+//        gioHangData.put("size", size);
+//        gioHangData.put("uid", uid);
+//
+//        gioHangRef.child(gioHangKey).setValue(gioHangData);
+
+        Toast.makeText(this, "Đã thêm sản phẩm vào giỏ hàng !", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onBackPressed() {
 
-        startActivity(new Intent(ChiTietSanPham.this,MainActivity.class));
+        startActivity(new Intent(ChiTietSanPhamActivity.this,MainActivity.class));
 
     }
 
@@ -105,8 +167,11 @@ public class ChiTietSanPham extends AppCompatActivity {
         tvThongTinChiTietSanPham.setText(sanPham.getMotaSP());
     }
 
-    private  void hienSoLuong (){
+
+
+    private  int hienSoLuong (){
         tvSoLuong.setText(String.valueOf(index));
+        return index;
     }
     private  void chonSoLuong (){
         btnTangSoLuong.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +196,7 @@ public class ChiTietSanPham extends AppCompatActivity {
         });
     }
 
-    private void chonSize (){
+    private void chonSize (int check){
         if (!rdSizeXL.isChecked() && !rdSizeL.isChecked() && !rdSizeM.isChecked()){
             Toast.makeText(this, "Bạn chưa chọn size", Toast.LENGTH_SHORT).show();
             return;
@@ -145,18 +210,22 @@ public class ChiTietSanPham extends AppCompatActivity {
         }else if (rdSizeM.isChecked()){
             size = "M";
         }
+        Intent intent;
+        if(check == 1){
+         intent = new Intent(ChiTietSanPhamActivity.this , ThanhToanSanPham.class);}
+        else {
+            intent = new Intent(ChiTietSanPhamActivity.this , GioHangActivity.class);}
+
+            Bundle bundle = new Bundle();
 
 
-        Intent intent = new Intent(ChiTietSanPham.this , ThanhToanSanPham.class);
-        Bundle bundle = new Bundle();
+            bundle.putSerializable("thanhtoancainay", sanPham);
+            bundle.putString("soluongthanhtoan", String.valueOf(index));
+            bundle.putString("sizethanhtoan", size);
 
+            intent.putExtras(bundle);
+            this.startActivity(intent);
 
-        bundle.putSerializable("thanhtoancainay",sanPham);
-        bundle.putString("soluongthanhtoan",String.valueOf(index));
-        bundle.putString("sizethanhtoan",size);
-
-        intent.putExtras(bundle);
-        this.startActivity(intent);
 
     }
 

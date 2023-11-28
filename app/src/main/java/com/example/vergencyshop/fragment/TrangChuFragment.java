@@ -94,25 +94,19 @@ public class TrangChuFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         anhXa();
-       viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
+        viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
 
         rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
-
-        sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
-
-
-
-
+        sanPhamTrangChuAdapter = new SanPhamTrangChuAdapter(getActivity(),list);
 
         reference.child("SanPham").addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham =  snapshot.getValue(SanPham.class);
 
-
                 list.add(sanPham);
-
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
@@ -120,14 +114,12 @@ public class TrangChuFragment extends Fragment {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 SanPham sanPham =  snapshot.getValue(SanPham.class);
-
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
@@ -144,14 +136,7 @@ public class TrangChuFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
         rcSanPham.setAdapter(sanPhamTrangChuAdapter);
-
         // Inflate the layout for this fragment
         return view;
     }
@@ -165,8 +150,8 @@ public class TrangChuFragment extends Fragment {
         runnable = new Runnable() {
            public void run() {
                currentPage = viewPager.getCurrentItem();
-                currentPage = (currentPage + 1) % imageIds.length;
-             viewPager.setCurrentItem(currentPage, true);
+               currentPage = (currentPage + 1) % imageIds.length;
+               viewPager.setCurrentItem(currentPage, true);
                handler.postDelayed(this, delayTime);
             }
        };
