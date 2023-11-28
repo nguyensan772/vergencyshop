@@ -1,10 +1,6 @@
 package com.example.vergencyshop;
 
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,19 +15,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
 import com.example.vergencyshop.fragment.DanhMucFragment;
 import com.example.vergencyshop.fragment.DoiMatKhauFragment;
 import com.example.vergencyshop.fragment.GioHangFragment;
@@ -40,8 +29,6 @@ import com.example.vergencyshop.fragment.LichSuMuaHangFragment;
 import com.example.vergencyshop.fragment.ThongTinNguoiDungFragment;
 import com.example.vergencyshop.fragment.TopSanPhamFragment;
 import com.example.vergencyshop.fragment.TrangChuFragment;
-import com.example.vergencyshop.models.SanPham;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -53,8 +40,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -111,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
-
-
-
                 }
                 if (item.getItemId() == R.id.nav_danhmuc){
                     progressDialog.dismiss();
@@ -153,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this,DangNhap.class);
                     startActivity(intent);
                     finishAffinity();
-
                 }
                 if (item.getItemId() == R.id.sub_Pass){
                     progressDialog.dismiss();
@@ -177,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                     callFragment(new GioHangFragment());
                     toolbar.setTitle("Giỏ hàng");
                 }
-
                 if (item.getItemId() == R.id.bt_danhmuc){
                     callFragment(new DanhMucFragment());
                     toolbar.setTitle("Danh mục");

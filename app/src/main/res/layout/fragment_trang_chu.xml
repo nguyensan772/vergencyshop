@@ -31,6 +31,7 @@
                     android:padding="8dp">
 
                     <SearchView
+                        android:id="@+id/sv_tenSP"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

@@ -60,10 +60,6 @@ public class ChiTietSanPham extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
     @Override
@@ -102,7 +98,8 @@ public class ChiTietSanPham extends AppCompatActivity {
 
         String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(sanPham.getGiaSP()));
         tvGiaSanPham.setText(formattedGiaSanPham);
-        tvThongTinChiTietSanPham.setText(sanPham.getMotaSP());
+        String motaSP = sanPham.getMotaSP().replace("\\n", "\n");
+        tvThongTinChiTietSanPham.setText(motaSP);
     }
 
     private  void hienSoLuong (){

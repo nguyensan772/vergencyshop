@@ -63,7 +63,7 @@ public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.Hold
         String formattedTongTien = currencyFormat.format(tongTien);
         holder.tvItemTongTienSanPhamThanhToan.setText(formattedTongTien);
         holder.tvItemSizeSanPhamThanhToan.setText(size);
-        holder.tvItemSoLuongSanPhamThanhToan.setText(soLuong);
+        holder.tvItemSoLuongSanPhamThanhToan.setText("x "+soLuong);
 
         Glide .with(context).load(list.get(position).getAnhSP()).into(holder.imgSanPhamThanhToan);
 

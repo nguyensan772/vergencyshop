@@ -31,8 +31,11 @@ public class SanPhamTrangChuAdapter extends RecyclerView.Adapter<SanPhamTrangChu
 
 
     private final Context context;
-    private final ArrayList<SanPham> list;
-
+    private ArrayList<SanPham> list;
+    public void filterList(ArrayList<SanPham> filteredList) {
+        list = filteredList;
+        notifyDataSetChanged();
+    }
 
     public SanPhamTrangChuAdapter(Context context, ArrayList<SanPham> list) {
         this.context = context;
