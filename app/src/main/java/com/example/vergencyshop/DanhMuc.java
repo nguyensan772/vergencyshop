@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class DanhMucActivity extends AppCompatActivity {
+public class DanhMuc extends AppCompatActivity {
 
     int CODE_CHOSSE;
 

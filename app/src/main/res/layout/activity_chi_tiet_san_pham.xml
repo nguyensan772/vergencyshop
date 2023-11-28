@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChiTietSanPham"
+
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="20sp"
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ChiTietSanPhamActivity"
+        tools:context=".ChiTietSanPham"
         android:paddingHorizontal="17sp"
+        android:gravity="center"
         >
 
 
@@ -25,7 +37,7 @@
             />
 
         <TextView
-            android:textSize="17dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:id="@+id/tvTenChiTietSanPham"
             android:text="Simple sweater/gray"
@@ -39,12 +51,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
 
                 <TextView
@@ -54,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     />
 
                 <RadioGroup
@@ -67,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:text="Size :"
                         android:textColor="@color/black"
-                        android:textSize="16dp"
+                        android:textSize="17dp"
                         android:textStyle="bold"
                         />
                     <RadioButton
@@ -102,7 +115,7 @@
                     >
                     <TextView
                         android:textColor="@color/black"
-                        android:textSize="18dp"
+                        android:textSize="19dp"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -162,7 +175,9 @@
                     android:layout_height="match_parent"
                     android:text="Thêm vào giỏ hàng"
                     android:backgroundTint="@color/dangnhap"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+
+                    />
 
                 <Button
                     android:id="@+id/btnThanhToanChiTietSanPham"
@@ -170,7 +185,8 @@
                     android:layout_height="match_parent"
                     android:text="Thanh toán"
                     android:backgroundTint="@color/dangnhap"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -187,8 +203,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+
             android:text="Name: Simple sweater/gray"
             />
+
+
+    </LinearLayout>
 
 
     </LinearLayout>

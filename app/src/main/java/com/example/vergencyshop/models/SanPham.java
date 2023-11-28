@@ -4,14 +4,17 @@ import java.io.Serializable;
 
 public class SanPham implements Serializable {
 
-    String anhSP,giaSP,tenSP,idSP,motaSP,loaiSP,sizeSP;
+    String anhSP,giaSP,tenSP,idSP,motaSP,loaiSP,sizeSP,danhmuc;
 
     String soluongSP;
 
     public SanPham() {
     }
 
+
     public SanPham(String anhSP, String giaSP, String tenSP, String idSP, String motaSP, String loaiSP, String sizeSP, String soluongSP) {
+
+
         this.anhSP = anhSP;
         this.giaSP = giaSP;
         this.tenSP = tenSP;
@@ -19,7 +22,11 @@ public class SanPham implements Serializable {
         this.motaSP = motaSP;
         this.loaiSP = loaiSP;
         this.sizeSP = sizeSP;
+
         this.soluongSP = soluongSP;
+
+        this.danhmuc = danhmuc;
+
     }
 
     public String getSoluongSP() {

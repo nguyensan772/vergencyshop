@@ -29,7 +29,7 @@ public class DangKy extends AppCompatActivity {
     FirebaseUser user ;
 
     EditText edtUser , edtPass , edtCheckPass ;
-    Button btnDangKi ;
+    Button btnDangKi , btnCancelDK;
     NguoiDung nguoiDung ;
     ProgressDialog progressDialog;
 
@@ -95,6 +95,10 @@ public class DangKy extends AppCompatActivity {
 
         });
 
+        btnCancelDK.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
 
     }
 
@@ -105,5 +109,13 @@ public class DangKy extends AppCompatActivity {
         edtPass = findViewById(R.id.edt_passDK);
         edtCheckPass = findViewById(R.id.edt_checkpassDK);
         btnDangKi = findViewById(R.id.btnsigninDK);
+        btnCancelDK = findViewById(R.id.btnCancelDK);
+
+        edtPass.setSingleLine(true);
+        edtUser.setSingleLine(true);
+        edtCheckPass.setSingleLine(true);
+
+
+
     }
 }
