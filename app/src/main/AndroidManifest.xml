@@ -17,6 +17,9 @@
         android:theme="@style/Theme.VergencyShop"
         tools:targetApi="31">
         <activity
+            android:name=".GioHangTest"
+            android:exported="false" />
+        <activity
             android:name=".DanhMuc"
             android:exported="false" />
         <activity

@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class SanPham implements Serializable {
 
-    String anhSP,giaSP,tenSP,idSP,motaSP,loaiSP,sizeSP;
+    String anhSP,giaSP,tenSP,idSP,motaSP,loaiSP,sizeSP,danhmuc;
 
     public SanPham() {
     }
 
-    public SanPham(String anhSP, String giaSP, String tenSP, String idSP, String motaSP, String loaiSP, String sizeSP) {
+    public SanPham(String anhSP, String giaSP, String tenSP, String idSP, String motaSP, String loaiSP, String sizeSP,String danhmuc) {
         this.anhSP = anhSP;
         this.giaSP = giaSP;
         this.tenSP = tenSP;
@@ -17,6 +17,7 @@ public class SanPham implements Serializable {
         this.motaSP = motaSP;
         this.loaiSP = loaiSP;
         this.sizeSP = sizeSP;
+        this.danhmuc = danhmuc;
     }
 
 

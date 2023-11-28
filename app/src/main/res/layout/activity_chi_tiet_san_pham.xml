@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChiTietSanPham"
-    android:paddingHorizontal="20sp"
+
     >
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="20sp"
+    >
     <ImageView
         android:id="@+id/imgChiTietSanPhamAct"
         android:layout_marginHorizontal="20dp"
@@ -189,5 +194,5 @@
         android:text="Name: Simple sweater/gray"
         />
 
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -115,7 +115,7 @@ public class ThongTinNguoiDungFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_thong_tin_nguoi_dung, container, false);
         anhXa();
         setThongTin();
-
+        String anh = reference.child("NguoiDung").child(user.getUid()).child("anh").toString();
 
         btnLuu.setOnClickListener(v -> {
 
@@ -281,10 +281,15 @@ public class ThongTinNguoiDungFragment extends Fragment {
 
         //Số điện thoại
 
+        Pattern pattern = Pattern.compile("^0[0-9]{9}$");
+        Matcher matcher = pattern.matcher(edtSoDienThoai.getText().toString().trim());
 
         if (edtSoDienThoai.getText().toString().isEmpty()){
             Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
-        }else {
+        }else if (!matcher.matches()){
+            Toast.makeText(getContext(), "Số sai", Toast.LENGTH_SHORT).show();
+        }
+        else {
             reference.child("NguoiDung").child(user.getUid()).child("soDienThoai").setValue(edtSoDienThoai.getText().toString());
         }
 

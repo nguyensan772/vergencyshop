@@ -48,14 +48,22 @@ public class ChiTietSanPham extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chonSize();
+
+                chonSize(1);
 
             }
         });
 
 
 
+        btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                chonSize(2);
+
+            }
+        });
 
     }
 
@@ -88,6 +96,7 @@ public class ChiTietSanPham extends AppCompatActivity {
 
     private void setChiTietSanPham (){
         Glide.with(this).load(sanPham.getAnhSP()).error(R.drawable.logo).placeholder(R.drawable.logo).into(imgChiTietSanPham);
+
         tvTenSanPham.setText(sanPham.getTenSP());
         tvGiaSanPham .setText(sanPham.getGiaSP()+" VNĐ");
         tvThongTinChiTietSanPham.setText(sanPham.getMotaSP());
@@ -119,7 +128,8 @@ public class ChiTietSanPham extends AppCompatActivity {
         });
     }
 
-    private void chonSize (){
+
+    private void chonSize (int check){
         if (!rdSizeXL.isChecked() && !rdSizeL.isChecked() && !rdSizeM.isChecked()){
             Toast.makeText(this, "Bạn chưa chọn size", Toast.LENGTH_SHORT).show();
             return;
@@ -133,9 +143,15 @@ public class ChiTietSanPham extends AppCompatActivity {
         }else if (rdSizeM.isChecked()){
             size = "M";
         }
+        Intent intent;
 
+      if (check == 1){
 
-        Intent intent = new Intent(ChiTietSanPham.this , ThanhToanSanPham.class);
+        intent  = new Intent(ChiTietSanPham.this , ThanhToanSanPham.class);
+      }else {
+          intent  = new Intent(ChiTietSanPham.this , GioHangTest.class);
+
+      }
         Bundle bundle = new Bundle();
 
 
@@ -147,5 +163,6 @@ public class ChiTietSanPham extends AppCompatActivity {
         this.startActivity(intent);
 
     }
+
 
 }

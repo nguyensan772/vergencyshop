@@ -14,6 +14,7 @@ public class NguoiDung {
 
     public NguoiDung(String ten, String gioiTinh, String soDienThoai, String diaChi, String ngaySinh, String anh, String taiKhoan) {
         this.ten = ten;
+
         this.gioiTinh = gioiTinh;
         this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
