@@ -86,13 +86,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chonSize(2);
-                themVaoGio();
             }
         });
     }
 
     private void themVaoGio(){
-
 
         String anhSP =  sanPham.getAnhSP();
         String tenSP = sanPham.getTenSP();
@@ -102,28 +100,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         String tongtien = String.valueOf(Integer.parseInt(soluongSP)*Integer.parseInt(giaSP));
 
-        String idSP = sanPham.getIdSP();
+        String idSP = "S"+(position + 1);
         String idND = user.getUid();
-        Toast.makeText(this, ""+giaSP, Toast.LENGTH_SHORT).show();
-        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,idSP,idND);
-        cartRef.push().setValue(newItem);
 
-//        DatabaseReference gioHangRef = FirebaseDatabase.getInstance().getReference().child("GioHang");
-//
-//        String giaSP = sanPham.getGiaSP();
-//        String.valueOf(index);
-//        String size = sanPham.getSizeSP();
-//        String uid = user.getUid();
-//
-//        String gioHangKey = gioHangRef.push().getKey();
-//
-//        HashMap<String, Object> gioHangData = new HashMap<>();
-//        gioHangData.put("giaSP", giaSP);
-//        gioHangData.put("index", index);
-//        gioHangData.put("size", size);
-//        gioHangData.put("uid", uid);
-//
-//        gioHangRef.child(gioHangKey).setValue(gioHangData);
+        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,idSP,idND);
+        cartRef.child(idSP+""+idND).setValue(newItem);
 
         Toast.makeText(this, "Đã thêm sản phẩm vào giỏ hàng !", Toast.LENGTH_SHORT).show();
     }
@@ -214,6 +195,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         if(check == 1){
          intent = new Intent(ChiTietSanPhamActivity.this , ThanhToanSanPham.class);}
         else {
+            themVaoGio();
+
             intent = new Intent(ChiTietSanPhamActivity.this , GioHangActivity.class);}
 
             Bundle bundle = new Bundle();

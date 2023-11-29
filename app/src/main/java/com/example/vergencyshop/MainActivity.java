@@ -175,10 +175,9 @@ public class MainActivity extends AppCompatActivity {
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
                 }
-                if (item.getItemId() == R.id.bt_giohang){
-//                    callFragment(new GioHangFragment());
-                    startActivity(new Intent(MainActivity.this, GioHangActivity.class));
-                    toolbar.setTitle("Giỏ hàng");
+                if (item.getItemId() == R.id.bt_banchay){
+                    callFragment(new TopSanPhamFragment());
+                    toolbar.setTitle("Sản Phẩm bán chạy");
                 }
 
                 if (item.getItemId() == R.id.bt_danhmuc){

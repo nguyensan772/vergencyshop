@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,21 +21,26 @@ import com.example.vergencyshop.Adapter.GioHangAdapter;
 
 import com.example.vergencyshop.models.GioHang;
 import com.example.vergencyshop.models.SanPham;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class GioHangActivity extends AppCompatActivity{
 
     RecyclerView rc_giohang;
 
     TextView tv_tongtien, tv_muahang;
+    ImageView btn_backToMain;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     ArrayList<GioHang> list = new ArrayList<>();
@@ -49,11 +56,17 @@ public class GioHangActivity extends AppCompatActivity{
         tv_tongtien = findViewById(R.id.tv_tongtien);
         tv_muahang = findViewById(R.id.btnMuaHang);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null){
-            Toast.makeText(this, "Không có giá trị gì", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        btn_backToMain = findViewById(R.id.img_backToMain);
+        btn_backToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GioHangActivity.this, MainActivity.class));
+            }
+        });
+
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         rc_giohang .setLayoutManager(new LinearLayoutManager(this));
 
@@ -61,29 +74,34 @@ public class GioHangActivity extends AppCompatActivity{
 
         DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("GioHang");
 
-        cartRef.addValueEventListener(new ValueEventListener() {
+        rc_giohang.setAdapter(gioHangAdapter);
+
+        Query query = cartRef.orderByChild("idNguoiDung").equalTo(user.getUid());
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                list.clear();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    list.clear();
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                        list.add(snapshot1.getValue(GioHang.class));
 
-                for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-                    GioHang item = itemSnapshot.getValue(GioHang.class);
-                    list.add(item);
+                    }
+
+
+                    tv_tongtien.setText(tinhtongtien());
                 }
-
                 gioHangAdapter.notifyDataSetChanged();
+
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu từ Firebase Database
-                Log.e("GioHangActivity", "Lỗi đọc dữ liệu từ Firebase Database: " + databaseError.getMessage());
-                gioHangAdapter.notifyDataSetChanged();
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
-        rc_giohang.setAdapter(gioHangAdapter);
-        // Inflate the layout for this fragment
+
 
 
         tv_muahang.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +111,19 @@ public class GioHangActivity extends AppCompatActivity{
             }
         });
     }
+
+    private String tinhtongtien(){
+        int tongTien =0;
+
+        for (GioHang gioHang1 : list){
+
+            int giatri = Integer.parseInt(gioHang1.getGiaSP());
+            tongTien = giatri + tongTien ;
+        }
+
+        return String.valueOf(tongTien);
+    }
+
 
 
 }

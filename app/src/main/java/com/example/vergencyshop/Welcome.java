@@ -27,10 +27,7 @@ public class Welcome extends AppCompatActivity {
 
             @Override
             public void run() {
-
                 checkDangNhap();
-
-
             }
         },1000);
 

@@ -16,10 +16,13 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.vergencyshop.Adapter.BannerAdapter;
 import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
+import com.example.vergencyshop.GioHangActivity;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.SanPham;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -80,6 +83,9 @@ public class TrangChuFragment extends Fragment {
     View view;
     SanPhamTrangChuAdapter sanPhamTrangChuAdapter;
     private ViewPager viewPager;
+
+    LinearLayout ln_timkiem;
+    ImageView img_giohang;
     private Handler handler;
     private Runnable runnable;
     private int delayTime = 3000; // Thời gian chuyển đổi ảnh (3 giây)
@@ -95,6 +101,20 @@ public class TrangChuFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         anhXa();
         viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
+
+        ln_timkiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        img_giohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), GioHangActivity.class));
+            }
+        });
 
         rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
@@ -183,6 +203,8 @@ public class TrangChuFragment extends Fragment {
     }
 
     private void anhXa (){
+        ln_timkiem = view.findViewById(R.id.searchBtn);
+        img_giohang = view.findViewById(R.id.cartImageView);
         rcSanPham = view.findViewById(R.id.rcdanhSachSanPhamTC);
         viewPager = view.findViewById(R.id.viewPager);
     }
