@@ -157,20 +157,20 @@ sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
     }
 
 
-    private void startAutoSlide() {
-        if (handler != null) {
-            handler.removeCallbacks(runnable);
-        }
+  private void startAutoSlide() {
+//        if (handler != null) {
+//            handler.removeCallbacks(runnable);
+//        }
     handler = new Handler();
-//        runnable = new Runnable() {
-//           public void run() {
-//               currentPage = viewPager.getCurrentItem();
-//                currentPage = (currentPage + 1) % imageIds.length;
-//             viewPager.setCurrentItem(currentPage, true);
-//               handler.postDelayed(this, delayTime);
-//            }
-//       };
-//      handler.postDelayed(runnable, delayTime);
+        runnable = new Runnable() {
+           public void run() {
+               currentPage = viewPager.getCurrentItem();
+                currentPage = (currentPage + 1) % imageIds.length;
+             viewPager.setCurrentItem(currentPage, true);
+               handler.postDelayed(this, delayTime);
+            }
+       };
+      handler.postDelayed(runnable, delayTime);
     }
     @Override
     public void onResume() {
@@ -217,7 +217,6 @@ sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                         search_List.add(sanPham);
                     }
                 }
-
                 sanPhamTrangChuAdapter.filterList(search_List);
             }
 
