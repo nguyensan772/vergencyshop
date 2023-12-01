@@ -99,6 +99,7 @@ public class TrangChuFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         anhXa();
+
         sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -119,25 +120,31 @@ public class TrangChuFragment extends Fragment {
     }
 });
        viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
-
         rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
         sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
+
+
+
+
         reference.child("SanPham").addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham =  snapshot.getValue(SanPham.class);
+
                 list.add(sanPham);
+
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                SanPham sanPham =  snapshot.getValue(SanPham.class);
+
+
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
             @Override
@@ -150,8 +157,8 @@ public class TrangChuFragment extends Fragment {
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
         });
-        rcSanPham.setAdapter(sanPhamTrangChuAdapter);
 
+        rcSanPham.setAdapter(sanPhamTrangChuAdapter);
         // Inflate the layout for this fragment
         return view;
     }
@@ -162,6 +169,7 @@ public class TrangChuFragment extends Fragment {
             handler.removeCallbacks(runnable);
         }
     handler = new Handler();
+
 //        runnable = new Runnable() {
 //           public void run() {
 //               currentPage = viewPager.getCurrentItem();
@@ -171,6 +179,17 @@ public class TrangChuFragment extends Fragment {
 //            }
 //       };
 //      handler.postDelayed(runnable, delayTime);
+
+        runnable = new Runnable() {
+           public void run() {
+               currentPage = viewPager.getCurrentItem();
+               currentPage = (currentPage + 1) % imageIds.length;
+               viewPager.setCurrentItem(currentPage, true);
+               handler.postDelayed(this, delayTime);
+            }
+       };
+      handler.postDelayed(runnable, delayTime);
+
     }
     @Override
     public void onResume() {

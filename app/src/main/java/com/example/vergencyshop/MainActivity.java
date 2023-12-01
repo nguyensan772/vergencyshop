@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+//ỳvuyjfujg
+// cn1
 
         progressDialog = new ProgressDialog(this);
 
@@ -160,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
                     toolbar.setTitle("Trang chủ");
                 }
                 if (item.getItemId() == R.id.bt_giohang){
-                    callFragment(new GioHangFragment());
+//                    callFragment(new GioHangFragment());
+                    startActivity(new Intent(MainActivity.this, GioHangActivity.class));
                     toolbar.setTitle("Giỏ hàng");
                 }
                 if (item.getItemId() == R.id.bt_danhmuc){
@@ -218,11 +219,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-
     }
-
-
-
 
 
 }

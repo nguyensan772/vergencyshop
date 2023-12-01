@@ -4,21 +4,41 @@ import java.io.Serializable;
 
 public class SanPham implements Serializable {
 
-    String anhSP,giaSP,tenSP,idSP,motaSP,loaiSP,sizeSP,danhmuc;
+    String anhSP,giaSP,tenSP,motaSP,danhmucSP,trangthaiSP;
+
+
+    public SanPham(String anhSP, String giaSP, String tenSP, String motaSP, String danhmucSP, String trangthaiSP) {
+        this.anhSP = anhSP;
+        this.giaSP = giaSP;
+        this.tenSP = tenSP;
+        this.motaSP = motaSP;
+        this.danhmucSP = danhmucSP;
+        this.trangthaiSP = trangthaiSP;
+    }
+
+
+
+    public String getDanhmucSP() {
+        return danhmucSP;
+    }
+
+    public void setDanhmucSP(String danhmucSP) {
+        this.danhmucSP = danhmucSP;
+    }
+
+    public String getTrangthaiSP() {
+        return trangthaiSP;
+    }
+
+    public void setTrangthaiSP(String trangthaiSP) {
+        this.trangthaiSP = trangthaiSP;
+    }
 
     public SanPham() {
     }
 
-    public SanPham(String anhSP, String giaSP, String tenSP, String idSP, String motaSP, String loaiSP, String sizeSP,String danhmuc) {
-        this.anhSP = anhSP;
-        this.giaSP = giaSP;
-        this.tenSP = tenSP;
-        this.idSP = idSP;
-        this.motaSP = motaSP;
-        this.loaiSP = loaiSP;
-        this.sizeSP = sizeSP;
-        this.danhmuc = danhmuc;
-    }
+
+
 
 
 
@@ -30,21 +50,6 @@ public class SanPham implements Serializable {
         this.motaSP = motaSP;
     }
 
-    public String getLoaiSP() {
-        return loaiSP;
-    }
-
-    public void setLoaiSP(String loaiSP) {
-        this.loaiSP = loaiSP;
-    }
-
-    public String getSizeSP() {
-        return sizeSP;
-    }
-
-    public void setSizeSP(String sizeSP) {
-        this.sizeSP = sizeSP;
-    }
 
     public String getAnhSP() {
         return anhSP;
@@ -70,11 +75,5 @@ public class SanPham implements Serializable {
         this.tenSP = tenSP;
     }
 
-    public String getIdSP() {
-        return idSP;
-    }
 
-    public void setIdSP(String idSP) {
-        this.idSP = idSP;
-    }
 }

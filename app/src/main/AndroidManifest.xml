@@ -17,16 +17,19 @@
         android:theme="@style/Theme.VergencyShop"
         tools:targetApi="31">
         <activity
-            android:name=".GioHangTest"
+
+            android:name=".GioHangActivity"
             android:exported="false" />
+
         <activity
             android:name=".DanhMuc"
+
             android:exported="false" />
         <activity
             android:name=".ThanhToanSanPham"
             android:exported="false" />
         <activity
-            android:name=".ChiTietSanPham"
+            android:name=".ChiTietSanPhamActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

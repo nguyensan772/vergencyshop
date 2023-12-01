@@ -62,7 +62,7 @@ public class DangKy extends AppCompatActivity {
                             Toast.makeText(DangKy.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                             user = auth.getCurrentUser();
                             reference.child(user.getUid()).child("taiKhoan").setValue(email);
-                            reference.child(user.getUid()).child("matKhau").setValue(password);
+                            
                             //Thong tin
                             reference.child(user.getUid()).child("ten").setValue(null);
                             reference.child(user.getUid()).child("gioiTinh").setValue(null);

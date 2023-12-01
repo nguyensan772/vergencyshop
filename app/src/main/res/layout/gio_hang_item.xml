@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="12dp"
+    android:id="@+id/layoutItemGioHang"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/eachCartItemIV"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shirt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_tensp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Ten"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/eachCartItemIV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.136" />
+
+        <TextView
+            android:id="@+id/tv_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="size"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/eachCartItemIV"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tensp" />
+
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Tổng Tiền: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/eachCartItemIV"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sl" />
+
+        <TextView
+            android:id="@+id/tv_sl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số lượng: "
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintStart_toEndOf="@+id/eachCartItemIV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.644" />
+
+        <TextView
+            android:id="@+id/tv_giatien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tong tien"
+            android:textColor="@color/gia"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toEndOf="@+id/eachCartItemIV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.943" />
+
+        <ImageView
+            android:id="@+id/eachCartItemDeleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_delete_24" />
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/eachCartItemAddQuantityBtn"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:background="@color/dangnhap"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:srcCompat="@drawable/baseline_add_24" />-->
+
+        <TextView
+            android:id="@+id/tv_soluong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="so luong"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.464"
+            app:layout_constraintStart_toEndOf="@+id/eachCartItemIV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.644" />
+
+        <!--        <ImageButton-->
+<!--            android:id="@+id/eachCartItemMinusQuantityBtn"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:background="@color/dangnhap"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/tv_soluong"-->
+<!--            app:srcCompat="@drawable/baseline_add_24" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
