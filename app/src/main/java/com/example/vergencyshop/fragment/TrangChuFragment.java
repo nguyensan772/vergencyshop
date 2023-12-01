@@ -105,7 +105,6 @@ public class TrangChuFragment extends Fragment {
         ln_timkiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
 

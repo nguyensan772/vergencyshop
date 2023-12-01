@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.vergencyshop.Adapter.GioHangAdapter;
 
 import com.example.vergencyshop.models.GioHang;
+import com.example.vergencyshop.models.HoaDon;
+import com.example.vergencyshop.models.HoaDonChiTiet;
 import com.example.vergencyshop.models.SanPham;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-public class GioHangActivity extends AppCompatActivity{
+public class GioHangActivity extends AppCompatActivity {
 
     RecyclerView rc_giohang;
 
@@ -47,6 +49,8 @@ public class GioHangActivity extends AppCompatActivity{
     GioHang gioHang = new GioHang();
 
     GioHangAdapter gioHangAdapter;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +69,11 @@ public class GioHangActivity extends AppCompatActivity{
         });
 
 
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        rc_giohang .setLayoutManager(new LinearLayoutManager(this));
+        rc_giohang.setLayoutManager(new LinearLayoutManager(this));
 
-        gioHangAdapter = new GioHangAdapter(this,list);
+        gioHangAdapter = new GioHangAdapter(this, list);
 
         DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("GioHang");
 
@@ -81,9 +84,9 @@ public class GioHangActivity extends AppCompatActivity{
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     list.clear();
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         list.add(snapshot1.getValue(GioHang.class));
 
                     }
@@ -102,28 +105,81 @@ public class GioHangActivity extends AppCompatActivity{
         });
 
 
-
-
         tv_muahang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                setHoaDon();
             }
         });
     }
 
-    private String tinhtongtien(){
-        int tongTien =0;
+    private void setHoaDon() {
 
-        for (GioHang gioHang1 : list){
+        ArrayList<HoaDon> listHD = new ArrayList<>();
+
+
+        DatabaseReference hoadonRef = FirebaseDatabase.getInstance().getReference("HoaDon");
+        Query query = hoadonRef.orderByChild("idND").equalTo(user.getUid());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot data:snapshot.getChildren()
+                         ) {
+                        listHD.add(data.getValue(HoaDon.class));
+
+                    }
+
+
+
+                    DatabaseReference hoadonchitietRef = FirebaseDatabase.getInstance().getReference("HoaDonChiTiet");
+                    if (list.size() < 0) {
+
+                        return;
+                    }
+                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+                    for (GioHang hang : list) {
+
+                        hoaDonChiTiet.setIdHD(hang.getIdNguoiDung() + listHD.size());
+                        hoaDonChiTiet.setIdSP(hang.getIdSP());
+
+                        hoaDonChiTiet.setSoLuong(hang.getSoluongSP());
+                        hoadonchitietRef.push().setValue(hoaDonChiTiet);
+
+                    }
+                    startActivity(new Intent(GioHangActivity.this, ThanhToanSanPham.class));
+
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+    private String tinhtongtien() {
+        int tongTien = 0;
+
+        for (GioHang gioHang1 : list) {
 
             int giatri = Integer.parseInt(gioHang1.getGiaSP());
-            tongTien = giatri + tongTien ;
+            tongTien = giatri + tongTien;
         }
 
         return String.valueOf(tongTien);
     }
-
 
 
 }

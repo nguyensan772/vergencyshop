@@ -1,10 +1,6 @@
 package com.example.vergencyshop;
 
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,30 +15,20 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
 import com.example.vergencyshop.fragment.DanhMucFragment;
 import com.example.vergencyshop.fragment.DoiMatKhauFragment;
-import com.example.vergencyshop.fragment.GioHangFragment;
 import com.example.vergencyshop.fragment.GioiThieuFragment;
 import com.example.vergencyshop.fragment.HoaDonFragment;
 import com.example.vergencyshop.fragment.LichSuMuaHangFragment;
 import com.example.vergencyshop.fragment.ThongTinNguoiDungFragment;
 import com.example.vergencyshop.fragment.TopSanPhamFragment;
 import com.example.vergencyshop.fragment.TrangChuFragment;
-import com.example.vergencyshop.models.SanPham;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -54,8 +40,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -78,11 +62,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//ỳvuyjfujg
-// cn1
 
         progressDialog = new ProgressDialog(this);
-
 
         drawerLayout = findViewById(R.id.layout_all);
         toolbar = findViewById(R.id.jl_toolbar);
@@ -92,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
          tvUser = navigationView.getHeaderView(0).findViewById(R.id.tvUser);
         setThongTin();
 
-
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Trang chủ");
         ActionBarDrawerToggle  toggle = new ActionBarDrawerToggle(MainActivity.this , drawerLayout , toolbar , R.string.open,R.string.close);
@@ -102,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
 
         callFragment(new TrangChuFragment());
-
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -120,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.nav_giohang){
-
-                    callFragment(new GioHangFragment());
-                    toolbar.setTitle("Giỏ hàng");
+                    startActivity(new Intent(getApplicationContext(),GioHangActivity.class));
                 }
                 if (item.getItemId() == R.id.sub_Top){
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,14 +36,13 @@ import java.util.Locale;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
     TextView tvTenSanPham,tvGiaSanPham,tvThongTinChiTietSanPham;
-    ImageView imgChiTietSanPham;
+    ImageView imgChiTietSanPham,imgBackToMain;
 
+    LinearLayout btnThemVaoGio,btnMuaNgay;
     //Cụm tăng chỉnh sô lượng
     TextView btnTruSoLuong , btnTangSoLuong, tvSoLuong;
-
     //Đặt hàng và giỏ hàng
     Button btnThemGioHang , btnDatHang ;
-
     //Chọn size
     RadioButton rdSizeM , rdSizeL , rdSizeXL ;
     SanPham sanPham;
@@ -75,17 +75,23 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         setChiTietSanPham();
         hienSoLuong();
         chonSoLuong();
-        btnDatHang.setOnClickListener(new View.OnClickListener() {
+        btnMuaNgay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chonSize(1);
             }
         });
 
-        btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+        btnThemVaoGio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chonSize(2);
+            }
+        });
+        imgBackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChiTietSanPhamActivity.this, MainActivity.class));
             }
         });
     }
@@ -121,6 +127,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         tvGiaSanPham = findViewById(R.id.tvGiaChiTietSanPham);
         tvThongTinChiTietSanPham = findViewById(R.id.tvThongTinChiTietSanPham);
         imgChiTietSanPham = findViewById(R.id.imgChiTietSanPhamAct);
+        imgBackToMain = findViewById(R.id.img_backToMainMenu);
         // Cụm tăng số lượng
         btnTangSoLuong = findViewById(R.id.btnCongSoLuong);
         btnTruSoLuong = findViewById(R.id.btnTruSoLuong);
@@ -130,8 +137,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         rdSizeL = findViewById(R.id.rdSizeL);
         rdSizeXL = findViewById(R.id.rdSizeXL);
         //Đặt hàng và giỏ hàng
-        btnThemGioHang = findViewById(R.id.btnThemVaoGioHangChiTietSanPham);
-        btnDatHang = findViewById(R.id.btnThanhToanChiTietSanPham);
+        btnMuaNgay = findViewById(R.id.btn_muangay);
+        btnThemVaoGio = findViewById(R.id.btn_themvaogio);
 
 
     }
