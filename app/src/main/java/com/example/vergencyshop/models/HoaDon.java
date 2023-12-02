@@ -1,8 +1,9 @@
 package com.example.vergencyshop.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HoaDon {
+public class HoaDon implements Serializable {
     String idHD, idND, thanhTien, ngayMua, phuongThuc, trangThai;
     ArrayList<HoaDonChiTiet> list ;
 

@@ -93,17 +93,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
 
 
 
-    private int tinhThanhTien (){
-        int soHang = 0 ;
 
-        for (GioHang i : list
-             ) {
-
-           soHang +=  (Integer.parseInt(i.getGiaSP()) * Integer.parseInt(i.getSoluongSP())) ;
-
-        }
-        return soHang ;
-    }
 
     private void setMuaHang() {
 
@@ -123,29 +113,41 @@ public class ThanhToanSanPham extends AppCompatActivity {
 
         String idHD = reference.push().getKey();
         String idND = user.getUid();
-        String thanhTien = String.valueOf(tinhThanhTien());
+        String thanhTien = "0";
+
         String ngayMua = formattedTime;
         String phuongThuc = setPhuongThucThanhToan();
         String trangThai ="Chờ Xác Nhận";
 
-        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
-
-        reference.child("HoaDon").child(idHD)
-                .setValue(hoaDon);
 
 
+
+
+
+
+        int tien = 0;
         for (GioHang hang: list){
 
-            String idHDCT = hoaDon.getIdHD();
+            String idHDCT = idHD;
             String idSP =   hang.getIdSP() ;
             String soLuong = hang.getSoluongSP();
-            String tongTien = String.valueOf(Integer.parseInt(hang.getSoluongSP()) * Integer.parseInt(hang.getSoluongSP())) ;
+            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP())) ;
             String anhSP = hang.getAnhSP() ;
             String sizeSP = hang.getSizeSP();
 
+
+            tien =tien + Integer.parseInt(tongTien);
+            thanhTien = String.valueOf(tien);
+            Toast.makeText(this, ""+tien, Toast.LENGTH_SHORT).show();
+
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
             reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);
+
         }
+        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
+        reference.child("HoaDon").child(idHD)
+                .setValue(hoaDon);
+
 
         //Xóa giỏ hàng
 

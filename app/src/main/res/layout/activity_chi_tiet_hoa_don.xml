@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChiTietHoaDonActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:layout_weight="1"
+            android:text="Hóa đơn bán hàng"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvIdHoaDonChiTiet"
+            android:text="Số"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvNgayTaoHoaDonChiTiet"
+            android:text="Ngày tạo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvKhachHangHoaDonChiTiet"
+            android:text="Khách hàng"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvSoDienThoaiHoaDonChiTiet"
+            android:text="So dien thoai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvDiaChiHoaDonChiTiet"
+            android:text="Địa chỉ"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rcHoaDonChiTiet"
+            />
+
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/tvPhiVanChuyenHoaDonChiTiet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phi van chuyen"
+        />
+
+    <TextView
+        android:id="@+id/tvTongTienHoaDonChiTiet"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tong tien"
+
+        />
+
+    <Button
+        android:id="@+id/btnHuyHoaDon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hủy đơn hàng"
+        />
+
+</LinearLayout>
