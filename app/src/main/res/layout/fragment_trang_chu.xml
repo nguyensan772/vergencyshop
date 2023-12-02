@@ -6,33 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/AppTheme.AppBarOverlay">-->
 
-<!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
-            <!-- Toolbar with SearchView and ImageView -->
-<!--            <androidx.appcompat.widget.Toolbar-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize"-->
-<!--                app:layout_collapseMode="pin"-->
-<!--                android:background="@drawable/backgourp_pro1">-->
-
-
-<!--            </androidx.appcompat.widget.Toolbar>-->
-
-<!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <!-- Content including ViewPager and RecyclerView -->
@@ -44,29 +23,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_gravity="center"
 
                 android:padding="8dp">
 
-                <SearchView
-                    android:id="@+id/sv_tenSP"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/searchBtn"
+                    android:background="@drawable/seach"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:queryHint="Search"
-                    android:iconifiedByDefault="false" />
+app:cardCornerRadius="50dp"
+                    android:orientation="horizontal">
+                    <SearchView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:queryHint="Nhập Tên Sản Phẩm"
+                        android:id="@+id/sv_tenSP"
+                        android:iconifiedByDefault="false"/>
+<!--                    <ImageView-->
+<!--                        android:layout_margin="6dp"-->
+<!--                        android:src="@drawable/baseline_search_24"-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp" />-->
 
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Tìm Kiếm Sản Phẩm"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:layout_marginTop="6dp"-->
+<!--                        />-->
+                </androidx.cardview.widget.CardView>
                 <ImageView
                     android:id="@+id/cartImageView"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/cart"
-                    android:contentDescription="Cart" />
-
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="Cart"
+                    android:src="@drawable/baseline_shopping_cart_checkout_24" />
             </LinearLayout>
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="130dp" />
+                android:layout_height="150dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcdanhSachSanPhamTC"

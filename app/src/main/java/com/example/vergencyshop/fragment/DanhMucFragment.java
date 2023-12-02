@@ -88,7 +88,6 @@ public class DanhMucFragment extends Fragment {
             }
         });
 
-
         btnDanhMucSweaters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

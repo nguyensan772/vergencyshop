@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,11 +17,17 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.SearchView;
+
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
 import com.example.vergencyshop.Adapter.BannerAdapter;
 import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
+import com.example.vergencyshop.GioHangActivity;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.SanPham;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -80,10 +87,14 @@ public class TrangChuFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     View view;
     SanPhamTrangChuAdapter sanPhamTrangChuAdapter;
     SearchView sv_tenSP;
     private ViewPager viewPager;
+
+    CardView ln_timkiem;
+    ImageView img_giohang;
     private Handler handler;
     private Runnable runnable;
     private int delayTime = 3000; // Thời gian chuyển đổi ảnh (3 giây)
@@ -99,45 +110,72 @@ public class TrangChuFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         anhXa();
-sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-
-        return false;
-    }
 
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        search_List.clear();
-        if (newText.length() > 0) {
-            queryFirebaseForSearch(newText);  // Truy vấn Firebase
-        } else {
-            sanPhamTrangChuAdapter.filterList(list);  // Hiển thị lại toàn bộ danh sách sản phẩm nếu không có từ khóa tìm kiếm
-        }
-        return false;
-    }
-});
-       viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
+        viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
+
+        ln_timkiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search_List.clear();
+                if (newText.length() > 0) {
+                    queryFirebaseForSearch(newText);  // Truy vấn Firebase
+                } else {
+                    sanPhamTrangChuAdapter.filterList(list);  // Hiển thị lại toàn bộ danh sách sản phẩm nếu không có từ khóa tìm kiếm
+                }
+                return false;
+            }
+        });
+
+        img_giohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), GioHangActivity.class));
+            }
+        });
 
         rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
+
+        sanPhamTrangChuAdapter = new SanPhamTrangChuAdapter(getActivity(),list);
+
+
         reference.child("SanPham").addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham =  snapshot.getValue(SanPham.class);
+
+
+
+
                 list.add(sanPham);
+
+
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 SanPham sanPham =  snapshot.getValue(SanPham.class);
+
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
             @Override
@@ -150,8 +188,8 @@ sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
         });
-        rcSanPham.setAdapter(sanPhamTrangChuAdapter);
 
+        rcSanPham.setAdapter(sanPhamTrangChuAdapter);
         // Inflate the layout for this fragment
         return view;
     }
@@ -165,8 +203,8 @@ sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
         runnable = new Runnable() {
            public void run() {
                currentPage = viewPager.getCurrentItem();
-                currentPage = (currentPage + 1) % imageIds.length;
-             viewPager.setCurrentItem(currentPage, true);
+               currentPage = (currentPage + 1) % imageIds.length;
+               viewPager.setCurrentItem(currentPage, true);
                handler.postDelayed(this, delayTime);
             }
        };
@@ -198,7 +236,12 @@ sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
     }
 
     private void anhXa (){
+
         sv_tenSP = view.findViewById(R.id.sv_tenSP);
+
+        ln_timkiem = view.findViewById(R.id.searchBtn);
+        img_giohang = view.findViewById(R.id.cartImageView);
+
         rcSanPham = view.findViewById(R.id.rcdanhSachSanPhamTC);
         viewPager = view.findViewById(R.id.viewPager);
     }

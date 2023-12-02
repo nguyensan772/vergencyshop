@@ -79,9 +79,13 @@ public class DangNhap extends AppCompatActivity {
     }
 
 
+
     private void anhXa (){
         edtUserName = findViewById(R.id.edt_user);
         edtPassWord = findViewById(R.id.edt_pass);
+
+        edtUserName.setSingleLine(true);
+        edtPassWord.setSingleLine(true);
     }
 
 }

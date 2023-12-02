@@ -7,13 +7,7 @@
     android:orientation="vertical"
     tools:context=".DanhMuc">
 
-    <EditText
-        android:id="@+id/edtTimKiemSanPhamTheoTen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcSanPhamDanhMuc"

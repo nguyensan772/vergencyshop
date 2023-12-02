@@ -8,9 +8,8 @@
     android:layout_gravity="center"
     android:padding="10sp"
     android:layout_margin="10sp"
-    android:background="#70cbff"
-    android:id="@+id/layoutItemSanPhamTrangChu"
-    >
+    android:background="#fff"
+    android:id="@+id/layoutItemSanPhamTrangChu">
 
     <ImageView
 

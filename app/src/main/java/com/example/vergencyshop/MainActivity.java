@@ -21,9 +21,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.vergencyshop.fragment.DanhMucFragment;
 import com.example.vergencyshop.fragment.DoiMatKhauFragment;
 import com.example.vergencyshop.fragment.GioHangFragment;
+import com.example.vergencyshop.fragment.GioiThieuFragment;
 import com.example.vergencyshop.fragment.HoaDonFragment;
 import com.example.vergencyshop.fragment.LichSuMuaHangFragment;
 import com.example.vergencyshop.fragment.ThongTinNguoiDungFragment;
@@ -62,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+//ỳvuyjfujg
+// cn1
 
         progressDialog = new ProgressDialog(this);
 
@@ -93,33 +95,33 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 progressDialog.show();
                 if (item.getItemId() == R.id.nav_trangchu){
-                    progressDialog.dismiss();
+
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
                 }
                 if (item.getItemId() == R.id.nav_danhmuc){
-                    progressDialog.dismiss();
+
                     callFragment(new DanhMucFragment());
                     toolbar.setTitle("Danh mục");
                 }
 
                 if (item.getItemId() == R.id.nav_giohang){
-                    progressDialog.dismiss();
+
                     callFragment(new GioHangFragment());
                     toolbar.setTitle("Giỏ hàng");
                 }
                 if (item.getItemId() == R.id.sub_Top){
-                    progressDialog.dismiss();
+
                     callFragment(new TopSanPhamFragment());
                     toolbar.setTitle("Sản phẩm bán chạy");
                 }
                 if (item.getItemId() == R.id.nav_HoSo){
-                    progressDialog.dismiss();
+
                     callFragment(thongTinNguoiDungFragment);
                     toolbar.setTitle("Thông tin khách hàng");
                 }
                 if (item.getItemId() == R.id.nav_HoaDon){
-                    progressDialog.dismiss();
+
                     callFragment(new HoaDonFragment());
                     toolbar.setTitle("Hóa đơn");
                 }
@@ -130,14 +132,18 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.sub_Logout){
-                    progressDialog.dismiss();
+
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(MainActivity.this,DangNhap.class);
                     startActivity(intent);
                     finishAffinity();
                 }
+                if (item.getItemId() == R.id.sub_Support){
+                    callFragment(new GioiThieuFragment());
+                    toolbar.setTitle("Hỗ trợ");
+                }
                 if (item.getItemId() == R.id.sub_Pass){
-                    progressDialog.dismiss();
+
                     callFragment(new DoiMatKhauFragment());
                     toolbar.setTitle("Đổi mật khẩu");
                 }
@@ -154,14 +160,15 @@ public class MainActivity extends AppCompatActivity {
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
                 }
-                if (item.getItemId() == R.id.bt_giohang){
-                    callFragment(new GioHangFragment());
-                    toolbar.setTitle("Giỏ hàng");
+                if (item.getItemId() == R.id.bt_banchay){
+                    callFragment(new TopSanPhamFragment());
+                    toolbar.setTitle("Sản Phẩm bán chạy");
                 }
                 if (item.getItemId() == R.id.bt_danhmuc){
                     callFragment(new DanhMucFragment());
                     toolbar.setTitle("Danh mục");
                 }
+
                 if (item.getItemId() == R.id.bt_nguoidung){
                     callFragment(new ThongTinNguoiDungFragment());
                     toolbar.setTitle("Hồ sơ");
@@ -176,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void callFragment (Fragment fragment){
+        progressDialog.dismiss();
         FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
         manager.replace(R.id.jl_fragment,fragment).commit();
         drawerLayout.close();
@@ -212,10 +220,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        reference.child("NguoiDung").child(user.getUid()).child("anh").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null){
+
+
+                    Glide.with(MainActivity.this).load(snapshot.getValue().toString()).into(imgAvt);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
-
-
-
 
 
 }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,7 +25,7 @@ public class DanhMuc extends AppCompatActivity {
 
     RecyclerView rcSanPhamDanhMuc ;
 
-    EditText edtTimKiem ;
+
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -200,7 +199,7 @@ public class DanhMuc extends AppCompatActivity {
 
 
     private  void  anhXa (){
-        edtTimKiem = findViewById(R.id.edtTimKiemSanPhamTheoTen);
+
         rcSanPhamDanhMuc = findViewById(R.id.rcSanPhamDanhMuc);
     }
 }

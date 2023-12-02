@@ -1,201 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChiTietSanPhamActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ChiTietSanPham"
-        android:paddingHorizontal="17sp"
-        android:gravity="center"
-        >
-
-
-        <ImageView
-            android:id="@+id/imgChiTietSanPhamAct"
-            android:layout_marginHorizontal="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:src="@drawable/logo"
-            />
-
-        <TextView
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:id="@+id/tvTenChiTietSanPham"
-            android:text="Simple sweater/gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-
-
-            />
+        android:paddingHorizontal="20sp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="17sp"
+            tools:context=".ChiTietSanPham">
+
+
+            <ImageView
+                android:id="@+id/imgChiTietSanPhamAct"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="50dp"
+               />
+
+            <TextView
+                android:id="@+id/tvTenChiTietSanPham"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simple sweater/gray"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-
-                <TextView
-                    android:id="@+id/tvGiaChiTietSanPham"
-                    android:text="99.000"
-                    android:textColor="@color/gia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="17dp"
-                    />
-
-                <RadioGroup
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Size :"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="bold"
-                        />
-                    <RadioButton
-                        android:id="@+id/rdSizeM"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="M"
-                        />
-                    <RadioButton
-                        android:id="@+id/rdSizeL"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L"
-                        />
-
-                    <RadioButton
-                        android:id="@+id/rdSizeXL"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="XL"
-                        />
-
-
-
-
-                </RadioGroup>
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
                     <TextView
-                        android:textColor="@color/black"
-                        android:textSize="19dp"
-                        android:textStyle="bold"
+                        android:id="@+id/tvGiaChiTietSanPham"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Số lượng "
+                        android:text="99.000"
+                        android:textColor="@color/gia"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Size :"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold" />
+                        <RadioButton
+                            android:id="@+id/rdSizeM"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="M" />
 
-                        />
-
-                    <TextView
-                        android:id="@+id/btnTruSoLuong"
-                        android:background="@color/dangnhap"
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="-"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        />
-
-                    <TextView
-                        android:id="@+id/tvSoLuong"
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:background="@color/cancel"
-                        />
-                    <TextView
-                        android:id="@+id/btnCongSoLuong"
-                        android:background="@color/dangnhap"
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent"
-                        android:text="+"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        />
-
+                        <RadioButton
+                            android:id="@+id/rdSizeL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L" />
+                        <RadioButton
+                            android:id="@+id/rdSizeXL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="XL" />
+                    </RadioGroup>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Số lượng "
+                            android:textColor="@color/black"
+                            android:textSize="19dp"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:id="@+id/btnTruSoLuong"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/dangnhap"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvSoLuong"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/cancel"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/btnCongSoLuong"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/dangnhap"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
-
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <Button
+                        android:id="@+id/btnThemVaoGioHangChiTietSanPham"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/dangnhap"
+                        android:text="Thêm vào giỏ hàng"
+                        android:textSize="15sp" />
+                    <Button
+                        android:id="@+id/btnThanhToanChiTietSanPham"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/dangnhap"
+                        android:text="Thanh toán"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-
-                <Button
-                    android:id="@+id/btnThemVaoGioHangChiTietSanPham"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Thêm vào giỏ hàng"
-                    android:backgroundTint="@color/dangnhap"
-                    android:textSize="15sp"
-
-                    />
-
-                <Button
-                    android:id="@+id/btnThanhToanChiTietSanPham"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Thanh toán"
-                    android:backgroundTint="@color/dangnhap"
-                    android:textSize="15sp"
-                    />
-            </LinearLayout>
+                android:text="MÔ TẢ SẢN PHẨM"
+                android:textColor="@color/dangnhap"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvThongTinChiTietSanPham"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: Simple sweater/gray"
+                android:textColor="@color/black" />
         </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dangnhap"
-            android:text="MÔ TẢ SẢN PHẨM"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:id="@+id/tvThongTinChiTietSanPham"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-
-            android:text="Name: Simple sweater/gray"
-            />
-
-
     </LinearLayout>
 </ScrollView>

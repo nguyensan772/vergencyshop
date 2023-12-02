@@ -3,20 +3,22 @@ package com.example.vergencyshop.fragment;
 
 
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.vergencyshop.MainActivity.MY_REQUEST_CODE;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.content.Intent;
+
 import android.net.Uri;
 
-import android.os.Build;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 
 
 import android.view.LayoutInflater;
@@ -28,9 +30,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 
-import com.example.vergencyshop.MainActivity;
+import com.bumptech.glide.Glide;
 import com.example.vergencyshop.R;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +43,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,6 +60,8 @@ public class ThongTinNguoiDungFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -94,10 +100,10 @@ public class ThongTinNguoiDungFragment extends Fragment {
 
 
     View view ;
-    EditText edtTen,edtNgaySinh,edtSoDienThoai,edtDiaChi;
+    EditText edanh,edtTen,edtNgaySinh,edtSoDienThoai,edtDiaChi;
     RadioButton rdNam ,rdNu ;
     Button btnLuu ;
-    ImageView imgAvt ;
+
     ProgressDialog progressDialog ;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -107,7 +113,7 @@ public class ThongTinNguoiDungFragment extends Fragment {
     FirebaseUser user = auth.getCurrentUser();
 
     private  Uri uri ;
-
+ImageView imgAVTedit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,6 +129,9 @@ public class ThongTinNguoiDungFragment extends Fragment {
 
         });
 
+        imgAVTedit.setOnClickListener(v -> {
+
+        });
 
 
         // Inflate the layout for this fragment
@@ -135,17 +144,37 @@ public class ThongTinNguoiDungFragment extends Fragment {
     private void anhXa (){
       //  progressDialog = new ProgressDialog(getContext());
         edtTen = view.findViewById(R.id.edtTenKH);
-
+        edanh = view.findViewById(R.id.edanh);
         edtNgaySinh = view.findViewById(R.id.edtNgaySinhKH);
         edtSoDienThoai = view.findViewById(R.id.edtSDTKH);
         edtDiaChi = view.findViewById(R.id.edtDiaChiKH);
         rdNam = view.findViewById(R.id.rdNam);
         rdNu = view.findViewById(R.id.rdNu);
         btnLuu = view.findViewById(R.id.btnSuaHoSo);
-        imgAvt = view.findViewById(R.id.imgAVTedit);
+
+        imgAVTedit = view.findViewById(R.id.imgAVTedit);
     }
 
+
+
     public  void  setThongTin(){
+        reference.child("NguoiDung").child(user.getUid()).child("anh").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if ( snapshot.getValue()== null){
+                    edanh.setText(null);
+
+                }else {
+                    Glide.with(getActivity()).load(edanh.getText().toString()).into(imgAVTedit);
+                    edanh.setText(snapshot.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         reference.child("NguoiDung").child(user.getUid()).child("ten").addValueEventListener(new ValueEventListener() {
             @Override
@@ -227,6 +256,22 @@ public class ThongTinNguoiDungFragment extends Fragment {
 
         //Địa chỉ
 
+        reference.child("NguoiDung").child(user.getUid()).child("anh").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if ( snapshot.getValue()== null){
+                    edanh.setText(null);
+
+                }else {
+                    edanh.setText(snapshot.getValue().toString());
+                    Glide.with(getActivity()).load(edanh.getText().toString().trim()).into(imgAVTedit);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
         reference.child("NguoiDung").child(user.getUid()).child("diaChi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -240,13 +285,8 @@ public class ThongTinNguoiDungFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-
-
-
     }
 
 
@@ -281,10 +321,15 @@ public class ThongTinNguoiDungFragment extends Fragment {
 
         //Số điện thoại
 
+        Pattern pattern = Pattern.compile("^0[0-9]{9}$");
+        Matcher matcher = pattern.matcher(edtSoDienThoai.getText().toString().trim());
 
         if (edtSoDienThoai.getText().toString().isEmpty()){
             Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
-        }else {
+        }else if (!matcher.matches()){
+            Toast.makeText(getContext(), "Số sai", Toast.LENGTH_SHORT).show();
+        }
+        else {
             reference.child("NguoiDung").child(user.getUid()).child("soDienThoai").setValue(edtSoDienThoai.getText().toString());
         }
 
@@ -294,11 +339,14 @@ public class ThongTinNguoiDungFragment extends Fragment {
         }else {
             reference.child("NguoiDung").child(user.getUid()).child("diaChi").setValue(edtDiaChi.getText().toString());
         }
-
+        // anh
+        if (edanh.getText().toString().isEmpty()){
+            Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
+        }else {
+            reference.child("NguoiDung").child(user.getUid()).child("anh").setValue(edanh.getText().toString());
+        }
 
     }
-
-
 
 
 
