@@ -59,9 +59,14 @@ public class GioHangActivity extends AppCompatActivity {
         rc_giohang = findViewById(R.id.rcGioHang);
         tv_tongtien = findViewById(R.id.tv_tongtien);
         tv_muahang = findViewById(R.id.btnMuaHangGioHang);
+btn_backToMain = findViewById(R.id.img_backToMain);
 
-
-
+btn_backToMain.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        onBackPressed();
+    }
+});
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         rc_giohang.setLayoutManager(new LinearLayoutManager(this));
@@ -72,7 +77,6 @@ public class GioHangActivity extends AppCompatActivity {
 
         rc_giohang.setAdapter(gioHangAdapter);
         gioHangAdapter.setTongTienTextView(tv_tongtien);
-
         Query query = cartRef.orderByChild("idNguoiDung").equalTo(user.getUid());
 
         query.addValueEventListener(new ValueEventListener() {
@@ -90,9 +94,7 @@ public class GioHangActivity extends AppCompatActivity {
 
                     String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(tinhtongtien()));
                     tv_tongtien.setText(formattedGiaSanPham);
-                    //tv_tongtien.setText(tinhtongtien());
 
-             //       tv_tongtien.setText(tinhtongtien().toString());
 
                 }
                 gioHangAdapter.notifyDataSetChanged();

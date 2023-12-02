@@ -58,19 +58,33 @@ public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.Hold
 
     @Override
     public void onBindViewHolder(@NonNull HolderThanhToan holder, int position) {
-
-
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        GioHang gioHang = list.get(position);
                 Glide.with(context)
                         .load(Uri.decode(list.get(position).getAnhSP()))
                         .placeholder(R.drawable.ic_giohang)
                         .error(R.drawable.ngacnhien)
                         .into(holder.imgSanPhamThanhToan);
 
-                holder.tvItemGiaSanPhamThanhToan.setText(list.get(position).getGiaSP());
-                holder.tvItemTenSanPhamThanhToan.setText(list.get(position).getTenSP());
-                holder.tvItemSizeSanPhamThanhToan.setText(list.get(position).getSizeSP());
-                holder.tvItemTongTienSanPhamThanhToan.setText(String.valueOf(Integer.parseInt(list.get(position).getGiaSP()) * Integer.parseInt(list.get(position).getSoluongSP())));
-                holder.tvItemSoLuongSanPhamThanhToan.setText(list.get(position).getSoluongSP());
+
+        // Định dạng và gán giá sản phẩm
+        double giaSP = Double.parseDouble(gioHang.getGiaSP());
+        String formattedGiaSP = currencyFormat.format(giaSP);
+        holder.tvItemGiaSanPhamThanhToan.setText(formattedGiaSP);
+
+        // Gán thông tin khác của sản phẩm
+        holder.tvItemTenSanPhamThanhToan.setText(gioHang.getTenSP());
+        holder.tvItemSizeSanPhamThanhToan.setText(gioHang.getSizeSP());
+
+        // Tính toán và định dạng tổng tiền
+        int soLuongSP = Integer.parseInt(gioHang.getSoluongSP());
+        int tongTien = (int) (giaSP * soLuongSP);
+        String formattedTongTien = currencyFormat.format(tongTien);
+        holder.tvItemTongTienSanPhamThanhToan.setText(formattedTongTien);
+
+        // Gán số lượng sản phẩm
+        holder.tvItemSoLuongSanPhamThanhToan.setText(gioHang.getSoluongSP());
 
 
 

@@ -126,7 +126,9 @@ sv_date.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
        query .addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                if (snapshot.exists()){
+                   list.clear();
                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                        list.add(dataSnapshot.getValue(HoaDon.class));
 

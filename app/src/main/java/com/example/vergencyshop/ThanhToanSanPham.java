@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
     RecyclerView rcSanPhamThanhToan ;
     RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;
     ThanhToanAdapter thanhToanAdapter;
+    ImageView img_backToMain;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -68,86 +70,60 @@ public class ThanhToanSanPham extends AppCompatActivity {
         anhXa();
         setList();
         setThongTin();
-
-
-
-
         rdBankingThanhToan.setChecked(true);
-
-
-
         rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this ));
         thanhToanAdapter = new ThanhToanAdapter(list,this);
-
-
-
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setMuaHang();
             }
         });
-
-
         rcSanPhamThanhToan.setAdapter(thanhToanAdapter);
-
+        img_backToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
-
-
-
-    private int tinhThanhTien (){
-        int soHang = 0 ;
-
-        for (GioHang i : list
-             ) {
-
-           soHang +=  (Integer.parseInt(i.getGiaSP()) * Integer.parseInt(i.getSoluongSP())) ;
-
-        }
-        return soHang ;
-    }
-
     private void setMuaHang() {
-
-
-
-
         // Set giờ
         // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
         // Lấy thời gian hiện tại
         Date currentTime = new Date();
 
         // Định dạng thời gian hiện tại theo định dạng đã cho
         String formattedTime = dateFormat.format(currentTime);
-
-
         String idHD = reference.push().getKey();
         String idND = user.getUid();
-        String thanhTien = String.valueOf(tinhThanhTien());
+        String thanhTien = "0";
         String ngayMua = formattedTime;
         String phuongThuc = setPhuongThucThanhToan();
         String trangThai ="Chờ Xác Nhận";
-
-        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
-
-        reference.child("HoaDon").child(idHD)
-                .setValue(hoaDon);
-
-
+        int tien = 0;
         for (GioHang hang: list){
-
-            String idHDCT = hoaDon.getIdHD();
+            String idHDCT = idHD;
             String idSP =   hang.getIdSP() ;
             String soLuong = hang.getSoluongSP();
-            String tongTien = String.valueOf(Integer.parseInt(hang.getSoluongSP()) * Integer.parseInt(hang.getSoluongSP())) ;
+            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP())) ;
             String anhSP = hang.getAnhSP() ;
             String sizeSP = hang.getSizeSP();
 
+
+            tien =tien + Integer.parseInt(tongTien);
+            thanhTien = String.valueOf(tien);
+            Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
             reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);
+
         }
+        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
+        reference.child("HoaDon").child(idHD)
+                .setValue(hoaDon);
+
 
         //Xóa giỏ hàng
 
@@ -158,7 +134,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
 
     }
     private  void anhXa(){
-
+        img_backToMain = findViewById(R.id.img_backToMain);
         tvTenSDtThanhToan = findViewById(R.id.tvTenSDtThanhToan);
         tvDiaChiThanhToan = findViewById(R.id.tvDiaChiThanhToan);
         tvTongThanhToanHoaDon = findViewById(R.id.tvTongThanhToanHoaDon);
@@ -208,28 +184,16 @@ public class ThanhToanSanPham extends AppCompatActivity {
 
             }
         });
-
-
-
     }
-
-
     private void setList(){
-
-
-
-
         Query query = reference.child("GioHang").orderByChild("idNguoiDung").equalTo(user.getUid());
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-
                             GioHang hang = dataSnapshot.getValue(GioHang.class);
                             list.add(hang);
-
                         }
                         thanhToanAdapter.notifyDataSetChanged();
                     }
@@ -240,15 +204,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
 
             }
         });
-
-
-
     }
-
-
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

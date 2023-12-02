@@ -121,7 +121,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         imgBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChiTietSanPhamActivity.this, MainActivity.class));
+              onBackPressed();
             }
         });
 

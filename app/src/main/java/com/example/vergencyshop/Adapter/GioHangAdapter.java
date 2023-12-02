@@ -71,9 +71,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
         holder.sizeSP.setText(list.get(position).getSizeSP());
         holder.giaSP.setText(list.get(position).getGiaSP());
         holder.soluongSP.setText(list.get(position).getSoluongSP());
-
         Locale locale = new Locale("vi", "VN");
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+
 
         try {
             double giaSP = Double.parseDouble(list.get(position).getGiaSP());

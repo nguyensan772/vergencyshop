@@ -3,13 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="40dp"
-    android:backgroundTint="@color/cancel"
+    app:cardCornerRadius="30dp"
+    android:backgroundTint="@color/login"
     android:layout_margin="8dp">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    android:id="@+id/layoutItemHoaDon"
+    >
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +29,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:textColor="@color/black"
             android:id="@+id/tvIdHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,17 +41,20 @@
             android:paddingBottom="4dp" />
 
         <TextView
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:id="@+id/tvNgayTaoHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ngày tạo: "
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp" />
 
         <TextView
+            android:textColor="@color/black"
             android:id="@+id/tvKhachHangHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,6 +66,7 @@
             android:paddingBottom="4dp" />
 
         <TextView
+            android:textColor="@color/black"
             android:id="@+id/tvSoDienThoaiHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,6 +78,7 @@
             android:paddingBottom="4dp" />
 
         <TextView
+            android:textColor="@color/black"
             android:id="@+id/tvDiaChiHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,6 +90,7 @@
             android:paddingBottom="4dp" />
 
         <TextView
+            android:textColor="@color/black"
             android:id="@+id/tvTongTienHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
