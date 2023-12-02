@@ -8,7 +8,7 @@
 
         <item
             android:id="@+id/nav_danhmuc"
-            android:icon="@drawable/ic_danhmuc"
+            android:icon="@drawable/category"
             android:title="Danh mục" />
         <item
             android:id="@+id/nav_giohang"
@@ -30,7 +30,7 @@
 
                 <item
                     android:id="@+id/nav_HoaDon"
-                    android:icon="@drawable/ic_nguoidung"
+                    android:icon="@drawable/ic_danhmuc"
                     android:title="Hóa đơn" />
 
                 <item
@@ -46,7 +46,7 @@
 
                 <item
                     android:id="@+id/sub_Pass"
-                    android:icon="@drawable/ic_matkhau"
+                    android:icon="@drawable/ic_lichsu"
                     android:title="Đổi mật khẩu"/>
                 <item
                     android:id="@+id/sub_Support"

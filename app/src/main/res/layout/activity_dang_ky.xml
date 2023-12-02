@@ -9,19 +9,18 @@
     android:gravity="center|top"
     android:background="#70cbff">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:cardCornerRadius="50dp"-->
-<!--        >-->
+
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/logo2"
             android:layout_marginBottom="20dp"/>
-<!--    </androidx.cardview.widget.CardView>-->
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputEditText
         android:layout_marginTop="20dp"
         android:id="@+id/edt_userDK"
         android:layout_width="match_parent"
@@ -32,29 +31,44 @@
         android:paddingLeft="20dp"
         android:inputType="textEmailAddress"
         />
-
-    <EditText
-        android:id="@+id/edt_passDK"
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/edit_text"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="Mật khẩu"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        />
+        android:layout_height="wrap_content"
 
-    <EditText
-        android:id="@+id/edt_checkpassDK"
+        android:layout_marginTop="15dp"
+        app:endIconMode="password_toggle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_passDK"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/edit_text"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="Nhập lại mật khẩu"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:endIconMode="password_toggle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_checkpassDK"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="Nhập lại mật khẩu"
+            android:inputType="textPassword"
+          />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
