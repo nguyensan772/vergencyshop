@@ -5,9 +5,9 @@
         android:title="Trang chủ"
         android:icon="@drawable/home"/>
     <item
-        android:id="@+id/bt_giohang"
-        android:title="Giỏ hàng"
-        android:icon="@drawable/cart"/>
+        android:id="@+id/bt_banchay"
+        android:title="SP Hot"
+        android:icon="@drawable/ic_topsp"/>
     <item
         android:id="@+id/bt_danhmuc"
         android:title="Danh mục"

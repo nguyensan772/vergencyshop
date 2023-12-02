@@ -16,11 +16,17 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.SearchView;
+
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
 import com.example.vergencyshop.Adapter.BannerAdapter;
 import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
+import com.example.vergencyshop.GioHangActivity;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.SanPham;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -84,6 +90,9 @@ public class TrangChuFragment extends Fragment {
     SanPhamTrangChuAdapter sanPhamTrangChuAdapter;
     SearchView sv_tenSP;
     private ViewPager viewPager;
+
+    LinearLayout ln_timkiem;
+    ImageView img_giohang;
     private Handler handler;
     private Runnable runnable;
     private int delayTime = 3000; // Thời gian chuyển đổi ảnh (3 giây)
@@ -100,26 +109,42 @@ public class TrangChuFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         anhXa();
 
-        sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-    @Override
-    public boolean onQueryTextSubmit(String query) {
 
-        return false;
-    }
-
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        search_List.clear();
-        if (newText.length() > 0) {
-            queryFirebaseForSearch(newText);  // Truy vấn Firebase
-        } else {
-            sanPhamTrangChuAdapter.filterList(list);  // Hiển thị lại toàn bộ danh sách sản phẩm nếu không có từ khóa tìm kiếm
-        }
-        return false;
-    }
-});
+//        sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//
+//        return false;
+//    }
+//
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        search_List.clear();
+//        if (newText.length() > 0) {
+//            queryFirebaseForSearch(newText);  // Truy vấn Firebase
+//        } else {
+//            sanPhamTrangChuAdapter.filterList(list);  // Hiển thị lại toàn bộ danh sách sản phẩm nếu không có từ khóa tìm kiếm
+//        }
+//        return false;
+//    }
+//});
        viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
+
+        ln_timkiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        img_giohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), GioHangActivity.class));
+            }
+        });
+
+
         rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
         sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
 
@@ -217,7 +242,12 @@ public class TrangChuFragment extends Fragment {
     }
 
     private void anhXa (){
-        sv_tenSP = view.findViewById(R.id.sv_tenSP);
+
+//        sv_tenSP = view.findViewById(R.id.sv_tenSP);
+
+        ln_timkiem = view.findViewById(R.id.searchBtn);
+        img_giohang = view.findViewById(R.id.cartImageView);
+
         rcSanPham = view.findViewById(R.id.rcdanhSachSanPhamTC);
         viewPager = view.findViewById(R.id.viewPager);
     }

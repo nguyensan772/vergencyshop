@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.example.vergencyshop.fragment.DanhMucFragment;
 import com.example.vergencyshop.fragment.DoiMatKhauFragment;
-import com.example.vergencyshop.fragment.GioHangFragment;
 import com.example.vergencyshop.fragment.GioiThieuFragment;
 import com.example.vergencyshop.fragment.HoaDonFragment;
 import com.example.vergencyshop.fragment.LichSuMuaHangFragment;
@@ -63,11 +62,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//ỳvuyjfujg
-// cn1
 
         progressDialog = new ProgressDialog(this);
-
 
         drawerLayout = findViewById(R.id.layout_all);
         toolbar = findViewById(R.id.jl_toolbar);
@@ -77,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
          tvUser = navigationView.getHeaderView(0).findViewById(R.id.tvUser);
         setThongTin();
 
-
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Trang chủ");
         ActionBarDrawerToggle  toggle = new ActionBarDrawerToggle(MainActivity.this , drawerLayout , toolbar , R.string.open,R.string.close);
@@ -87,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
 
         callFragment(new TrangChuFragment());
-
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -105,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.nav_giohang){
-
-                    callFragment(new GioHangFragment());
-                    toolbar.setTitle("Giỏ hàng");
+                    startActivity(new Intent(getApplicationContext(),GioHangActivity.class));
                 }
                 if (item.getItemId() == R.id.sub_Top){
 
@@ -159,10 +150,9 @@ public class MainActivity extends AppCompatActivity {
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
                 }
-                if (item.getItemId() == R.id.bt_giohang){
-//                    callFragment(new GioHangFragment());
-                    startActivity(new Intent(MainActivity.this, GioHangActivity.class));
-                    toolbar.setTitle("Giỏ hàng");
+                if (item.getItemId() == R.id.bt_banchay){
+                    callFragment(new TopSanPhamFragment());
+                    toolbar.setTitle("Sản Phẩm bán chạy");
                 }
                 if (item.getItemId() == R.id.bt_danhmuc){
                     callFragment(new DanhMucFragment());

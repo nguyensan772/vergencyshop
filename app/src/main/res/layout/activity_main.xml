@@ -15,7 +15,7 @@
             android:id="@+id/jl_toolbar"
 
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?attr/actionBarSize" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/jl_fragment"

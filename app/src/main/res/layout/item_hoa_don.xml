@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_margin="20dp"
+    >
+
+    <TextView
+        android:layout_weight="1"
+        android:text="Hóa đơn bán hàng"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvIdHoaDon"
+        android:text="Số"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvNgayTaoHoaDon"
+        android:text="Ngày tạo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvKhachHangHoaDon"
+        android:text="Khách hàng"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvSoDienThoaiHoaDon"
+        android:text="Số điện thoại"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvDiaChiHoaDon"
+        android:text="Địa chỉ"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvTongTienHoaDon"
+        android:text="Tổng tiền"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+</LinearLayout>

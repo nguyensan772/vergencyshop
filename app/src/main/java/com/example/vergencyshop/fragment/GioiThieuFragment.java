@@ -61,6 +61,6 @@ public class GioiThieuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gioi_thieu, container, false);
+        return inflater.inflate(R.layout.frag_gioithieu, container, false);
     }
 }

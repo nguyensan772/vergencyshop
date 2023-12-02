@@ -15,16 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.vergencyshop.GioHangActivity;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.GioHang;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
@@ -36,8 +40,10 @@ import java.util.Locale;
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGioHangAdapter>{
 
 
+    DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("GioHang");
     private final Context context;
     private final ArrayList<GioHang> list;
+    int tongHang = 0;
 
 
     public GioHangAdapter(Context context, ArrayList<GioHang> list) {
@@ -80,14 +86,47 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
         }
 
         if (giaSP != null) {
-
             holder.giaSP.setText(list.get(position).getGiaSP());
         } else {
             holder.giaSP.setText(list.get(position).getGiaSP());
         }
 
+        holder.imgDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xoaSPTrongGioHang(list.get(position));
+                notifyDataSetChanged();
+            }
+        });
+
+
+
 
     }
+
+    private void xoaSPTrongGioHang(GioHang gioHang) {
+        Query query = cartRef.orderByChild("idSP").equalTo(gioHang.getIdSP());
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    dataSnapshot.getRef().removeValue(); // hoặc sử dụng setValue(null) để xóa dữ liệu
+                }
+
+                list.remove(gioHang);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu từ Firebase Realtime Database
+                Log.e("XoaSPTrongGioHang", "Lỗi đọc dữ liệu từ Firebase Realtime Database: " + error.getMessage());
+            }
+        });
+    }
+
+
 
     @Override
     public int getItemCount() {
@@ -108,35 +147,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
             sizeSP = (TextView) itemView.findViewById(R.id.tv_size);
             giaSP = (TextView) itemView.findViewById(R.id.tv_giatien);
             soluongSP = (TextView) itemView.findViewById(R.id.tv_soluong);
-
-            imgDel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("GioHang");
-
-                    cartRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            list.clear();
-
-                            for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-                                GioHang item = itemSnapshot.getValue(GioHang.class);
-                                list.remove(item);
-                            }
-
-                            notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu từ Firebase Database
-                            Log.e("GioHangActivity", "Lỗi đọc dữ liệu từ Firebase Database: " + databaseError.getMessage());
-                            notifyDataSetChanged();
-                        }
-                    });
-                    Toast.makeText(itemView.getContext(), "Xoa sp thanh cong", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 }
