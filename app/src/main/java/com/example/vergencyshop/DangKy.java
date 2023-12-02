@@ -46,8 +46,12 @@ public class DangKy extends AppCompatActivity {
                     edtPass.getText().toString().isEmpty() ||
                     edtCheckPass.getText().toString().isEmpty()
             ){
+                progressDialog.dismiss();
+
                 Toast.makeText(this, "Giữ liệu còn thiếu", Toast.LENGTH_SHORT).show();
             }else if (!edtPass.getText().toString().equalsIgnoreCase(edtCheckPass.getText().toString())){
+                progressDialog.dismiss();
+
                 Toast.makeText(this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
             }else {
                 String email , password ;
@@ -62,7 +66,7 @@ public class DangKy extends AppCompatActivity {
                             Toast.makeText(DangKy.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                             user = auth.getCurrentUser();
                             reference.child(user.getUid()).child("taiKhoan").setValue(email);
-                            reference.child(user.getUid()).child("matKhau").setValue(password);
+                            
                             //Thong tin
                             reference.child(user.getUid()).child("ten").setValue(null);
                             reference.child(user.getUid()).child("gioiTinh").setValue(null);

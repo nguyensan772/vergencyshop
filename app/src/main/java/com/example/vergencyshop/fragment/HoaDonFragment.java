@@ -4,10 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vergencyshop.Adapter.HoaDonAdapter;
 import com.example.vergencyshop.R;
+import com.example.vergencyshop.models.HoaDon;
+import com.example.vergencyshop.models.SanPham;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,11 +72,96 @@ public class HoaDonFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    View view ;
+    RecyclerView rcHoaDon;
+    SearchView sv_date;
+    HoaDonAdapter hoaDonAdapter ;
+    ArrayList<HoaDon> list = new ArrayList<>();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.frag_hoadon, container, false);
+
+        anhXa();
+
+        setListHoaDon();
+
+        hoaDonAdapter = new HoaDonAdapter(list,getActivity());
+        rcHoaDon.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        rcHoaDon.setAdapter(hoaDonAdapter);
+sv_date.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        list.clear();
+        if (newText.length() > 0) {
+            queryFirebaseForSearch(newText);  // Truy vấn Firebase
+        } else {
+            hoaDonAdapter.filterList_hoadon(list);  // Hiển thị lại toàn bộ danh sách sản phẩm nếu không có từ khóa tìm kiếm
+        }
+
+        return false;
+    }
+});
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag_hoadon, container, false);
+        return view ;
+    }
+
+    private  void anhXa (){
+
+        sv_date = view.findViewById(R.id.sv_date);
+        rcHoaDon = view.findViewById(R.id.rc_danhsachhoadon);
+    }
+
+    private void setListHoaDon (){
+       Query query = reference.child("HoaDon").orderByChild("idND").equalTo(user.getUid());
+       query .addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if (snapshot.exists()){
+                   for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                       list.add(dataSnapshot.getValue(HoaDon.class));
+
+                   }
+                   hoaDonAdapter.notifyDataSetChanged();
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
+    }
+    private void queryFirebaseForSearch(String keyword) {
+        Query searchQuery = reference.child("HoaDon").orderByChild("ngayMuaLowerCase");
+
+        searchQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+
+                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                    HoaDon hoaDon = childSnapshot.getValue(HoaDon.class);
+                    String lowercasehoadon = hoaDon.getNgayMua().toLowerCase();
+                    if (hoaDon != null && hoaDon.getIdND().equals(user.getUid()) && lowercasehoadon.contains(keyword.toLowerCase())) {
+                        list.add(hoaDon);
+                    }
+                }
+                hoaDonAdapter.filterList_hoadon(list);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý  lỗi
+            }
+        });
     }
 }

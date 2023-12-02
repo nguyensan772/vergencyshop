@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,14 +37,13 @@ import java.util.Locale;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
     TextView tvTenSanPham,tvGiaSanPham,tvThongTinChiTietSanPham;
-    ImageView imgChiTietSanPham;
+    ImageView imgChiTietSanPham,imgBackToMain;
 
+    LinearLayout btnThemVaoGio,btnMuaNgay;
     //Cụm tăng chỉnh sô lượng
     TextView btnTruSoLuong , btnTangSoLuong, tvSoLuong;
-
     //Đặt hàng và giỏ hàng
-    Button btnThemGioHang , btnDatHang ;
-
+  //  Button btnThemGioHang , btnDatHang ;
     //Chọn size
     RadioButton rdSizeM , rdSizeL , rdSizeXL ;
     SanPham sanPham;
@@ -56,6 +57,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     GioHangAdapter gioHangAdapter;
     List<GioHang> listGH;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,20 +77,64 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         setChiTietSanPham();
         hienSoLuong();
         chonSoLuong();
-        btnDatHang.setOnClickListener(new View.OnClickListener() {
+
+
+        if ( sanPham.getTrangthaiSP() == null || sanPham.getTrangthaiSP().equals("Còn Hàng")){
+
+            btnMuaNgay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chonSize(1);
+                }
+            });
+
+            btnThemVaoGio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chonSize(2);
+                }
+            });
+
+
+        }else {
+
+            btnMuaNgay.setEnabled(false);
+            btnThemVaoGio.setEnabled(false);
+            tvGiaSanPham.setText("Hết hàng");
+
+            btnThemVaoGio.setBackgroundColor(R.color.black);
+            btnMuaNgay.setBackgroundColor(R.color.black);
+
+            tvSoLuong.setEnabled(false);
+            btnTangSoLuong.setEnabled(false);
+            btnTruSoLuong.setEnabled(false);
+        }
+
+
+
+
+
+
+
+
+
+        imgBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chonSize(1);
+                startActivity(new Intent(ChiTietSanPhamActivity.this, MainActivity.class));
             }
         });
 
 
-        btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+
+        btnThemVaoGio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 chonSize(2);
             }
         });
+
     }
 
     private void themVaoGio(){
@@ -99,6 +145,16 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         String soluongSP = String.valueOf(index);
         String giaSP = sanPham.getGiaSP();
         String tongtien = String.valueOf(Integer.parseInt(soluongSP)*Integer.parseInt(giaSP));
+
+
+//<<<<<<< HEAD
+//
+//        String idND = user.getUid();
+//        Toast.makeText(this, ""+giaSP, Toast.LENGTH_SHORT).show();
+//        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,new String(),idND);
+//        cartRef.push().setValue(newItem);
+
+
         String idSP = "S"+(position + 1);
         String idND = user.getUid();
         GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,idSP,idND);
@@ -117,6 +173,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         tvGiaSanPham = findViewById(R.id.tvGiaChiTietSanPham);
         tvThongTinChiTietSanPham = findViewById(R.id.tvThongTinChiTietSanPham);
         imgChiTietSanPham = findViewById(R.id.imgChiTietSanPhamAct);
+        imgBackToMain = findViewById(R.id.img_backToMainMenu);
         // Cụm tăng số lượng
         btnTangSoLuong = findViewById(R.id.btnCongSoLuong);
         btnTruSoLuong = findViewById(R.id.btnTruSoLuong);
@@ -126,8 +183,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         rdSizeL = findViewById(R.id.rdSizeL);
         rdSizeXL = findViewById(R.id.rdSizeXL);
         //Đặt hàng và giỏ hàng
-        btnThemGioHang = findViewById(R.id.btnThemVaoGioHangChiTietSanPham);
-        btnDatHang = findViewById(R.id.btnThanhToanChiTietSanPham);
+
+        btnThemVaoGio = findViewById(R.id.btn_themvaogio);
+        btnMuaNgay = findViewById(R.id.btn_muangay);
+
+//        btnMuaNgay = findViewById(R.id.btn_themvaogio);
+//        btnThemGioHang = findViewById(R.id.btn_themvaogio);
+
+
+
     }
 
     private void setChiTietSanPham (){
@@ -139,8 +203,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(sanPham.getGiaSP()));
         tvGiaSanPham.setText(formattedGiaSanPham);
-        String motaSP = sanPham.getMotaSP().replace("\\n", "\n");
-        tvThongTinChiTietSanPham.setText(motaSP);
+        tvThongTinChiTietSanPham.setText(sanPham.getMotaSP());
     }
     private  int hienSoLuong (){
         tvSoLuong.setText(String.valueOf(index));

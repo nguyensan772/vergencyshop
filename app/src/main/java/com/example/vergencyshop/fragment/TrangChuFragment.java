@@ -109,18 +109,22 @@ public class TrangChuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
+
         anhXa();
 
 
-        viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
-
-        ln_timkiem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
-            }
-        });
+       viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
+
+
+//        ln_timkiem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//            }
+//        });
         sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -138,6 +142,7 @@ public class TrangChuFragment extends Fragment {
                     sanPhamTrangChuAdapter.filterList(list);  // Hiển thị lại toàn bộ danh sách sản phẩm nếu không có từ khóa tìm kiếm
                 }
                 return false;
+
             }
         });
 
@@ -148,9 +153,12 @@ public class TrangChuFragment extends Fragment {
             }
         });
 
-        rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
-        sanPhamTrangChuAdapter = new SanPhamTrangChuAdapter(getActivity(),list);
+        rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
+
+
+
 
 
         reference.child("SanPham").addChildEventListener(new ChildEventListener() {
@@ -162,7 +170,7 @@ public class TrangChuFragment extends Fragment {
 
 
 
-                list.add(sanPham);
+            list.add(sanPham);
 
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
@@ -174,7 +182,9 @@ public class TrangChuFragment extends Fragment {
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
                 SanPham sanPham =  snapshot.getValue(SanPham.class);
+
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
@@ -200,6 +210,8 @@ public class TrangChuFragment extends Fragment {
 //            handler.removeCallbacks(runnable);
 //        }
     handler = new Handler();
+
+
         runnable = new Runnable() {
            public void run() {
                currentPage = viewPager.getCurrentItem();
@@ -209,6 +221,7 @@ public class TrangChuFragment extends Fragment {
             }
        };
       handler.postDelayed(runnable, delayTime);
+
     }
     @Override
     public void onResume() {
@@ -238,7 +251,6 @@ public class TrangChuFragment extends Fragment {
     private void anhXa (){
 
         sv_tenSP = view.findViewById(R.id.sv_tenSP);
-
         ln_timkiem = view.findViewById(R.id.searchBtn);
         img_giohang = view.findViewById(R.id.cartImageView);
 

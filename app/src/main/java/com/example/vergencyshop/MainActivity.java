@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.vergencyshop.fragment.DanhMucFragment;
 import com.example.vergencyshop.fragment.DoiMatKhauFragment;
-import com.example.vergencyshop.fragment.GioHangFragment;
 import com.example.vergencyshop.fragment.GioiThieuFragment;
 import com.example.vergencyshop.fragment.HoaDonFragment;
 import com.example.vergencyshop.fragment.LichSuMuaHangFragment;
@@ -64,11 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//ỳvuyjfujg
-// cn1
 
         progressDialog = new ProgressDialog(this);
-
 
         drawerLayout = findViewById(R.id.layout_all);
         toolbar = findViewById(R.id.jl_toolbar);
@@ -78,18 +74,13 @@ public class MainActivity extends AppCompatActivity {
          tvUser = navigationView.getHeaderView(0).findViewById(R.id.tvUser);
         setThongTin();
 
-
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Trang chủ");
         ActionBarDrawerToggle  toggle = new ActionBarDrawerToggle(MainActivity.this , drawerLayout , toolbar , R.string.open,R.string.close);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
-
         callFragment(new TrangChuFragment());
-
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -106,9 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.nav_giohang){
-
-                    callFragment(new GioHangFragment());
-                    toolbar.setTitle("Giỏ hàng");
+                    startActivity(new Intent(getApplicationContext(),GioHangActivity.class));
                 }
                 if (item.getItemId() == R.id.sub_Top){
 

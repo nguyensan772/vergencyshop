@@ -102,7 +102,9 @@ public class DanhMuc extends AppCompatActivity {
 
         }else if (CODE_CHOSSE == 3 ){
 
-            reference.child("SanPham").orderByChild("danhmucSP").equalTo("sweaters").addValueEventListener(new ValueEventListener() {
+
+            reference.child("SanPham").orderByChild("danhmucSP").equalTo("sweater").addValueEventListener(new ValueEventListener() {
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
@@ -130,7 +132,6 @@ public class DanhMuc extends AppCompatActivity {
                     if (snapshot.exists()){
                         list.clear();
                         for (DataSnapshot dataChild : snapshot.getChildren()){
-
                             list.add(dataChild.getValue(SanPham.class));
 
                         }
@@ -187,16 +188,9 @@ public class DanhMuc extends AppCompatActivity {
 
                 }
             });
-
         }
-
-
         rcSanPhamDanhMuc.setAdapter(sanPhamTrangChuAdapter);
-
-
-
     }
-
 
     private  void  anhXa (){
 

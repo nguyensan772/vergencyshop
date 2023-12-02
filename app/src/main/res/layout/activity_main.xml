@@ -12,12 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
+
             android:id="@+id/jl_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/jl_fragment"
+
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
