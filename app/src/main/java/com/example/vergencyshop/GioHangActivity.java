@@ -118,11 +118,11 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
 
 
         private String tinhtongtien () {
-        int tongTien = 0;
+        double tongTien = 0;
 
         for (GioHang gioHang1 : list) {
 
-            int giatri = Integer.parseInt(gioHang1.getGiaSP());
+            double giatri = Double.parseDouble(gioHang1.getGiaSP());
             tongTien = giatri + tongTien;
         }
         return String.valueOf(tongTien);

@@ -4,20 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".ChiTietHoaDonActivity">
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
      >
-        <ImageButton
+        <ImageView
             android:id="@+id/img_backTo_hdct"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/baseline_arrow_back_24"
              />
-
-
     </Toolbar>
 
     <LinearLayout

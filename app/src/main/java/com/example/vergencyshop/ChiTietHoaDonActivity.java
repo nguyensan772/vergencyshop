@@ -27,7 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ChiTietHoaDonActivity extends AppCompatActivity {
     TextView tvIdHoaDonChiTiet ,tvNgayTaoHoaDonChiTiet,tvKhachHangHoaDonChiTiet,tvSoDienThoaiHoaDonChiTiet,tvDiaChiHoaDonChiTiet;
@@ -139,25 +141,14 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
 
             }
         });
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
-
-
-                if (Integer.parseInt(hoaDon.getThanhTien()) < 300000){
-                    tvPhiVanChuyenHoaDonChiTiet .setText("Tiền ship: 20.000VNĐ");
-                }else {
-                    tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: 0VNĐ");
-                }
-
-                tvTongTienHoaDonChiTiet.setText("Thành tiền: "+String.valueOf((Integer.parseInt(hoaDon.getThanhTien())+ 20000)));
-
-
-
-
-
-
-
-
-
-    }
+        if (Integer.parseInt(hoaDon.getThanhTien()) < 300000){
+            tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: " + numberFormat.format(20000));
+        } else {
+            tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: " + numberFormat.format(0));
+        }
+        tvTongTienHoaDonChiTiet.setText("Thành tiền: " + numberFormat.format(Integer.parseInt(hoaDon.getThanhTien()) + 20000));
+}
 
 }

@@ -61,11 +61,11 @@ public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.Hold
         Locale locale = new Locale("vi", "VN");
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
         GioHang gioHang = list.get(position);
-                Glide.with(context)
-                        .load(Uri.decode(list.get(position).getAnhSP()))
-                        .placeholder(R.drawable.ic_giohang)
-                        .error(R.drawable.ngacnhien)
-                        .into(holder.imgSanPhamThanhToan);
+        Glide.with(context)
+                .load(Uri.decode(list.get(position).getAnhSP()))
+                .placeholder(R.drawable.ic_giohang)
+                .error(R.drawable.ngacnhien)
+                .into(holder.imgSanPhamThanhToan);
 
 
         // Định dạng và gán giá sản phẩm
@@ -103,7 +103,7 @@ public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.Hold
                 tvItemSizeSanPhamThanhToan,
                 tvItemGiaSanPhamThanhToan ,
                 tvItemSoLuongSanPhamThanhToan,
-                 tvItemTongTienSanPhamThanhToan;
+                tvItemTongTienSanPhamThanhToan;
 
         ImageView imgSanPhamThanhToan;
         public HolderThanhToan(@NonNull View itemView) {
