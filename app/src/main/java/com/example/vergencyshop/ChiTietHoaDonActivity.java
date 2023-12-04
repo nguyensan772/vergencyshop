@@ -113,7 +113,6 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
                 tvSoDienThoaiHoaDonChiTiet.setText("Số điện thoại: "+nguoiDung.getSoDienThoai()) ;
                 tvDiaChiHoaDonChiTiet.setText("Địa chỉ: "+nguoiDung.getDiaChi());
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

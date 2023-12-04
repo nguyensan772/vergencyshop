@@ -115,8 +115,6 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
         });
     }
 
-
-
         private String tinhtongtien () {
         double tongTien = 0;
 
@@ -127,8 +125,6 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
         }
         return String.valueOf(tongTien);
     }
-
-
         private void setHoaDon () {
 
 

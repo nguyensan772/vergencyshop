@@ -24,6 +24,8 @@ import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.GioHang;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +47,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
     private final ArrayList<GioHang> list;
     int tongHang = 0;
     private TextView tv_tongtien;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public GioHangAdapter(Context context, ArrayList<GioHang> list) {
         this.context = context;
@@ -66,15 +69,65 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
                 .placeholder(R.drawable.ic_giohang)
                 .error(R.drawable.ngacnhien)
                 .into(holder.imgSP);
+        holder.btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                int soLuong = Integer.parseInt(list.get(position).getSoluongSP()) +1;
+                int giaSP = Integer.parseInt(list.get(position).getGiaSP());
+
+                cartRef.child(list.get(position).getIdSP()+user.getUid()).child("soluongSP").setValue(String.valueOf(soLuong ));
+
+                int giaSP_1 = giaSP / (soLuong - 1);
+                giaSP = giaSP_1 * soLuong;
+                int tongGiaSP = giaSP;
+                list.get(position).setGiaSP(String.valueOf(tongGiaSP));
+                cartRef.child(list.get(position).getIdSP()+user.getUid()).child("giaSP").setValue(String.valueOf(tongGiaSP ));
+
+
+
+                notifyDataSetChanged(); // Cập nhật giao diện
+
+                updateTongTien(); // Cập nhật tổng tiền
+
+//                }
+
+            }
+        });
+        holder.btnTruSoLuong_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int soLuong = Integer.parseInt(list.get(position).getSoluongSP()) -1;
+                int giaSP = Integer.parseInt(list.get(position).getGiaSP());
+                if (soLuong > 1){
+                    cartRef.child(list.get(position).getIdSP()+user.getUid()).child("soluongSP").setValue(String.valueOf(soLuong));
+
+                }else {
+                    cartRef.child(list.get(position).getIdSP()+user.getUid()).child("soluongSP").setValue(String.valueOf(1));
+
+                }
+
+                int giaSP_1 = giaSP / (soLuong + 1);
+                giaSP = giaSP_1 * soLuong;
+
+                int tongGiaSP = giaSP;
+                list.get(position).setGiaSP(String.valueOf(tongGiaSP));
+                cartRef.child(list.get(position).getIdSP()+user.getUid()).child("giaSP").setValue(String.valueOf(tongGiaSP ));
+                updateTongTien(); // Cập nhật tổng tiền
+                notifyDataSetChanged(); // Cập nhật giao diện
+
+
+
+//                }
+           }
+        });
         holder.tenSP.setText(list.get(position).getTenSP());
         holder.sizeSP.setText(list.get(position).getSizeSP());
-        holder.giaSP.setText(list.get(position).getGiaSP());
+
         holder.soluongSP.setText(list.get(position).getSoluongSP());
         Locale locale = new Locale("vi", "VN");
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
-
-
         try {
             double giaSP = Double.parseDouble(list.get(position).getGiaSP());
             String formattedGiaSP = currencyFormat.format(giaSP);
@@ -119,7 +172,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
 
     class HolderGioHangAdapter extends RecyclerView.ViewHolder {
         ImageView imgSP, imgDel;
-        TextView tenSP , giaSP, soluongSP , sizeSP;
+        TextView tenSP , giaSP, soluongSP , sizeSP,btnTruSoLuong_cart,btnCongSoLuong_cart;
 
         LinearLayout layoutItem ;
         public HolderGioHangAdapter(@NonNull View itemView) {
@@ -130,6 +183,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
             sizeSP = (TextView) itemView.findViewById(R.id.tv_size);
             giaSP = (TextView) itemView.findViewById(R.id.tv_giatien);
             soluongSP = (TextView) itemView.findViewById(R.id.tv_sl);
+            btnTruSoLuong_cart = (TextView) itemView.findViewById(R.id.btnTruSoLuong_cart);
+            btnCongSoLuong_cart = (TextView) itemView.findViewById(R.id.btnCongSoLuong_cart);
         }
     }
     public void setTongTienTextView(TextView tv_tongtien) {

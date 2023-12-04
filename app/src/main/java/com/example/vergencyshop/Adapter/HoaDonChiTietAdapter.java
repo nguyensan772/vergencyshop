@@ -59,6 +59,7 @@ public class HoaDonChiTietAdapter extends RecyclerView.Adapter<HoaDonChiTietAdap
                     holder.tvTenSpHoaDonChiTiet.setText(sanPham.getTenSP());
                     holder.tvGiaHoaDonCHiTiet.setText(sanPham.getGiaSP()) ;
                     holder.tvSoLuongHoaDonChiTiet.setText(list.get(position).getSoLuong()) ;
+
                     holder.tvTongTienHoaDonCHiTiet.setText(String.valueOf(Integer.parseInt(list.get(position).getSoLuong()) * Integer.parseInt(sanPham.getGiaSP()) ));
 
                 }

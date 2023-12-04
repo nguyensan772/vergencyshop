@@ -114,7 +114,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
 
             tien =tien + Integer.parseInt(tongTien);
             thanhTien = String.valueOf(tien);
-            Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đặt hàng thành công"+thanhTien, Toast.LENGTH_SHORT).show();
 
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
             reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);

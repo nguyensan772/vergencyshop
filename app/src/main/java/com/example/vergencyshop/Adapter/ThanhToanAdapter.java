@@ -79,7 +79,9 @@ public class ThanhToanAdapter extends RecyclerView.Adapter<ThanhToanAdapter.Hold
 
         // Tính toán và định dạng tổng tiền
         int soLuongSP = Integer.parseInt(gioHang.getSoluongSP());
-        int tongTien = (int) (giaSP * soLuongSP);
+        int giaSP_1 = (int) (giaSP / (soLuongSP));
+
+        int tongTien = (int) (giaSP_1 * soLuongSP);
         String formattedTongTien = currencyFormat.format(tongTien);
         holder.tvItemTongTienSanPhamThanhToan.setText(formattedTongTien);
 
