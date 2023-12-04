@@ -65,10 +65,11 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HolderHoaD
 
 
 
-         if (Integer.parseInt(list.get(position).getThanhTien()) > 300000){
-             holder. tvTongTienHoaDon.setText("Thành tiền: "+list.get(position).getThanhTien()+" VNĐ");
+         if (Integer.parseInt(list.get(position).getThanhTien()) < 300000){
+             holder. tvTongTienHoaDon.setText("Thành tiền: "+(Integer.parseInt(list.get(position).getThanhTien()) + 20000)+" VNĐ");
+
          }else {
-             holder. tvTongTienHoaDon.setText("Thành tiền: "+String.valueOf(Integer.parseInt(list.get(position).getThanhTien()) + 20000)+" VNĐ");
+             holder. tvTongTienHoaDon.setText("Thành tiền: "+list.get(position).getThanhTien()+" VNĐ");
          }
 
 
@@ -99,7 +100,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HolderHoaD
 
 
 
-        holder. tvTongTienHoaDon.setText("Tổng tiền: "+list.get(position).getThanhTien()+ "VNĐ");
+
 
 
 

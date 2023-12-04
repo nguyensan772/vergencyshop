@@ -17,7 +17,7 @@
 
         <item
             android:id="@+id/sub_Top"
-            android:title="San pham ban chay"
+            android:title="Sản phẩm bán chạy"
             android:icon="@drawable/ic_topsp" />
 
         <item android:title="Cá nhân">

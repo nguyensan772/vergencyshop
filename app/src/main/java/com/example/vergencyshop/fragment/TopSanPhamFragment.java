@@ -8,11 +8,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vergencyshop.Adapter.HoaDonChiTietAdapter;
 import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
+import com.example.vergencyshop.Adapter.TopSanPhamAdapter;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.HoaDon;
 import com.example.vergencyshop.models.HoaDonChiTiet;
@@ -27,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,11 +82,14 @@ public class TopSanPhamFragment extends Fragment {
 
     View view;
     RecyclerView rcTopSanPham ;
-    ArrayList<HoaDonChiTiet> list = new ArrayList<>();
-    HoaDonChiTietAdapter sanPhamTrangChuAdapter ;
+   // ArrayList<HoaDonChiTiet> list = new ArrayList<>();
+    TopSanPhamAdapter topSanPhamAdapter ;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-    ArrayList<TopSanPham> listTongTien = new ArrayList<>();
+  //  ArrayList<TopSanPham> listTongTien = new ArrayList<>();
+
+    ArrayList<TopSanPham> topSanPhamArrayList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,10 +97,10 @@ public class TopSanPhamFragment extends Fragment {
          view  = inflater.inflate(R.layout.frag_thanhtoan, container, false);
         anhXa ();
         setTop();
-        rcTopSanPham.setLayoutManager(new LinearLayoutManager(getActivity()));
-        sanPhamTrangChuAdapter = new HoaDonChiTietAdapter( list,getActivity());
+        rcTopSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        topSanPhamAdapter = new TopSanPhamAdapter( topSanPhamArrayList,getActivity());
 
-        rcTopSanPham.setAdapter(sanPhamTrangChuAdapter);
+        rcTopSanPham.setAdapter(topSanPhamAdapter);
 
 
 
@@ -111,13 +117,60 @@ public class TopSanPhamFragment extends Fragment {
           @Override
           public void onDataChange(@NonNull DataSnapshot snapshot) {
               if (snapshot.exists()){
-                  ArrayList<SanPham> sanPhams = new ArrayList<>();
+
                   for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                      SanPham sanPham = dataSnapshot.getValue(SanPham.class);
-                      sanPhams.add(sanPham);
+
+
+                      reference.child("HoaDonChiTiet").orderByChild("idSP").equalTo(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                          @Override
+                          public void onDataChange(@NonNull DataSnapshot snapshot) {
+                              if (snapshot.exists()){
+                                  int tong = 0 ;
+                                  HoaDonChiTiet hoaDonChiTiet = null;
+                                  for (DataSnapshot gioHangCT: snapshot.getChildren()){
+                                      hoaDonChiTiet = gioHangCT.getValue(HoaDonChiTiet.class);
+
+                                      tong = tong + Integer.parseInt(hoaDonChiTiet.getSoLuong());
+
+
+
+
+
+
+                                  }
+                                  TopSanPham topSanPham = new TopSanPham(hoaDonChiTiet.getIdSP(),String.valueOf(tong));
+                                 // Toast.makeText(getActivity(), ""+topSanPham.toString(), Toast.LENGTH_SHORT).show();
+                                  topSanPhamArrayList.add(topSanPham);
+
+
+                                  //Sắp xếp
+                                  topSanPhamArrayList.sort(new Comparator<TopSanPham>() {
+                                      @Override
+                                      public int compare(TopSanPham o1, TopSanPham o2) {
+                                          if (Integer.parseInt(o1.getSoLuong()) > Integer.parseInt(o2.getSoLuong())){
+                                              return -1;
+                                          }else if (Integer.parseInt(o1.getSoLuong()) < Integer.parseInt(o2.getSoLuong())){
+                                              return 1;
+                                          }
+
+                                          return 0;
+                                      }
+                                  });
+                                    topSanPhamAdapter.notifyDataSetChanged();
+                              }
+                          }
+
+                          @Override
+                          public void onCancelled(@NonNull DatabaseError error) {
+
+                          }
+                      });
+                      // Toast.makeText(getActivity(), ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
 
                   }
-                  Toast.makeText(getActivity(), ""+sanPhams.size(), Toast.LENGTH_SHORT).show();
+
+
+
 
               }
           }

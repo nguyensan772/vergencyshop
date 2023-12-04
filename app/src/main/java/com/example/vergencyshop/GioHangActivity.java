@@ -122,7 +122,7 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
 
         for (GioHang gioHang1 : list) {
 
-            int giatri = Integer.parseInt(gioHang1.getGiaSP());
+            int giatri = Integer.parseInt(gioHang1.getGiaSP()) *Integer.parseInt(gioHang1.getSoluongSP()) ;
             tongTien = giatri + tongTien;
         }
         return String.valueOf(tongTien);

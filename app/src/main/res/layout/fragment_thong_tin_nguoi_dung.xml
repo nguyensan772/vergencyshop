@@ -16,7 +16,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAVTedit"
-                android:src="@drawable/ngacnhien"
+                android:src="@drawable/ic_nguoidung"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
             />
@@ -31,20 +31,23 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:textColor="@color/dangnhap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Ảnh :"
             />
 
 
         <EditText
+            android:layout_weight="1"
             android:singleLine="true"
             android:padding="8dp"
             android:textColor="@color/dangnhap"
             android:id="@+id/edanh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:hint="Trống"
+            android:ellipsize="end"
+
             />
     </LinearLayout>
     <LinearLayout
@@ -59,20 +62,22 @@
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:textColor="@color/dangnhap"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên:"
                 />
 
 
         <EditText
+            android:layout_weight="1"
             android:singleLine="true"
             android:padding="8dp"
             android:textColor="@color/dangnhap"
             android:id="@+id/edtTenKH"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Trống"
+            android:ellipsize="end"
             />
     </LinearLayout>
 
@@ -87,7 +92,7 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:textColor="@color/dangnhap"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Giới tính:"
             />
@@ -97,7 +102,7 @@
             android:layout_weight="1"
             android:textColor="@color/dangnhap"
             android:id="@+id/edtGioiTinhKH"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
@@ -132,20 +137,21 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:textColor="@color/dangnhap"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ngày sinh:"
             />
 
         <EditText
-
+            android:layout_weight="1"
             android:singleLine="true"
             android:padding="8dp"
             android:textColor="@color/dangnhap"
             android:id="@+id/edtNgaySinhKH"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Trống"
+            android:ellipsize="end"
             />
 
     </LinearLayout>
@@ -163,18 +169,21 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:textColor="@color/dangnhap"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Số điện thoại:"
+            android:ellipsize="end"
             />
         <EditText
+            android:layout_weight="1"
             android:singleLine="true"
             android:padding="8dp"
             android:textColor="@color/dangnhap"
             android:id="@+id/edtSDTKH"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Trống"
+            android:ellipsize="end"
             />
 
 
@@ -190,19 +199,21 @@
         >
 
         <TextView
+
             android:layout_weight="1"
             android:padding="10dp"
             android:textColor="@color/dangnhap"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Địa chỉ:"
             />
         <EditText
+            android:layout_weight="1"
             android:singleLine="true"
             android:padding="8dp"
             android:textColor="@color/dangnhap"
             android:id="@+id/edtDiaChiKH"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Trống"
             />

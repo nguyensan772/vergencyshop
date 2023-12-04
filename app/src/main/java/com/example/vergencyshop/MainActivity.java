@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
         manager.replace(R.id.jl_fragment,fragment).commit();
         drawerLayout.close();
+        progressDialog.dismiss();
     }
 
     @Override
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         }else {
             super.onBackPressed();
+            progressDialog.dismiss();
         }
     }
 

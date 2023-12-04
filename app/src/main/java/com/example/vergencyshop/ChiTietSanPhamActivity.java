@@ -81,12 +81,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         if ( sanPham.getTrangthaiSP() == null || sanPham.getTrangthaiSP().equals("Còn Hàng")){
 
-            btnMuaNgay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    chonSize(1);
-                }
-            });
+
 
             btnThemVaoGio.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -185,7 +180,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         //Đặt hàng và giỏ hàng
 
         btnThemVaoGio = findViewById(R.id.btn_themvaogio);
-        btnMuaNgay = findViewById(R.id.btn_muangay);
+
 
 //        btnMuaNgay = findViewById(R.id.btn_themvaogio);
 //        btnThemGioHang = findViewById(R.id.btn_themvaogio);
@@ -246,23 +241,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         }else if (rdSizeM.isChecked()){
             size = "M";
         }
-        Intent intent;
-        if(check == 1){
-         intent = new Intent(ChiTietSanPhamActivity.this , ThanhToanSanPham.class);}
-        else {
+
+
+
             themVaoGio();
 
-            intent = new Intent(ChiTietSanPhamActivity.this , GioHangActivity.class);}
-
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("thanhtoancainay", sanPham);
-            bundle.putString("soluongthanhtoan", String.valueOf(index));
-            bundle.putString("sizethanhtoan", size);
-
-            intent.putExtras(bundle);
-            this.startActivity(intent);
-
-
+        Intent  intent = new Intent(ChiTietSanPhamActivity.this , GioHangActivity.class);
+        startActivity(intent);
     }
+
+
+
+
+
 
 }

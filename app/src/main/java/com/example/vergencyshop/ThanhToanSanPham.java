@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.text.NumberFormat;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
@@ -191,12 +192,25 @@ public class ThanhToanSanPham extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
+                        list.clear();
+                        int tongTien = 0 ;
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             GioHang hang = dataSnapshot.getValue(GioHang.class);
                             list.add(hang);
+
+                            tongTien += Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP());
                         }
+                        if (tongTien < 300000){
+
+                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien+20000));
+                        }else {
+                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien));
+                        }
+
                         thanhToanAdapter.notifyDataSetChanged();
+
                     }
+
             }
 
             @Override

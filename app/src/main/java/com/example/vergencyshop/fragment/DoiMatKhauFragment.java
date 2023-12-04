@@ -11,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.NguoiDung;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -75,14 +78,16 @@ public class DoiMatKhauFragment extends Fragment {
     }
     EditText edtOldPass , edtNewPass , edtCheckNewPass ;
     Button btnChange;
+    ImageView imgNguoiDungDoiMK;
     View view;
     ProgressDialog progressDialog;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("NguoiDung");
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+
     //Người dùng
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user = auth.getCurrentUser();
 
     @Override
@@ -90,6 +95,8 @@ public class DoiMatKhauFragment extends Fragment {
                              Bundle savedInstanceState) {
        view = inflater.inflate(R.layout.fragment_doi_mat_khau, container, false);
         anhXa();
+        setAnh();
+
 
         btnChange.setOnClickListener(v -> {
             progressDialog.show();
@@ -138,7 +145,28 @@ public class DoiMatKhauFragment extends Fragment {
         return view ;
     }
 
+    private void setAnh() {
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference();
+
+        reference1.child("NguoiDung").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
+
+                Glide.with(getContext()).load(nguoiDung.getAnh()).into(imgNguoiDungDoiMK);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private  void  anhXa (){
+        imgNguoiDungDoiMK = view.findViewById(R.id.imgNguoiDungDoiMK);
         progressDialog = new ProgressDialog(getContext());
         edtNewPass = view.findViewById(R.id.edt_newpassDMK);
         edtOldPass = view.findViewById(R.id.edt_oldpassDMK);
