@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.text.NumberFormat;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
@@ -107,14 +108,14 @@ public class ThanhToanSanPham extends AppCompatActivity {
             String idHDCT = idHD;
             String idSP =   hang.getIdSP() ;
             String soLuong = hang.getSoluongSP();
-            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP())) ;
+            int gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
+            String tongTien = String.valueOf(gia1sp * Integer.parseInt(hang.getSoluongSP())) ;
             String anhSP = hang.getAnhSP() ;
             String sizeSP = hang.getSizeSP();
 
-
             tien =tien + Integer.parseInt(tongTien);
             thanhTien = String.valueOf(tien);
-            Toast.makeText(this, "Đặt hàng thành công"+thanhTien, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
 
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
             reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);
@@ -191,12 +192,33 @@ public class ThanhToanSanPham extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()){
+                        list.clear();
+                        int tongTien = 0 ;
+                        int gia1sp = 0;
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             GioHang hang = dataSnapshot.getValue(GioHang.class);
                             list.add(hang);
+gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
+                            tongTien += gia1sp * Integer.parseInt(hang.getSoluongSP());
+                             }
+
+                        if (tongTien < 300000){
+
+                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien+20000));
+                        }else {
+                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien));
                         }
+                        Locale locale = new Locale("vi", "VN");
+                        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+                        Currency currency = Currency.getInstance(locale);
+
+
+                        String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(String.valueOf(tongTien)));
+                        tvTongThanhToanHoaDon.setText(formattedGiaSanPham);
                         thanhToanAdapter.notifyDataSetChanged();
+
                     }
+
             }
 
             @Override

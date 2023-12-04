@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.vergencyshop.R;
+import com.example.vergencyshop.ThanhToanSanPham;
+import com.example.vergencyshop.models.GioHang;
 import com.example.vergencyshop.models.HoaDonChiTiet;
 import com.example.vergencyshop.models.SanPham;
 import com.google.firebase.database.DataSnapshot;
@@ -52,15 +54,17 @@ public class HoaDonChiTietAdapter extends RecyclerView.Adapter<HoaDonChiTietAdap
                 if (snapshot.exists()){
 
                     SanPham sanPham = snapshot.getValue(SanPham.class);
-
+                //    GioHang thanhToanSanPham = snapshot.getValue(GioHang.class);
 
 
                     Glide.with(context).load(sanPham.getAnhSP()).into(holder.imgAnhHoaDonChiTiet);
                     holder.tvTenSpHoaDonChiTiet.setText(sanPham.getTenSP());
                     holder.tvGiaHoaDonCHiTiet.setText(sanPham.getGiaSP()) ;
                     holder.tvSoLuongHoaDonChiTiet.setText(list.get(position).getSoLuong()) ;
-
-                    holder.tvTongTienHoaDonCHiTiet.setText(String.valueOf(Integer.parseInt(list.get(position).getSoLuong()) * Integer.parseInt(sanPham.getGiaSP()) ));
+                    int soLuong = Integer.parseInt(list.get(position).getSoLuong());
+                    int giaSP1 = Integer.parseInt(sanPham.getGiaSP()) /  soLuong;
+                       holder.tvTongTienHoaDonCHiTiet.setText(String.valueOf(Integer.parseInt(list.get(position).getSoLuong()) * Integer.parseInt(sanPham.getGiaSP())));
+                //    holder.tvTongTienHoaDonCHiTiet.setText(String.valueOf((1)));
 
                 }
 

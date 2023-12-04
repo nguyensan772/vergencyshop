@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.vergencyshop.Adapter.HoaDonChiTietAdapter;
 import com.example.vergencyshop.fragment.LichSuMuaHangFragment;
+import com.example.vergencyshop.models.GioHang;
 import com.example.vergencyshop.models.HoaDon;
 import com.example.vergencyshop.models.HoaDonChiTiet;
 import com.example.vergencyshop.models.NguoiDung;
@@ -108,7 +109,9 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
         reference.child("NguoiDung").child(hoaDon.getIdND()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GioHang gioHang = snapshot.getValue(GioHang.class);
                 NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
+
                 tvKhachHangHoaDonChiTiet.setText("Tên người dùng: "+nguoiDung.getTen()) ;
                 tvSoDienThoaiHoaDonChiTiet.setText("Số điện thoại: "+nguoiDung.getSoDienThoai()) ;
                 tvDiaChiHoaDonChiTiet.setText("Địa chỉ: "+nguoiDung.getDiaChi());
@@ -141,13 +144,16 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
             }
         });
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-
-        if (Integer.parseInt(hoaDon.getThanhTien()) < 300000){
+int thanhtien = Integer.parseInt(hoaDon.getThanhTien());
+        if ( thanhtien< 300000){
             tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: " + numberFormat.format(20000));
+            tvTongTienHoaDonChiTiet.setText("Thành tiền: " + numberFormat.format(thanhtien + 20000));
         } else {
             tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: " + numberFormat.format(0));
+            tvTongTienHoaDonChiTiet.setText("Thành tiền: " + numberFormat.format(thanhtien));
         }
-        tvTongTienHoaDonChiTiet.setText("Thành tiền: " + numberFormat.format(Integer.parseInt(hoaDon.getThanhTien()) + 20000));
+
+
 }
 
 }

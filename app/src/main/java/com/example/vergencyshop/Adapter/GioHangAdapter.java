@@ -74,21 +74,22 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
             public void onClick(View v) {
 
                 int soLuong = Integer.parseInt(list.get(position).getSoluongSP()) +1;
-                int giaSP = Integer.parseInt(list.get(position).getGiaSP());
+                if (soLuong <= 10) { // Giới hạn tối đa số lượng là 10
+                    int giaSP = Integer.parseInt(list.get(position).getGiaSP());
 
-                cartRef.child(list.get(position).getIdSP()+user.getUid()).child("soluongSP").setValue(String.valueOf(soLuong ));
+                    cartRef.child(list.get(position).getIdSP() + user.getUid()).child("soluongSP").setValue(String.valueOf(soLuong));
 
-                int giaSP_1 = giaSP / (soLuong - 1);
-                giaSP = giaSP_1 * soLuong;
-                int tongGiaSP = giaSP;
-                list.get(position).setGiaSP(String.valueOf(tongGiaSP));
-                cartRef.child(list.get(position).getIdSP()+user.getUid()).child("giaSP").setValue(String.valueOf(tongGiaSP ));
-
-
-
-                notifyDataSetChanged(); // Cập nhật giao diện
-
-                updateTongTien(); // Cập nhật tổng tiền
+                    int giaSP_1 = giaSP / (soLuong - 1);
+                    giaSP = giaSP_1 * soLuong;
+                    int tongGiaSP = giaSP;
+                    list.get(position).setGiaSP(String.valueOf(tongGiaSP));
+                    cartRef.child(list.get(position).getIdSP() + user.getUid()).child("giaSP").setValue(String.valueOf(tongGiaSP));
+                    notifyDataSetChanged(); // Cập nhật giao diện
+                    updateTongTien(); // Cập nhật tổng tiền
+                }else {
+                    Toast.makeText(context, "Đã đạt số lượng tối đa trên 1 sản phẩm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 //                }
 
@@ -99,29 +100,22 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
             public void onClick(View v) {
 
                 int soLuong = Integer.parseInt(list.get(position).getSoluongSP()) -1;
-                int giaSP = Integer.parseInt(list.get(position).getGiaSP());
-                if (soLuong > 1){
-                    cartRef.child(list.get(position).getIdSP()+user.getUid()).child("soluongSP").setValue(String.valueOf(soLuong));
+                if (soLuong >= 1) { // Giới hạn tối thiểu số lượng là 1
+                    int giaSP = Integer.parseInt(list.get(position).getGiaSP());
+                    cartRef.child(list.get(position).getIdSP() + user.getUid()).child("soluongSP").setValue(String.valueOf(soLuong));
 
-                }else {
-                    cartRef.child(list.get(position).getIdSP()+user.getUid()).child("soluongSP").setValue(String.valueOf(1));
+                    int giaSP_1 = giaSP / (soLuong + 1);
+                    giaSP = giaSP_1 * soLuong;
+                    int tongGiaSP = giaSP;
+                    list.get(position).setGiaSP(String.valueOf(tongGiaSP));
+                    cartRef.child(list.get(position).getIdSP() + user.getUid()).child("giaSP").setValue(String.valueOf(tongGiaSP));
 
-                }
-
-                int giaSP_1 = giaSP / (soLuong + 1);
-                giaSP = giaSP_1 * soLuong;
-
-                int tongGiaSP = giaSP;
-                list.get(position).setGiaSP(String.valueOf(tongGiaSP));
-                cartRef.child(list.get(position).getIdSP()+user.getUid()).child("giaSP").setValue(String.valueOf(tongGiaSP ));
-                updateTongTien(); // Cập nhật tổng tiền
-                notifyDataSetChanged(); // Cập nhật giao diện
-
-
-
-//                }
+                    notifyDataSetChanged(); // Cập nhật giao diện
+                    updateTongTien(); // Cập nhật tổng tiền
+                     }
            }
         });
+
         holder.tenSP.setText(list.get(position).getTenSP());
         holder.sizeSP.setText(list.get(position).getSizeSP());
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,6 +32,7 @@ import com.example.vergencyshop.GioHangActivity;
 import com.example.vergencyshop.R;
 import com.example.vergencyshop.models.SanPham;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,8 +95,9 @@ public class TrangChuFragment extends Fragment {
     SearchView sv_tenSP;
     private ViewPager viewPager;
 
+    NestedScrollView nestedScrollView;
     CardView ln_timkiem;
-    ImageView img_giohang;
+    ImageView img_giohang,ìmg_cuon;
     private Handler handler;
     private Runnable runnable;
     private int delayTime = 3000; // Thời gian chuyển đổi ảnh (3 giây)
@@ -152,7 +155,13 @@ public class TrangChuFragment extends Fragment {
                 startActivity(new Intent(getContext(), GioHangActivity.class));
             }
         });
+        ìmg_cuon.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+        nestedScrollView.smoothScrollTo(0, 0);
+    }
+});
 
         rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
         sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
@@ -249,11 +258,11 @@ public class TrangChuFragment extends Fragment {
     }
 
     private void anhXa (){
-
+        nestedScrollView = view.findViewById(R.id.nestedScrollView);
+        ìmg_cuon = view.findViewById(R.id.ìmg_cuon);
         sv_tenSP = view.findViewById(R.id.sv_tenSP);
         ln_timkiem = view.findViewById(R.id.searchBtn);
         img_giohang = view.findViewById(R.id.cartImageView);
-
         rcSanPham = view.findViewById(R.id.rcdanhSachSanPhamTC);
         viewPager = view.findViewById(R.id.viewPager);
     }

@@ -94,8 +94,6 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
 
                     String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(tinhtongtien()));
                     tv_tongtien.setText(formattedGiaSanPham);
-
-
                 }
                 gioHangAdapter.notifyDataSetChanged();
             }
@@ -116,18 +114,17 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
     }
 
         private String tinhtongtien () {
-        double tongTien = 0;
+        int tongTien = 0;
 
         for (GioHang gioHang1 : list) {
 
-            double giatri = Double.parseDouble(gioHang1.getGiaSP());
+            int gia1sp = Integer.parseInt(gioHang1.getGiaSP()) /Integer.parseInt(gioHang1.getSoluongSP());
+            int giatri = gia1sp * Integer.parseInt(gioHang1.getSoluongSP());
             tongTien = giatri + tongTien;
         }
         return String.valueOf(tongTien);
     }
         private void setHoaDon () {
-
-
         Intent intent = new Intent(GioHangActivity.this, ThanhToanSanPham.class);
 
 

@@ -12,7 +12,6 @@
         android:orientation="horizontal"
         android:background="@color/backgroundwelcome"
         android:weightSum="4">
-
         <TextView
             android:id="@+id/btnListChoXacNhan"
             android:layout_width="match_parent"

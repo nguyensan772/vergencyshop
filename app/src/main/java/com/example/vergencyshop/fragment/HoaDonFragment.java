@@ -25,6 +25,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -133,6 +135,7 @@ sv_date.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                        list.add(dataSnapshot.getValue(HoaDon.class));
 
                    }
+                   Collections.reverse(list);
                    hoaDonAdapter.notifyDataSetChanged();
                }
            }

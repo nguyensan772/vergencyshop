@@ -165,7 +165,7 @@ ImageView imgAVTedit;
                     edanh.setText(null);
 
                 }else {
-                    Glide.with(getActivity()).load(edanh.getText().toString()).into(imgAVTedit);
+                    Glide.with(getContext()).load(edanh.getText().toString()).into(imgAVTedit);
                     edanh.setText(snapshot.getValue().toString());
                 }
             }

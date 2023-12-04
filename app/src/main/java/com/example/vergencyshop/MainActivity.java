@@ -3,6 +3,7 @@ package com.example.vergencyshop;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -122,10 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (item.getItemId() == R.id.sub_Logout){
 
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(MainActivity.this,DangNhap.class);
-                    startActivity(intent);
-                    finishAffinity();
+                  Logout();
                 }
                 if (item.getItemId() == R.id.sub_Support){
                     callFragment(new GioiThieuFragment());
@@ -176,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
         manager.replace(R.id.jl_fragment,fragment).commit();
         drawerLayout.close();
+        progressDialog.dismiss();
     }
 
     @Override
@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         }else {
             super.onBackPressed();
+            progressDialog.dismiss();
         }
     }
 
@@ -213,8 +214,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue() != null){
-
-
                     Glide.with(MainActivity.this).load(snapshot.getValue().toString()).into(imgAvt);
                 }
             }
@@ -226,6 +225,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+public void Logout(){
+    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+    builder.setTitle("Thông báo");
+    builder.setMessage("Bạn có muốn đăng xuất tài khoản không ?");
+    builder.setCancelable(false);
+    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this,DangNhap.class);
+            startActivity(intent);
+            finishAffinity();
+        }
+    });
+    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+        }
+    });
+    AlertDialog dialog = builder.create();
+    dialog.show();
+}
 
 }

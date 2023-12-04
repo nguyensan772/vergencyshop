@@ -51,7 +51,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:id="@+id/nestedScrollView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <!-- Content including ViewPager and RecyclerView -->
@@ -119,5 +119,21 @@ app:cardCornerRadius="50dp"
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+<androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    app:cardCornerRadius="20dp"
+   >
+    <ImageView
+        android:id="@+id/ìmg_cuon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        android:scaleType="center"
+        android:src="@drawable/baseline_arrow_upward_24" />
+</androidx.cardview.widget.CardView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
