@@ -76,6 +76,7 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
         DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("GioHang");
 
         rc_giohang.setAdapter(gioHangAdapter);
+        // activity lấy giá tổng
         gioHangAdapter.setTongTienTextView(tv_tongtien);
         Query query = cartRef.orderByChild("idNguoiDung").equalTo(user.getUid());
 
@@ -87,14 +88,17 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         list.add(snapshot1.getValue(GioHang.class));
                     }
+
                     Locale locale = new Locale("vi", "VN");
                     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
                     Currency currency = Currency.getInstance(locale);
-
-
                     String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(tinhtongtien()));
                     tv_tongtien.setText(formattedGiaSanPham);
                 }
+                if (list.isEmpty()) {
+                    tv_tongtien.setText("0");
+                }
+
                 gioHangAdapter.notifyDataSetChanged();
             }
 
@@ -108,7 +112,13 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
         tv_muahang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setHoaDon();
+                String tongTien = tv_tongtien.getText().toString();
+                if (tongTien.equals("0") || list.isEmpty()) {
+                    Toast.makeText(GioHangActivity.this, "Giỏ hàng đang trống hãy thêm sản phẩm vào giỏ", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    setHoaDon();
+                }
             }
         });
     }
@@ -117,17 +127,15 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
         int tongTien = 0;
 
         for (GioHang gioHang1 : list) {
+                int gia1sp = Integer.parseInt(gioHang1.getGiaSP()) /Integer.parseInt(gioHang1.getSoluongSP());
+                int giatri = gia1sp * Integer.parseInt(gioHang1.getSoluongSP());
+                tongTien = giatri + tongTien;
 
-            int gia1sp = Integer.parseInt(gioHang1.getGiaSP()) /Integer.parseInt(gioHang1.getSoluongSP());
-            int giatri = gia1sp * Integer.parseInt(gioHang1.getSoluongSP());
-            tongTien = giatri + tongTien;
         }
         return String.valueOf(tongTien);
     }
         private void setHoaDon () {
         Intent intent = new Intent(GioHangActivity.this, ThanhToanSanPham.class);
-
-
         startActivity(intent);
 
 

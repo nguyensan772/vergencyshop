@@ -50,7 +50,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     int index;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference cartRef = database.getReference("GioHang");
-
     FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
     String size = null;
     int position ;
@@ -129,7 +128,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 chonSize(2);
             }
         });
-
     }
 
     private void themVaoGio(){
@@ -241,9 +239,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         }else if (rdSizeM.isChecked()){
             size = "M";
         }
-
-
-
             themVaoGio();
 
         Intent  intent = new Intent(ChiTietSanPhamActivity.this , GioHangActivity.class);

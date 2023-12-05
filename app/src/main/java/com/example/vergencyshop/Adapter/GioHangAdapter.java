@@ -184,7 +184,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.HolderGi
     public void setTongTienTextView(TextView tv_tongtien) {
         this.tv_tongtien = tv_tongtien;
     }
-    private void updateTongTien() {
+    public void updateTongTien() {
         int tongTien = 0;
         for (GioHang gioHang : list) {
             int giaSP = Integer.parseInt(gioHang.getGiaSP());

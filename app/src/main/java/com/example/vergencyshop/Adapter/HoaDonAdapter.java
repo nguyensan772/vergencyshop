@@ -25,7 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 import java.util.zip.Inflater;
 
 public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HolderHoaDonAdapter>{
@@ -57,21 +60,25 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HolderHoaD
 
         holder.tvIdHoaDon .setText("Số hóa đơn: "+list.get(position).getIdHD()); ;
         holder. tvNgayTaoHoaDon .setText("Ngày tạo: "+list.get(position).getNgayMua());
-
-
         holder.tvIdHoaDon .setText("ID hóa đơn: "+list.get(position).getIdHD());
         holder. tvNgayTaoHoaDon .setText("Ngày mua: "+list.get(position).getNgayMua());
 
 
 
+        int thanhTien = Integer.parseInt(list.get(position).getThanhTien());
+        int tongTienHoaDon = thanhTien;
+        if (thanhTien < 300000) {
+            tongTienHoaDon += 20000;
+            holder.tvTongTienHoaDon.setText("Thành tiền: " + tongTienHoaDon);
+        } else {
+            holder.tvTongTienHoaDon.setText("Thành tiền: " + thanhTien);
+        }
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        Currency currency = Currency.getInstance(locale);
 
-         if (Integer.parseInt(list.get(position).getThanhTien()) < 300000){
-             holder. tvTongTienHoaDon.setText("Thành tiền: "+(Integer.parseInt(list.get(position).getThanhTien()) + 20000)+" VNĐ");
-
-         }else {
-             holder. tvTongTienHoaDon.setText("Thành tiền: "+list.get(position).getThanhTien()+" VNĐ");
-         }
-
+        String formattedtonggiaHD = currencyFormat.format(Double.parseDouble(String.valueOf(tongTienHoaDon)));
+        holder.tvTongTienHoaDon.setText("Thành tiền: "+formattedtonggiaHD);
 
         reference.child("NguoiDung").child(list.get(position).getIdND()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,8 +94,6 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HolderHoaD
                     holder. tvSoDienThoaiHoaDon .setText("Số điện thoại: "+nguoiDung.getSoDienThoai());
                     holder.tvDiaChiHoaDon .setText("Địa chỉ: "+nguoiDung.getDiaChi());
                 }
-
-
             }
 
             @Override
@@ -97,22 +102,12 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HolderHoaD
             }
         });
 
-
-
-
-
-
-
-
         holder.layoutItemHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                denHoaDonChiTiet(position);
             }
         });
-
-
-
     }
 
     private void denHoaDonChiTiet(int position) {

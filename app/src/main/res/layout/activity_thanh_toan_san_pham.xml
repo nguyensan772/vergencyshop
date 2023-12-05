@@ -56,23 +56,16 @@ tools:context=".GioHangActivity">
         android:id="@+id/rcSanPhamThanhToan"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="10"
         android:layout_margin="8dp" />
-    <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phương thức thanh toán"
-            android:textStyle="bold"
-            />
         <TextView
-            android:layout_weight="1"
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phương thức thanh toán"
             android:textStyle="bold"/>
         <RadioGroup
-            android:layout_weight="1"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -90,7 +83,7 @@ tools:context=".GioHangActivity">
         </RadioGroup>
 
         <LinearLayout
-            android:layout_weight="1"
+         android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

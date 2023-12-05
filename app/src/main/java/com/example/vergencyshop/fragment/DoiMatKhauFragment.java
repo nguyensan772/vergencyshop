@@ -112,7 +112,6 @@ public class DoiMatKhauFragment extends Fragment {
             }else {
                 oldPass = edtOldPass.getText().toString();
                 newPass = edtNewPass.getText().toString();
-
                auth.signInWithEmailAndPassword(user.getEmail(),oldPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                    @Override
                    public void onComplete(@NonNull Task<AuthResult> task) {
@@ -124,7 +123,6 @@ public class DoiMatKhauFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-
                                         Toast.makeText(getContext(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
 
                                     }

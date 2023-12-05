@@ -65,9 +65,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanh_toan_san_pham);
 
-        Locale locale = new Locale("vi", "VN");
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
-        Currency currency = Currency.getInstance(locale);
+
         anhXa();
         setList();
         setThongTin();
@@ -124,11 +122,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
         HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
         reference.child("HoaDon").child(idHD)
                 .setValue(hoaDon);
-
-
         //Xóa giỏ hàng
-
-
         Intent intent = new Intent(ThanhToanSanPham.this , MainActivity.class);
         startActivity(intent);
         finishAffinity();
@@ -201,26 +195,20 @@ public class ThanhToanSanPham extends AppCompatActivity {
 gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
                             tongTien += gia1sp * Integer.parseInt(hang.getSoluongSP());
                              }
-
-                        if (tongTien < 300000){
-
-                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien+20000));
-                        }else {
+                        if (tongTien <= 300000){
+                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien+=20000));
+                        } else {
                             tvTongThanhToanHoaDon.setText(String.valueOf(tongTien));
                         }
                         Locale locale = new Locale("vi", "VN");
                         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
                         Currency currency = Currency.getInstance(locale);
 
-
                         String formattedGiaSanPham = currencyFormat.format(Double.parseDouble(String.valueOf(tongTien)));
                         tvTongThanhToanHoaDon.setText(formattedGiaSanPham);
                         thanhToanAdapter.notifyDataSetChanged();
-
                     }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
