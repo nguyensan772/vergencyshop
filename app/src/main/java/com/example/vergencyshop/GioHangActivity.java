@@ -59,14 +59,14 @@ public class GioHangActivity extends AppCompatActivity {
         rc_giohang = findViewById(R.id.rcGioHang);
         tv_tongtien = findViewById(R.id.tv_tongtien);
         tv_muahang = findViewById(R.id.btnMuaHangGioHang);
-btn_backToMain = findViewById(R.id.img_backToMain);
+        btn_backToMain = findViewById(R.id.img_backToMain);
 
-btn_backToMain.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        onBackPressed();
-    }
-});
+        btn_backToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         rc_giohang.setLayoutManager(new LinearLayoutManager(this));
@@ -116,20 +116,19 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
     }
 
 
-
-        private String tinhtongtien () {
+    private String tinhtongtien() {
         int tongTien = 0;
 
         for (GioHang gioHang1 : list) {
 
-            int giatri = Integer.parseInt(gioHang1.getGiaSP()) *Integer.parseInt(gioHang1.getSoluongSP()) ;
+            int giatri = Integer.parseInt(gioHang1.getGiaSP()) * Integer.parseInt(gioHang1.getSoluongSP());
             tongTien = giatri + tongTien;
         }
         return String.valueOf(tongTien);
     }
 
 
-        private void setHoaDon () {
+    private void setHoaDon() {
 
 
         Intent intent = new Intent(GioHangActivity.this, ThanhToanSanPham.class);

@@ -53,8 +53,6 @@ public class HoaDonChiTietAdapter extends RecyclerView.Adapter<HoaDonChiTietAdap
 
                     SanPham sanPham = snapshot.getValue(SanPham.class);
 
-
-
                     Glide.with(context).load(sanPham.getAnhSP()).into(holder.imgAnhHoaDonChiTiet);
                     holder.tvTenSpHoaDonChiTiet.setText(sanPham.getTenSP());
                     holder.tvGiaHoaDonCHiTiet.setText(sanPham.getGiaSP()) ;

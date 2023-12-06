@@ -45,18 +45,18 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int MY_REQUEST_CODE = 10 ;
-    DrawerLayout drawerLayout ;
-    Toolbar toolbar ;
-    NavigationView navigationView ;
+    public static final int MY_REQUEST_CODE = 10;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
-    ProgressDialog progressDialog ;
+    ProgressDialog progressDialog;
     TextView tvUser;
-    ImageView imgAvt ;
-    DatabaseReference reference = FirebaseDatabase .getInstance().getReference();
+    ImageView imgAvt;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    private final ThongTinNguoiDungFragment thongTinNguoiDungFragment  = new ThongTinNguoiDungFragment();
+    private final ThongTinNguoiDungFragment thongTinNguoiDungFragment = new ThongTinNguoiDungFragment();
 
 
     @Override
@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.main_navigation_view01);
         bottomNavigationView = findViewById(R.id.jl_btton_nav);
         imgAvt = navigationView.getHeaderView(0).findViewById(R.id.imgAvt);
-         tvUser = navigationView.getHeaderView(0).findViewById(R.id.tvUser);
+        tvUser = navigationView.getHeaderView(0).findViewById(R.id.tvUser);
         setThongTin();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Trang chủ");
-        ActionBarDrawerToggle  toggle = new ActionBarDrawerToggle(MainActivity.this , drawerLayout , toolbar , R.string.open,R.string.close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.open, R.string.close);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
@@ -85,53 +85,53 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 progressDialog.show();
-                if (item.getItemId() == R.id.nav_trangchu){
+                if (item.getItemId() == R.id.nav_trangchu) {
 
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
                 }
-                if (item.getItemId() == R.id.nav_danhmuc){
+                if (item.getItemId() == R.id.nav_danhmuc) {
 
                     callFragment(new DanhMucFragment());
                     toolbar.setTitle("Danh mục");
                 }
 
-                if (item.getItemId() == R.id.nav_giohang){
-                    startActivity(new Intent(getApplicationContext(),GioHangActivity.class));
+                if (item.getItemId() == R.id.nav_giohang) {
+                    startActivity(new Intent(getApplicationContext(), GioHangActivity.class));
                 }
-                if (item.getItemId() == R.id.sub_Top){
+                if (item.getItemId() == R.id.sub_Top) {
 
                     callFragment(new TopSanPhamFragment());
                     toolbar.setTitle("Sản phẩm bán chạy");
                 }
-                if (item.getItemId() == R.id.nav_HoSo){
+                if (item.getItemId() == R.id.nav_HoSo) {
 
                     callFragment(thongTinNguoiDungFragment);
                     toolbar.setTitle("Thông tin khách hàng");
                 }
-                if (item.getItemId() == R.id.nav_HoaDon){
+                if (item.getItemId() == R.id.nav_HoaDon) {
 
                     callFragment(new HoaDonFragment());
                     toolbar.setTitle("Hóa đơn");
                 }
-                if (item.getItemId() == R.id.nav_lichsumuahang){
+                if (item.getItemId() == R.id.nav_lichsumuahang) {
                     progressDialog.dismiss();
                     callFragment(new LichSuMuaHangFragment());
                     toolbar.setTitle("Lịch sử mua hàng");
                 }
 
-                if (item.getItemId() == R.id.sub_Logout){
+                if (item.getItemId() == R.id.sub_Logout) {
 
                     FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(MainActivity.this,DangNhap.class);
+                    Intent intent = new Intent(MainActivity.this, DangNhap.class);
                     startActivity(intent);
                     finishAffinity();
                 }
-                if (item.getItemId() == R.id.sub_Support){
+                if (item.getItemId() == R.id.sub_Support) {
                     callFragment(new GioiThieuFragment());
                     toolbar.setTitle("Hỗ trợ");
                 }
-                if (item.getItemId() == R.id.sub_Pass){
+                if (item.getItemId() == R.id.sub_Pass) {
 
                     callFragment(new DoiMatKhauFragment());
                     toolbar.setTitle("Đổi mật khẩu");
@@ -145,20 +145,20 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.bt_trangchu){
+                if (item.getItemId() == R.id.bt_trangchu) {
                     callFragment(new TrangChuFragment());
                     toolbar.setTitle("Trang chủ");
                 }
-                if (item.getItemId() == R.id.bt_banchay){
+                if (item.getItemId() == R.id.bt_banchay) {
                     callFragment(new TopSanPhamFragment());
                     toolbar.setTitle("Sản Phẩm bán chạy");
                 }
-                if (item.getItemId() == R.id.bt_danhmuc){
+                if (item.getItemId() == R.id.bt_danhmuc) {
                     callFragment(new DanhMucFragment());
                     toolbar.setTitle("Danh mục");
                 }
 
-                if (item.getItemId() == R.id.bt_nguoidung){
+                if (item.getItemId() == R.id.bt_nguoidung) {
                     callFragment(new ThongTinNguoiDungFragment());
                     toolbar.setTitle("Hồ sơ");
                 }
@@ -168,54 +168,51 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
 
-    private void callFragment (Fragment fragment){
+    private void callFragment(Fragment fragment) {
         progressDialog.dismiss();
         FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
-        manager.replace(R.id.jl_fragment,fragment).commit();
+        manager.replace(R.id.jl_fragment, fragment).commit();
         drawerLayout.close();
         progressDialog.dismiss();
     }
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
             drawerLayout.closeDrawer(GravityCompat.START);
 
-        }else {
+        } else {
             super.onBackPressed();
             progressDialog.dismiss();
         }
     }
 
 
-    private void setThongTin (){
-            reference.child("NguoiDung").child(user.getUid()).child("ten").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.getValue() == null){
-                        tvUser.setText(null);
-                    }else {
-                        tvUser.setText(snapshot.getValue().toString());
-                    }
+    private void setThongTin() {
+        reference.child("NguoiDung").child(user.getUid()).child("ten").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() == null) {
+                    tvUser.setText(null);
+                } else {
+                    tvUser.setText(snapshot.getValue().toString());
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-
+            }
+        });
 
 
         reference.child("NguoiDung").child(user.getUid()).child("anh").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue() != null){
-
+                if (snapshot.getValue() != null) {
 
                     Glide.with(MainActivity.this).load(snapshot.getValue().toString()).into(imgAvt);
                 }

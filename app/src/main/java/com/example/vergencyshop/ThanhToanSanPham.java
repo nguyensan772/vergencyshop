@@ -43,21 +43,17 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ThanhToanSanPham extends AppCompatActivity {
-    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon ;
+    TextView tvTenSDtThanhToan, tvDiaChiThanhToan, tvTongThanhToanHoaDon;
     LinearLayout btnMuaHang;
-    RecyclerView rcSanPhamThanhToan ;
-    RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;
+    RecyclerView rcSanPhamThanhToan;
+    RadioButton rdNhanHangThanhToan, rdBankingThanhToan;
     ThanhToanAdapter thanhToanAdapter;
     ImageView img_backToMain;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
-
-
     ArrayList<GioHang> list = new ArrayList<>();
-
 
 
     @Override
@@ -72,8 +68,8 @@ public class ThanhToanSanPham extends AppCompatActivity {
         setList();
         setThongTin();
         rdBankingThanhToan.setChecked(true);
-        rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this ));
-        thanhToanAdapter = new ThanhToanAdapter(list,this);
+        rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this));
+        thanhToanAdapter = new ThanhToanAdapter(list, this);
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +84,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
             }
         });
     }
+
     private void setMuaHang() {
         // Set giờ
         // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
@@ -102,26 +99,26 @@ public class ThanhToanSanPham extends AppCompatActivity {
         String thanhTien = "0";
         String ngayMua = formattedTime;
         String phuongThuc = setPhuongThucThanhToan();
-        String trangThai ="Chờ Xác Nhận";
+        String trangThai = "Chờ Xác Nhận";
         int tien = 0;
-        for (GioHang hang: list){
+        for (GioHang hang : list) {
             String idHDCT = idHD;
-            String idSP =   hang.getIdSP() ;
+            String idSP = hang.getIdSP();
             String soLuong = hang.getSoluongSP();
-            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP())) ;
-            String anhSP = hang.getAnhSP() ;
+            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP()));
+            String anhSP = hang.getAnhSP();
             String sizeSP = hang.getSizeSP();
 
 
-            tien =tien + Integer.parseInt(tongTien);
+            tien = tien + Integer.parseInt(tongTien);
             thanhTien = String.valueOf(tien);
             Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
 
-            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
+            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT, idSP, soLuong, tongTien, anhSP, sizeSP);
             reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);
 
         }
-        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
+        HoaDon hoaDon = new HoaDon(idHD, idND, thanhTien, ngayMua, phuongThuc, trangThai);
         reference.child("HoaDon").child(idHD)
                 .setValue(hoaDon);
 
@@ -129,12 +126,13 @@ public class ThanhToanSanPham extends AppCompatActivity {
         //Xóa giỏ hàng
 
 
-        Intent intent = new Intent(ThanhToanSanPham.this , MainActivity.class);
+        Intent intent = new Intent(ThanhToanSanPham.this, MainActivity.class);
         startActivity(intent);
         finishAffinity();
 
     }
-    private  void anhXa(){
+
+    private void anhXa() {
         img_backToMain = findViewById(R.id.img_backToMain);
         tvTenSDtThanhToan = findViewById(R.id.tvTenSDtThanhToan);
         tvDiaChiThanhToan = findViewById(R.id.tvDiaChiThanhToan);
@@ -146,23 +144,23 @@ public class ThanhToanSanPham extends AppCompatActivity {
     }
 
 
-    private String setPhuongThucThanhToan (){
+    private String setPhuongThucThanhToan() {
 
-        if (rdBankingThanhToan.isChecked()){
+        if (rdBankingThanhToan.isChecked()) {
             return "bank";
-        }else {
+        } else {
             return "tien";
         }
     }
 
-    private void setThongTin (){
+    private void setThongTin() {
         reference.child("NguoiDung").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
 
                 tvDiaChiThanhToan.setText(nguoiDung.getDiaChi());
-                tvTenSDtThanhToan.setText(nguoiDung.getTen() +"-"+nguoiDung.getDiaChi());
+                tvTenSDtThanhToan.setText(nguoiDung.getTen() + "-" + nguoiDung.getDiaChi());
             }
 
             @Override
@@ -186,30 +184,31 @@ public class ThanhToanSanPham extends AppCompatActivity {
             }
         });
     }
-    private void setList(){
+
+    private void setList() {
         Query query = reference.child("GioHang").orderByChild("idNguoiDung").equalTo(user.getUid());
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
-                        list.clear();
-                        int tongTien = 0 ;
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            GioHang hang = dataSnapshot.getValue(GioHang.class);
-                            list.add(hang);
+                if (snapshot.exists()) {
+                    list.clear();
+                    int tongTien = 0;
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        GioHang hang = dataSnapshot.getValue(GioHang.class);
+                        list.add(hang);
 
-                            tongTien += Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP());
-                        }
-                        if (tongTien < 300000){
-
-                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien+20000));
-                        }else {
-                            tvTongThanhToanHoaDon.setText(String.valueOf(tongTien));
-                        }
-
-                        thanhToanAdapter.notifyDataSetChanged();
-
+                        tongTien += Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP());
                     }
+                    if (tongTien < 300000) {
+
+                        tvTongThanhToanHoaDon.setText(String.valueOf(tongTien + 20000));
+                    } else {
+                        tvTongThanhToanHoaDon.setText(String.valueOf(tongTien));
+                    }
+
+                    thanhToanAdapter.notifyDataSetChanged();
+
+                }
 
             }
 
@@ -219,6 +218,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

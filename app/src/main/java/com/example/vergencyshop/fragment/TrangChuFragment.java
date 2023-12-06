@@ -99,7 +99,7 @@ public class TrangChuFragment extends Fragment {
     private Runnable runnable;
     private int delayTime = 3000; // Thời gian chuyển đổi ảnh (3 giây)
     private int currentPage = 0;
-    private int[] imageIds = {R.drawable.slide_index_1, R.drawable.slide_index_2}; // Danh sách ID ảnh
+    private int[] imageIds = {R.drawable.slide_index_1, R.drawable.slide_index_2,R.drawable.slide_index_1,R.drawable.slide_index_2}; // Danh sách ID ảnh
     private RecyclerView rcSanPham;
     ArrayList<SanPham> list = new ArrayList<>();
     private ArrayList<SanPham> search_List = new ArrayList<>();
@@ -112,19 +112,8 @@ public class TrangChuFragment extends Fragment {
 
         anhXa();
 
+        viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
 
-
-
-       viewPager.setAdapter(new BannerAdapter(getContext(), imageIds));
-
-
-//        ln_timkiem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
         sv_tenSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -154,40 +143,38 @@ public class TrangChuFragment extends Fragment {
         });
 
 
-        rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        sanPhamTrangChuAdapter= new SanPhamTrangChuAdapter(getActivity(),list);
-
-
-
+        rcSanPham.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        sanPhamTrangChuAdapter = new SanPhamTrangChuAdapter(getActivity(), list);
 
 
         reference.child("SanPham").addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham =  snapshot.getValue(SanPham.class);
+                SanPham sanPham = snapshot.getValue(SanPham.class);
 
 
-
-
-            list.add(sanPham);
+                list.add(sanPham);
 
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-                SanPham sanPham =  snapshot.getValue(SanPham.class);
+                SanPham sanPham = snapshot.getValue(SanPham.class);
 
 
                 sanPhamTrangChuAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -205,28 +192,29 @@ public class TrangChuFragment extends Fragment {
     }
 
 
-  private void startAutoSlide() {
+    private void startAutoSlide() {
 //        if (handler != null) {
 //            handler.removeCallbacks(runnable);
 //        }
-    handler = new Handler();
+        handler = new Handler();
 
 
         runnable = new Runnable() {
-           public void run() {
-               currentPage = viewPager.getCurrentItem();
-               currentPage = (currentPage + 1) % imageIds.length;
-               viewPager.setCurrentItem(currentPage, true);
-               handler.postDelayed(this, delayTime);
+            public void run() {
+                currentPage = viewPager.getCurrentItem();
+                currentPage = (currentPage + 1) % imageIds.length;
+                viewPager.setCurrentItem(currentPage, true);
+                handler.postDelayed(this, delayTime);
             }
-       };
-      handler.postDelayed(runnable, delayTime);
+        };
+        handler.postDelayed(runnable, delayTime);
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
-       startAutoSlide();
+        startAutoSlide();
 
     }
 
@@ -248,7 +236,7 @@ public class TrangChuFragment extends Fragment {
 
     }
 
-    private void anhXa (){
+    private void anhXa() {
 
         sv_tenSP = view.findViewById(R.id.sv_tenSP);
         ln_timkiem = view.findViewById(R.id.searchBtn);
@@ -257,6 +245,7 @@ public class TrangChuFragment extends Fragment {
         rcSanPham = view.findViewById(R.id.rcdanhSachSanPhamTC);
         viewPager = view.findViewById(R.id.viewPager);
     }
+
     private void queryFirebaseForSearch(String keyword) {
         Query searchQuery = reference.child("SanPham").orderByChild("tenSPLowerCase");
 

@@ -87,7 +87,7 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
         //RC
         rcHoaDonChiTiet = findViewById(R.id.rcHoaDonChiTiet) ;
         //Gia Tien
-        tvPhiVanChuyenHoaDonChiTiet = findViewById(R.id.tvPhiVanChuyenHoaDonChiTiet) ;
+
         tvTongTienHoaDonChiTiet = findViewById(R.id.tvTongTienHoaDonChiTiet);
 //thoát
         img_backTo_hdct = findViewById(R.id.img_backTo_hdct);
@@ -140,15 +140,7 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-
-
-                if (Integer.parseInt(hoaDon.getThanhTien()) < 300000){
-                    tvPhiVanChuyenHoaDonChiTiet .setText("Tiền ship: 20.000VNĐ");
-                }else {
-                    tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: 0VNĐ");
-                }
-
-                tvTongTienHoaDonChiTiet.setText("Thành tiền: "+String.valueOf((Integer.parseInt(hoaDon.getThanhTien())+ 20000)));
+                tvTongTienHoaDonChiTiet.setText("Thành tiền: "+String.valueOf((Integer.parseInt(hoaDon.getThanhTien()))));
 
 
 

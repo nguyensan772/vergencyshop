@@ -20,27 +20,24 @@ public class Welcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
 
-
-
-
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
                 checkDangNhap();
             }
-        },1000);
+        }, 1000);
 
     }
 
     private void checkDangNhap() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        if (user != null){
-            Intent intent = new Intent(Welcome.this,MainActivity.class);
+        if (user != null) {
+            Intent intent = new Intent(Welcome.this, MainActivity.class);
             startActivity(intent);
-        }else {
-            Intent intent = new Intent(Welcome.this,DangNhap.class);
+        } else {
+            Intent intent = new Intent(Welcome.this, DangNhap.class);
             startActivity(intent);
         }
 

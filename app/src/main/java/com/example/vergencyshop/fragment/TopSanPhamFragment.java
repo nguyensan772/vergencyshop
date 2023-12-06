@@ -94,7 +94,7 @@ public class TopSanPhamFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         view  = inflater.inflate(R.layout.frag_thanhtoan, container, false);
+        view  = inflater.inflate(R.layout.frag_thanhtoan, container, false);
         anhXa ();
         setTop();
         rcTopSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
@@ -131,11 +131,6 @@ public class TopSanPhamFragment extends Fragment {
                                       hoaDonChiTiet = gioHangCT.getValue(HoaDonChiTiet.class);
 
                                       tong = tong + Integer.parseInt(hoaDonChiTiet.getSoLuong());
-
-
-
-
-
 
                                   }
                                   TopSanPham topSanPham = new TopSanPham(hoaDonChiTiet.getIdSP(),String.valueOf(tong));

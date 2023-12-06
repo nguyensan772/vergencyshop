@@ -25,10 +25,11 @@ public class DangNhap extends AppCompatActivity {
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
     //Người dùng
-    FirebaseUser user ;
+    FirebaseUser user;
 
 
-    EditText edtUserName , edtPassWord ;
+    EditText edtUserName, edtPassWord;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,46 +42,45 @@ public class DangNhap extends AppCompatActivity {
 
         findViewById(R.id.tvDangky).setOnClickListener(v -> {
 
-            startActivity(new Intent(DangNhap.this,DangKy.class));
+            startActivity(new Intent(DangNhap.this, DangKy.class));
 
         });
 
 
         btnLogin.setOnClickListener(v -> {
 
-          if (edtUserName.getText().toString().trim().isEmpty()||
-                  edtPassWord.getText().toString().trim().isEmpty()){
-              Toast.makeText(this, "Bạn nhập thiếu", Toast.LENGTH_SHORT).show();
-          }else {
-              String email = edtUserName.getText().toString().trim();
-              String pass = edtPassWord.getText().toString().trim();
+            if (edtUserName.getText().toString().trim().isEmpty() ||
+                    edtPassWord.getText().toString().trim().isEmpty()) {
+                Toast.makeText(this, "Bạn nhập thiếu", Toast.LENGTH_SHORT).show();
+            } else {
+                String email = edtUserName.getText().toString().trim();
+                String pass = edtPassWord.getText().toString().trim();
 
 
                 user = auth.getCurrentUser();
-              auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                  @Override
-                  public void onComplete(@NonNull Task<AuthResult> task) {
+                auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                      if (task.isSuccessful()){
-                          Toast.makeText(DangNhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                         startActivity(new Intent(DangNhap.this , MainActivity.class));
-finish();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(DangNhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(DangNhap.this, MainActivity.class));
+                            finish();
 
-                      }else {
-                          Toast.makeText(DangNhap.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-                      }
+                        } else {
+                            Toast.makeText(DangNhap.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                        }
 
-                  }
-              });
+                    }
+                });
 
 
-          }
+            }
         });
     }
 
 
-
-    private void anhXa (){
+    private void anhXa() {
         edtUserName = findViewById(R.id.edt_user);
         edtPassWord = findViewById(R.id.edt_pass);
 

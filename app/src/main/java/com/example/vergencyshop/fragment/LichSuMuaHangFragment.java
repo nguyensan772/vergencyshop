@@ -72,20 +72,22 @@ public class LichSuMuaHangFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    TextView btnListChoXacNhan , btnListDangGiao , btnListDaGiao , btnListDaHuy ;
+
+    TextView btnListChoXacNhan, btnListDangGiao, btnListDaGiao, btnListDaHuy;
     RecyclerView rcLichSuMuaHang;
-    HoaDonAdapter hoaDonAdapter ;
+    HoaDonAdapter hoaDonAdapter;
     ArrayList<HoaDon> list = new ArrayList<>();
     View view;
-    DatabaseReference reference = FirebaseDatabase .getInstance().getReference();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_lich_su_mua_hang, container, false);
         anhXa();
         xuatDanhSachHoaDon("Chờ Xác Nhận");
-        hoaDonAdapter = new HoaDonAdapter(list,getActivity() );
+        hoaDonAdapter = new HoaDonAdapter(list, getActivity());
 
         rcLichSuMuaHang.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -124,18 +126,18 @@ public class LichSuMuaHangFragment extends Fragment {
     }
 
     private void xuatDanhSachHoaDon(String trangThai) {
-        Query query =  reference.child("HoaDon").orderByChild("idND").equalTo(user.getUid());
+        Query query = reference.child("HoaDon").orderByChild("idND").equalTo(user.getUid());
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     list.clear();
 
 
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         HoaDon hoaDon = dataSnapshot.getValue(HoaDon.class);
-                        if (hoaDon.getTrangThai() .equals(trangThai)){
+                        if (hoaDon.getTrangThai().equals(trangThai)) {
                             list.add(hoaDon);
                         }
 
@@ -152,16 +154,13 @@ public class LichSuMuaHangFragment extends Fragment {
         });
 
 
-
-
-
     }
 
-    private  void anhXa (){
+    private void anhXa() {
         rcLichSuMuaHang = view.findViewById(R.id.rcLichSuMuaHang);
         btnListChoXacNhan = view.findViewById(R.id.btnListChoXacNhan);
-        btnListDangGiao  = view.findViewById(R.id.btnListDangGiao) ;
-        btnListDaGiao  = view.findViewById(R.id.btnListDaGiao) ;
-        btnListDaHuy  = view.findViewById(R.id.btnListDaHuy) ;
+        btnListDangGiao = view.findViewById(R.id.btnListDangGiao);
+        btnListDaGiao = view.findViewById(R.id.btnListDaGiao);
+        btnListDaHuy = view.findViewById(R.id.btnListDaHuy);
     }
 }

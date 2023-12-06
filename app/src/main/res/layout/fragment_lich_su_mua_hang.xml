@@ -17,48 +17,52 @@
            android:id="@+id/btnListChoXacNhan"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:text="Chờ xác nhận"
+           android:text="Chờ Xác Nhận"
            android:gravity="center"
            android:textStyle="bold"
-           android:textColor="@color/black"
+           android:background="#40C4FF"
+           android:textColor="@color/white"
            android:layout_weight="1"
            />
        <TextView
            android:id="@+id/btnListDangGiao"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:text="Đang giao"
+           android:text="Đang Giao"
            android:gravity="center"
            android:textStyle="bold"
-           android:textColor="@color/black"
+           android:background="#536DFE"
+           android:textColor="@color/white"
            android:layout_weight="1"
            />
        <TextView
            android:id="@+id/btnListDaGiao"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:text="Đã giao"
+           android:text="Đã Giao"
            android:gravity="center"
            android:textStyle="bold"
-           android:textColor="@color/black"
+           android:background="#69F0AE"
+           android:textColor="@color/white"
            android:layout_weight="1"
            />
        <TextView
            android:id="@+id/btnListDaHuy"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:text="Đã hủy"
+           android:text="Đã Hủy"
            android:gravity="center"
            android:textStyle="bold"
-           android:textColor="@color/black"
-           android:layout_weight="1"
-           />
+           android:background="#FF5252"
+           android:textColor="@color/white"
+           android:layout_weight="1" />
 
    </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcLichSuMuaHang"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 

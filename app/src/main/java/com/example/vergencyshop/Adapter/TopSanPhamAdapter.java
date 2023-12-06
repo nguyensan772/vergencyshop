@@ -59,7 +59,7 @@ public class TopSanPhamAdapter extends RecyclerView .Adapter<TopSanPhamAdapter.H
 
             }
         });
-        holder.tvGiaItemSanPhamTrangChu .setText("Lượt mua: "+list.get(position).getSoLuong());
+        holder.tvGiaItemSanPhamTrangChu .setText("Lượt bán ra: "+list.get(position).getSoLuong());
 
     }
 
