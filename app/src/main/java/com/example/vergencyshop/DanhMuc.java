@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vergencyshop.Adapter.SanPhamTrangChuAdapter;
@@ -25,7 +26,7 @@ public class DanhMuc extends AppCompatActivity {
 
     RecyclerView rcSanPhamDanhMuc ;
 
-
+    ImageView img_backTo_dm ;
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -39,6 +40,9 @@ public class DanhMuc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_muc);
         anhXa();
+        img_backTo_dm.setOnClickListener(v -> {
+            onBackPressed();
+        });
         
 
         Bundle bundle = getIntent().getExtras();
@@ -49,7 +53,7 @@ public class DanhMuc extends AppCompatActivity {
             return;
         }
         CODE_CHOSSE =  bundle.getInt("CODE");
-        Toast.makeText(this, String.valueOf(CODE_CHOSSE), Toast.LENGTH_SHORT).show();
+
 
         rcSanPhamDanhMuc .setLayoutManager(new GridLayoutManager(this,2));
 
@@ -193,7 +197,7 @@ public class DanhMuc extends AppCompatActivity {
     }
 
     private  void  anhXa (){
-
+        img_backTo_dm = findViewById(R.id.img_backTo_dm);
         rcSanPhamDanhMuc = findViewById(R.id.rcSanPhamDanhMuc);
     }
 }

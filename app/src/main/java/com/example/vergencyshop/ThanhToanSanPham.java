@@ -188,8 +188,14 @@ public class ThanhToanSanPham extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                    NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
-                    tvTenSDtThanhToan.setText(nguoiDung.getTen().toUpperCase()+"\n"+nguoiDung.getSoDienThoai().toUpperCase());
-                    tvDiaChiThanhToan.setText(nguoiDung.getDiaChi().toUpperCase());
+                   if (nguoiDung.getTen() == null || nguoiDung.getSoDienThoai() == null){
+                       tvTenSDtThanhToan.setText("");
+                       tvDiaChiThanhToan.setText("");
+                   }else {
+                       tvTenSDtThanhToan.setText(nguoiDung.getTen().toUpperCase()+"\n"+nguoiDung.getSoDienThoai().toUpperCase());
+                       tvDiaChiThanhToan.setText(nguoiDung.getDiaChi().toUpperCase());
+                   }
+
                 }
 
             }

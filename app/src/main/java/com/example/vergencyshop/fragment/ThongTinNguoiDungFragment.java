@@ -357,7 +357,11 @@ public class ThongTinNguoiDungFragment extends Fragment {
             Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
         }else {
             reference.child("NguoiDung").child(user.getUid()).child("anh").setValue(edanh.getText().toString());
+       
+       
         }
+
+        Toast.makeText(getContext(), "Thay đổi thành công", Toast.LENGTH_SHORT).show();
 
     }
 
