@@ -122,7 +122,6 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
             }
         });
     }
-
         private String tinhtongtien () {
         int tongTien = 0;
 
