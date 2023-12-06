@@ -134,25 +134,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     private void themVaoGio(){
 
-        String anhSP =  sanPham.getAnhSP();
+
+
+
+        String anhSP = sanPham.getAnhSP();
         String tenSP = sanPham.getTenSP();
         String sizeSP = size;
-        String soluongSP = String.valueOf(index);
         String giaSP = sanPham.getGiaSP();
-        String tongtien = String.valueOf(Integer.parseInt(soluongSP)*Integer.parseInt(giaSP));
-
-
-//<<<<<<< HEAD
-//
-//        String idND = user.getUid();
-//        Toast.makeText(this, ""+giaSP, Toast.LENGTH_SHORT).show();
-//        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,new String(),idND);
-//        cartRef.push().setValue(newItem);
+        String soluongSP = String.valueOf(index);
 
 
         String idSP = "S"+(position + 1);
         String idND = user.getUid();
-        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,tongtien,soluongSP,idSP,idND);
+        GioHang newItem = new GioHang(anhSP,tenSP,sizeSP,giaSP,soluongSP,idSP,idND);
         cartRef.child(idSP+""+idND).setValue(newItem);
         Toast.makeText(this, "Đã thêm sản phẩm vào giỏ hàng !", Toast.LENGTH_SHORT).show();
 
@@ -208,8 +202,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         btnTangSoLuong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                index++;
-                hienSoLuong();
+                if (index>9){
+                    index = 10;
+                    hienSoLuong();
+                }else {
+                    index++;
+                    hienSoLuong();
+                }
             }
         });
 

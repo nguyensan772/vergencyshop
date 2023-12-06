@@ -65,15 +65,21 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
         rcHoaDonChiTiet.setAdapter(hoaDonChiTietAdapter);
 
 
-        btnHuyHoaDon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (hoaDon.getTrangThai() .equals("Chờ xác nhận")){
+            btnHuyHoaDon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                reference.child("HoaDon").child(hoaDon.getIdHD()).child("trangThai").setValue("Hủy");
-                Toast.makeText(ChiTietHoaDonActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
+                    reference.child("HoaDon").child(hoaDon.getIdHD()).child("trangThai").setValue("Hủy");
+                    Toast.makeText(ChiTietHoaDonActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
+        }else {
+            btnHuyHoaDon.setVisibility(View.GONE);
+        }
+
+
 
 
     }
@@ -144,11 +150,15 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
 
                 if (Integer.parseInt(hoaDon.getThanhTien()) < 300000){
                     tvPhiVanChuyenHoaDonChiTiet .setText("Tiền ship: 20.000VNĐ");
+                    tvTongTienHoaDonChiTiet.setText("Thành tiền: "+((Integer.parseInt(hoaDon.getThanhTien())+ 20000)));
+
                 }else {
                     tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: 0VNĐ");
+                    tvTongTienHoaDonChiTiet.setText("Thành tiền: "+((Integer.parseInt(hoaDon.getThanhTien()))));
+
+
                 }
 
-                tvTongTienHoaDonChiTiet.setText("Thành tiền: "+String.valueOf((Integer.parseInt(hoaDon.getThanhTien())+ 20000)));
 
 
 
