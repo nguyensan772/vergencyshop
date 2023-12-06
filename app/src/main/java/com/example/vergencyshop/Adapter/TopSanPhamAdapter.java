@@ -66,7 +66,7 @@ public class TopSanPhamAdapter extends RecyclerView .Adapter<TopSanPhamAdapter.H
     @Override
     public int getItemCount() {
 
-        return   list.size();
+        return list.size();
     }
 
     class HolderTopSanPhamAdapter extends RecyclerView.ViewHolder {

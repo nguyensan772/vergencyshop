@@ -1,5 +1,6 @@
 package com.example.vergencyshop.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,9 +99,11 @@ public class TopSanPhamFragment extends Fragment {
         anhXa ();
         setTop();
         rcTopSanPham.setLayoutManager(new GridLayoutManager(getActivity(),2));
+
         topSanPhamAdapter = new TopSanPhamAdapter( topSanPhamArrayList,getActivity());
 
         rcTopSanPham.setAdapter(topSanPhamAdapter);
+
 
 
 
@@ -156,6 +159,10 @@ public class TopSanPhamFragment extends Fragment {
                                           return 0;
                                       }
                                   });
+                                  for (int i = topSanPhamArrayList.size() - 1; i >= 6; i--) {
+                                      topSanPhamArrayList.remove(i);
+                                  }
+
                                     topSanPhamAdapter.notifyDataSetChanged();
                               }
                           }
@@ -183,4 +190,7 @@ public class TopSanPhamFragment extends Fragment {
     }
 
 
+
+
 }
+

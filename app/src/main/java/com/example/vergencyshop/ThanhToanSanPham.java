@@ -183,27 +183,14 @@ public class ThanhToanSanPham extends AppCompatActivity {
     }
 
     private void setThongTin (){
-        reference.child("NguoiDung").addChildEventListener(new ChildEventListener() {
+        reference.child("NguoiDung").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
-
-                tvDiaChiThanhToan.setText(nguoiDung.getDiaChi());
-                tvTenSDtThanhToan.setText(nguoiDung.getTen() +"-"+nguoiDung.getDiaChi());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                   NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
+                    tvTenSDtThanhToan.setText(nguoiDung.getTen().toUpperCase()+"\n"+nguoiDung.getSoDienThoai().toUpperCase());
+                    tvDiaChiThanhToan.setText(nguoiDung.getDiaChi().toUpperCase());
+                }
 
             }
 
@@ -225,7 +212,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             GioHang hang = dataSnapshot.getValue(GioHang.class);
                             list.add(hang);
-gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
+                            gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
                             tongTien += gia1sp * Integer.parseInt(hang.getSoluongSP());
                              }
                         if (tongTien <= 300000){
