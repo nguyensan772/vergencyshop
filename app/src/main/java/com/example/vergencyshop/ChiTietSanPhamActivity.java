@@ -138,7 +138,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         String anhSP = sanPham.getAnhSP();
         String tenSP = sanPham.getTenSP();
         String sizeSP = size;
-        String giaSP = sanPham.getGiaSP();
+        String giaSP = String.valueOf(Integer.parseInt(sanPham.getGiaSP()) * index);
         String soluongSP = String.valueOf(index);
 
 

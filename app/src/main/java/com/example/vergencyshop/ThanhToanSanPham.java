@@ -124,7 +124,7 @@ public class ThanhToanSanPham extends AppCompatActivity {
                             String idHDCT = idHD;
                             String idSP =   hang.getIdSP() ;
                             String soLuong = hang.getSoluongSP();
-                            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP())) ;
+                            String tongTien = hang.getGiaSP() ;
                             String anhSP = hang.getAnhSP() ;
                             String sizeSP = hang.getSizeSP();
 
@@ -213,7 +213,8 @@ public class ThanhToanSanPham extends AppCompatActivity {
                             GioHang hang = dataSnapshot.getValue(GioHang.class);
                             list.add(hang);
                             gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
-                            tongTien += gia1sp * Integer.parseInt(hang.getSoluongSP());
+                            tongTien +=  Integer.parseInt(hang.getGiaSP()) ;
+                                    //gia1sp * Integer.parseInt(hang.getSoluongSP());
                              }
                         if (tongTien <= 300000){
                             tvTongThanhToanHoaDon.setText(String.valueOf(tongTien+=20000));
