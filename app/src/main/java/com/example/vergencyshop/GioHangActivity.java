@@ -130,6 +130,7 @@ btn_backToMain.setOnClickListener(new View.OnClickListener() {
                 int giatri = gia1sp * Integer.parseInt(gioHang1.getSoluongSP());
                 tongTien = giatri + tongTien;
 
+
         }
         return String.valueOf(tongTien);
     }

@@ -68,15 +68,21 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
         rcHoaDonChiTiet.setAdapter(hoaDonChiTietAdapter);
 
 
-        btnHuyHoaDon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (hoaDon.getTrangThai() .equals("Chờ xác nhận")){
+            btnHuyHoaDon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                reference.child("HoaDon").child(hoaDon.getIdHD()).child("trangThai").setValue("Hủy");
-                Toast.makeText(ChiTietHoaDonActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
+                    reference.child("HoaDon").child(hoaDon.getIdHD()).child("trangThai").setValue("Hủy");
+                    Toast.makeText(ChiTietHoaDonActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
+        }else {
+            btnHuyHoaDon.setVisibility(View.GONE);
+        }
+
+
 
 
     }
@@ -101,10 +107,10 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    private  void setGiaTri (HoaDon hoaDon){
+    private  void setGiaTri (HoaDon hoaDon) {
 
-        tvIdHoaDonChiTiet.setText("ID hóa đơn: "+hoaDon.getIdHD()) ;
-        tvNgayTaoHoaDonChiTiet.setText("Ngày mua: "+hoaDon.getNgayMua()) ;
+        tvIdHoaDonChiTiet.setText("ID hóa đơn: " + hoaDon.getIdHD());
+        tvNgayTaoHoaDonChiTiet.setText("Ngày mua: " + hoaDon.getNgayMua());
 
         reference.child("NguoiDung").child(hoaDon.getIdND()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -112,10 +118,11 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
                 GioHang gioHang = snapshot.getValue(GioHang.class);
                 NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
 
-                tvKhachHangHoaDonChiTiet.setText("Tên người dùng: "+nguoiDung.getTen()) ;
-                tvSoDienThoaiHoaDonChiTiet.setText("Số điện thoại: "+nguoiDung.getSoDienThoai()) ;
-                tvDiaChiHoaDonChiTiet.setText("Địa chỉ: "+nguoiDung.getDiaChi());
+                tvKhachHangHoaDonChiTiet.setText("Tên người dùng: " + nguoiDung.getTen());
+                tvSoDienThoaiHoaDonChiTiet.setText("Số điện thoại: " + nguoiDung.getSoDienThoai());
+                tvDiaChiHoaDonChiTiet.setText("Địa chỉ: " + nguoiDung.getDiaChi());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -128,9 +135,9 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        HoaDonChiTiet hoaDonChiTiet =    dataSnapshot.getValue(HoaDonChiTiet.class);
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        HoaDonChiTiet hoaDonChiTiet = dataSnapshot.getValue(HoaDonChiTiet.class);
                         list.add(hoaDonChiTiet);
 
                     }
@@ -144,16 +151,13 @@ img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
             }
         });
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-int thanhtien = Integer.parseInt(hoaDon.getThanhTien());
-        if ( thanhtien< 300000){
+        int thanhtien = Integer.parseInt(hoaDon.getThanhTien());
+        if (thanhtien < 300000) {
             tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: " + numberFormat.format(20000));
             tvTongTienHoaDonChiTiet.setText("Thành tiền: " + numberFormat.format(thanhtien + 20000));
         } else {
             tvPhiVanChuyenHoaDonChiTiet.setText("Tiền ship: " + numberFormat.format(0));
             tvTongTienHoaDonChiTiet.setText("Thành tiền: " + numberFormat.format(thanhtien));
         }
-
-
-}
-
-}
+    }
+    }

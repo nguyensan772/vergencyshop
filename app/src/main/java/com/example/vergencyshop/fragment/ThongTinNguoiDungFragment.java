@@ -7,6 +7,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.vergencyshop.MainActivity.MY_REQUEST_CODE;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 
 import android.content.Intent;
@@ -25,9 +26,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -44,7 +47,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -105,7 +108,7 @@ public class ThongTinNguoiDungFragment extends Fragment {
     Button btnLuu ;
 
     ProgressDialog progressDialog ;
-
+    TextView btnChonNgaySinh;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     DatabaseReference reference = database.getReference();
@@ -113,7 +116,9 @@ public class ThongTinNguoiDungFragment extends Fragment {
     FirebaseUser user = auth.getCurrentUser();
 
     private  Uri uri ;
-ImageView imgAVTedit;
+    ImageView imgAVTedit;
+    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -151,6 +156,7 @@ ImageView imgAVTedit;
         rdNam = view.findViewById(R.id.rdNam);
         rdNu = view.findViewById(R.id.rdNu);
         btnLuu = view.findViewById(R.id.btnSuaHoSo);
+
 
         imgAVTedit = view.findViewById(R.id.imgAVTedit);
     }
@@ -311,12 +317,19 @@ ImageView imgAVTedit;
         }
 
         //Ngày sinh
+        Pattern patternNS = Pattern.compile("^([0-9]{1,2})\\/([0-9]{1,2})\\/([0-9]{4})$");
+        Matcher matcherNS = patternNS.matcher(edtNgaySinh.getText().toString().trim());
 
         if (edtNgaySinh.getText().toString().isEmpty()){
             Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
-        }else {
+        }else if (!matcherNS.matches()){
+            Toast.makeText(getContext(), "Ngày sinh nhập sai", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
             reference.child("NguoiDung").child(user.getUid()).child("ngaySinh").setValue(edtNgaySinh.getText().toString());
         }
+
 
 
         //Số điện thoại

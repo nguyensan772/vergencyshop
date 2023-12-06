@@ -45,7 +45,7 @@
             android:id="@+id/edanh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Trống"
+            android:hint="URL ảnh"
             android:ellipsize="end"
 
             />
@@ -76,7 +76,7 @@
             android:id="@+id/edtTenKH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Trống"
+            android:hint="Nhập tên"
             android:ellipsize="end"
             />
     </LinearLayout>
@@ -150,9 +150,10 @@
             android:id="@+id/edtNgaySinhKH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Trống"
+            android:hint="dd/MM/yyyy"
             android:ellipsize="end"
             />
+
 
     </LinearLayout>
 
@@ -182,7 +183,7 @@
             android:id="@+id/edtSDTKH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Trống"
+            android:hint="Số điện thoại"
             android:ellipsize="end"
             />
 
@@ -215,7 +216,7 @@
             android:id="@+id/edtDiaChiKH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Trống"
+            android:hint="Địa chỉ"
             />
     </LinearLayout>
 

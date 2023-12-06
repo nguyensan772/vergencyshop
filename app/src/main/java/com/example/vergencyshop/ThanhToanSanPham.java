@@ -87,45 +87,78 @@ public class ThanhToanSanPham extends AppCompatActivity {
         });
     }
     private void setMuaHang() {
-        // Set giờ
-        // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        // Lấy thời gian hiện tại
-        Date currentTime = new Date();
 
-        // Định dạng thời gian hiện tại theo định dạng đã cho
-        String formattedTime = dateFormat.format(currentTime);
-        String idHD = reference.push().getKey();
-        String idND = user.getUid();
-        String thanhTien = "0";
-        String ngayMua = formattedTime;
-        String phuongThuc = setPhuongThucThanhToan();
-        String trangThai ="Chờ Xác Nhận";
-        int tien = 0;
-        for (GioHang hang: list){
-            String idHDCT = idHD;
-            String idSP =   hang.getIdSP() ;
-            String soLuong = hang.getSoluongSP();
-            int gia1sp = Integer.parseInt(hang.getGiaSP())/Integer.parseInt(hang.getSoluongSP());
-            String tongTien = String.valueOf(gia1sp * Integer.parseInt(hang.getSoluongSP())) ;
-            String anhSP = hang.getAnhSP() ;
-            String sizeSP = hang.getSizeSP();
+        
+        reference.child("NguoiDung").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
 
-            tien =tien + Integer.parseInt(tongTien);
-            thanhTien = String.valueOf(tien);
-            Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
 
-            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
-            reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);
+                    if (nguoiDung.getTen() == null||
+                    nguoiDung.getGioiTinh()== null||
+                    nguoiDung.getSoDienThoai()== null||
+                    nguoiDung.getDiaChi()== null){
 
-        }
-        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
-        reference.child("HoaDon").child(idHD)
-                .setValue(hoaDon);
-        //Xóa giỏ hàng
-        Intent intent = new Intent(ThanhToanSanPham.this , MainActivity.class);
-        startActivity(intent);
-        finishAffinity();
+                        Toast.makeText(ThanhToanSanPham.this, "Bạn chưa nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+
+
+                    }else {
+                        // Set giờ
+                        // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        // Lấy thời gian hiện tại
+                        Date currentTime = new Date();
+
+                        // Định dạng thời gian hiện tại theo định dạng đã cho
+                        String formattedTime = dateFormat.format(currentTime);
+                        String idHD = reference.push().getKey();
+                        String idND = user.getUid();
+                        String thanhTien = "0";
+                        String ngayMua = formattedTime;
+                        String phuongThuc = setPhuongThucThanhToan();
+                        String trangThai ="Chờ Xác Nhận";
+                        int tien = 0;
+                        for (GioHang hang: list){
+                            String idHDCT = idHD;
+                            String idSP =   hang.getIdSP() ;
+                            String soLuong = hang.getSoluongSP();
+                            String tongTien = String.valueOf(Integer.parseInt(hang.getGiaSP()) * Integer.parseInt(hang.getSoluongSP())) ;
+                            String anhSP = hang.getAnhSP() ;
+                            String sizeSP = hang.getSizeSP();
+
+
+                            tien =tien + Integer.parseInt(tongTien);
+                            thanhTien = String.valueOf(tien);
+                            Toast.makeText(ThanhToanSanPham.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
+                            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(idHDCT,idSP,soLuong,tongTien,anhSP,sizeSP);
+                            reference.child("HoaDonChiTiet").push().setValue(hoaDonChiTiet);
+
+                        }
+                        HoaDon hoaDon = new HoaDon(idHD,idND,thanhTien,ngayMua,phuongThuc,trangThai);
+                        reference.child("HoaDon").child(idHD)
+                                .setValue(hoaDon);
+
+
+                        //Xóa giỏ hàng
+
+
+                        Intent intent = new Intent(ThanhToanSanPham.this , MainActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                    }
+                    
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
     private  void anhXa(){
