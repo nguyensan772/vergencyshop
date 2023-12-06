@@ -209,7 +209,7 @@ public class TrangChuFragment extends Fragment {
         });
 
         rcSanPham.setAdapter(sanPhamTrangChuAdapter);
-        // Inflate the layout for this fragment
+        // Inflate the layout for this Fragment
         return view;
     }
 
