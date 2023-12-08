@@ -25,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -140,7 +141,7 @@ public class LichSuMuaHangFragment extends Fragment {
                         }
 
                     }
-
+                    Collections.reverse(list);
                     hoaDonAdapter.notifyDataSetChanged();
                 }
             }
